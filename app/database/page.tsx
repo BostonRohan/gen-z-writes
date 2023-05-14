@@ -53,21 +53,27 @@ export default async function Page() {
     /(youtu.*be.*)\/(watch\?v=|embed\/|v|shorts|)(.*?((?=[&#?])|$))/m;
 
   return (
-    <main className="text-white grid md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
+    <main className="text-white grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
       {rows.map(
         (video: Video) =>
           video.data?.link && (
-            <article key={video.id} className="md:my-8 my-12 shrink-0">
-              <h1 className="font-bold mb-4">{video.data.title}</h1>
+            <article
+              key={video.id}
+              className="md:my-8 my-12 shrink-0 w-full capitalize max-w-[450px]"
+            >
+              <h1 className="font-bold mb-4 truncate text-xl">
+                {video.data.title}
+              </h1>
               <Image
                 src={`https://img.youtube.com/vi/${
                   youtubeIdRegex.exec(video.data.link)![3]
                 }/sddefault.jpg`}
                 alt={`${video.data.title} Youtube Thumbnail`}
+                className="mx-auto"
                 width={450}
                 height={240}
               />
-              <section className="flex justify-between gap-2 mt-4 max-w-[450px] items-center">
+              <section className="flex justify-between sm:flex-row flex-col text-left gap-2 mt-4 mx-auto sm:items-center">
                 <p className={`${poppins.className} truncate`}>
                   {video.data.author}
                 </p>
@@ -76,7 +82,7 @@ export default async function Page() {
                     const id = uuidv4();
                     return (
                       <span
-                        className="p-2 bg-[#0749ac43] shrink-1 rounded-xl h-10"
+                        className="p-2 bg-[#0749ac43] shrink-1 rounded-xl h-10 w-fit truncate"
                         key={id}
                       >
                         {genre}
