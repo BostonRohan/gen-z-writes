@@ -16,6 +16,9 @@ async function getVideos() {
 }
 
 import { Metadata } from "next";
+import { poppins } from "../fonts";
+import Image from "next/image";
+import { v4 as uuidv4 } from "uuid";
 
 export const metadata: Metadata = {
   title: "Database",
@@ -46,15 +49,45 @@ interface Video {
 export default async function Page() {
   const { rows } = await getVideos();
 
+  const youtubeIdRegex =
+    /(youtu.*be.*)\/(watch\?v=|embed\/|v|shorts|)(.*?((?=[&#?])|$))/m;
+
   return (
-    <main>
-      {rows.map((video: Video) => (
-        <article key={video.id}>
-          <h1>{video.data.title}</h1>
-          <a href={video.data.link}>{video.data.link}</a>
-          <p>{video.data.author}</p>
-        </article>
-      ))}
+    <main className="text-white grid md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
+      {rows.map(
+        (video: Video) =>
+          video.data?.link && (
+            <article key={video.id} className="md:my-8 my-12 shrink-0">
+              <h1 className="font-bold mb-4">{video.data.title}</h1>
+              <Image
+                src={`https://img.youtube.com/vi/${
+                  youtubeIdRegex.exec(video.data.link)![3]
+                }/sddefault.jpg`}
+                alt={`${video.data.title} Youtube Thumbnail`}
+                width={450}
+                height={240}
+              />
+              <section className="flex justify-between gap-2 mt-4 max-w-[450px] items-center">
+                <p className={`${poppins.className} truncate`}>
+                  {video.data.author}
+                </p>
+                <div className="flex gap-2">
+                  {video.data.type.split(",").map((genre: string) => {
+                    const id = uuidv4();
+                    return (
+                      <span
+                        className="p-2 bg-[#0749ac43] shrink-1 rounded-xl h-10"
+                        key={id}
+                      >
+                        {genre}
+                      </span>
+                    );
+                  })}
+                </div>
+              </section>
+            </article>
+          )
+      )}
     </main>
   );
 }
