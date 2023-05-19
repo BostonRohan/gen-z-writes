@@ -54,7 +54,7 @@ const VideoGrid = ({ rows }: { rows: Video[] }) => {
           No Results Found
         </h1>
       )}
-      <section className="text-white grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
+      <section className="text-white grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center min-h-[50vh] sm:mb-32 mb-64">
         {!!videos.length &&
           videos.map(
             (video) =>
