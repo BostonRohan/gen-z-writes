@@ -1,11 +1,14 @@
-export default function RootLayout({
+import "global.css";
+import { inter } from "./fonts";
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`bg-primary ${inter.className}`}>{children}</body>
     </html>
   );
 }
