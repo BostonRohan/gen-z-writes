@@ -11,13 +11,11 @@ export default async function DatabaseLayout({
 }) {
   const plasmicData = await PLASMIC.fetchComponentData("Footer");
   return (
-    <html>
-      <body className={`bg-primary ${inter.className}`}>
-        <PlasmicClientRootProvider prefetchedData={plasmicData}>
-          {children}
-          <PlasmicComponent component="Footer" />
-        </PlasmicClientRootProvider>
-      </body>
-    </html>
+    <main className={`bg-primary ${inter.className}`}>
+      <PlasmicClientRootProvider prefetchedData={plasmicData}>
+        {children}
+        <PlasmicComponent component="Footer" />
+      </PlasmicClientRootProvider>
+    </main>
   );
 }

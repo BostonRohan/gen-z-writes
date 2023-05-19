@@ -17,9 +17,10 @@ const VideoCard = ({ video }: { video: Video }) => {
           youtubeIdRegex.exec(video.data.link)![3]
         }/sddefault.jpg`}
         alt={`${video.data.title} Youtube Thumbnail`}
-        className="mx-auto"
+        className="mx-auto w-[450px] h-[240px]"
         width={450}
         height={240}
+        style={{ width: "auto", height: "auto" }}
       />
       <section className="flex justify-between sm:flex-row flex-col text-left gap-2 mt-4 mx-auto sm:items-center">
         <p className={`${poppins.className} truncate text-lg`}>

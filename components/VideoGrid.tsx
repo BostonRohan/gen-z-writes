@@ -54,13 +54,13 @@ const VideoGrid = ({ rows }: { rows: Video[] }) => {
           No Results Found
         </h1>
       )}
-      <main className="text-white grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
+      <section className="text-white grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
         {!!videos.length &&
           videos.map(
             (video) =>
               video.data?.link && <VideoCard key={video.id} video={video} />
           )}
-      </main>
+      </section>
     </>
   );
 };
