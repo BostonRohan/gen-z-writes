@@ -1,6 +1,11 @@
 import { poppins } from "@/app/fonts";
+import { ChangeEvent } from "react";
 
-const SearchInput = () => {
+const SearchInput = ({
+  handleSearch,
+}: {
+  handleSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+}) => {
   return (
     <section className="w-full flex justify-center relative my-12">
       <div className="relative">
@@ -19,6 +24,7 @@ const SearchInput = () => {
         type="search"
         className={`rounded-xl bg-primary border-white border-2 p-4 w-full max-w-[450px] text-white outline-none ${poppins.className} placeholder:font-normal pl-10`}
         placeholder="Search by category, artist or title..."
+        onChange={handleSearch}
       />
     </section>
   );
