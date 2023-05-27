@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start:author": "cd dist && node addAuthorData.js"
+    "start:author": "cd dist && node addAuthorData.js",
+    "start:videos": "cd dist && node addVideoSlug.js"
   },
   "keywords": [],
   "author": "",
