@@ -1,11 +1,23 @@
 async function getVideo(slug: string) {
-  const res = await getVideoByTitle(slug);
+  const res = await getVideoBySlug(slug);
+
+  const video = await res.json();
 
   if (!res.ok) {
-    console.error(res);
     throw new Error(`Failed to fetch data for ${slug}`);
   }
-  return await res.json();
+  return video;
+}
+
+async function getAuthor(id: string) {
+  const res = await getAuthorById(id);
+
+  const author = await res.json();
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch data for author with the id of: ${id}`);
+  }
+  return author;
 }
 
 export async function generateStaticParams() {
@@ -24,20 +36,16 @@ export async function generateStaticParams() {
     });
 
   return videos.rows.map((video: Video) => ({
-    //remove non alphanumeric, replace spaces with dashes
-    slug: video.data.title
-      .trim()
-      .replace(/[^\w\s]/gi, "")
-      .toLowerCase()
-      .replace(/\s/gi, "-"),
+    slug: video.data.slug,
   }));
 }
 
-export async function generateMetadata(
-  { params }: { params: { slug: string } },
-  parent?: ResolvingMetadata
-): Promise<Metadata> {
-  const res = await getVideoByTitle(params.slug)
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const res = await getVideoBySlug(params.slug)
     .then((res) => res.json())
     .catch((err) => {
       console.error(err);
@@ -50,34 +58,40 @@ export async function generateMetadata(
 
   const youtubeId = getYoutubeId(video.data.link);
 
-  // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent)?.openGraph?.images || [];
-
   return {
     title: video.data.title,
     openGraph: {
       title: video.data.title,
       images: [
-        `https://img.youtube.com/vi/${youtubeId}/sddefault.jpg`,
-        ...previousImages,
+        { url: `https://img.youtube.com/vi/${youtubeId}/sddefault.jpg` },
       ],
     },
   };
 }
 
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { Video } from "@/components/VideoGrid";
 import { PageProps } from "@/.next/types/app/database/page";
 import VideoCard from "@/components/VideoCard";
 import getYoutubeId from "@/utils/getYoutubeId";
-import getVideoByTitle from "@/utils/getVideoByTitle";
+import getVideoBySlug from "@/utils/getVideoBySlug";
+import getAuthorById from "@/utils/getAuthorById";
 
 export default async function Page({ params }: PageProps) {
   const video = await getVideo(params.slug);
+  const author = await getAuthor(video.rows[0].data.author);
 
   return (
-    <section>
-      <VideoCard video={video.rows[0]} />
+    <section className="sm:min-h-[704px] min-h-[600px] px-4">
+      <VideoCard
+        author={author.rows[0]}
+        video={video.rows[0]}
+        cardClassName="max-w-[800px] mx-auto"
+        videoHeight={600}
+        videoWidth={800}
+        showVideo={true}
+        thumbnailIconClassName="!left-[40%]"
+      />
     </section>
   );
 }

@@ -8,15 +8,30 @@ async function getVideos() {
     }
   );
 
+  const videos = await res.json();
+
+  for (let i = 0; i < videos.rows.length; i++) {
+    try {
+      const authorRes = await getAuthorById(videos.rows[i].data.author);
+      const author = await authorRes.json();
+      videos.rows[i].data.author = author.rows[0];
+    } catch (err) {
+      console.error(
+        `there was an error getting data for author id: ${videos.rows[i].data.author}`
+      );
+    }
+  }
+
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
 
-  return res.json();
+  return videos;
 }
 
 import VideoGrid from "@/components/VideoGrid";
 import { Video } from "@/components/VideoGrid";
+import getAuthorById from "@/utils/getAuthorById";
 
 export default async function Page() {
   const { rows }: { rows: Video[] } = await getVideos();

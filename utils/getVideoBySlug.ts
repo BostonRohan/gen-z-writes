@@ -1,21 +1,12 @@
-const getVideoByTitle = async (slug: string) => {
+const getVideoBySlug = async (slug: string) => {
   const apiUrl = new URL(
     `https://studio.plasmic.app/api/v1/cms/databases/${process.env.NEXT_PUBLIC_CMS_ID}/tables/videos/query`
   );
 
-  //remove dashes and capatalize title
-  const title = slug
-    .replace(/-/g, " ")
-    .split(" ")
-    .map((word) => {
-      return word[0].toUpperCase() + word.substring(1);
-    })
-    .join(" ");
-
   apiUrl.search = new URLSearchParams({
     q: JSON.stringify({
       where: {
-        title,
+        slug,
       },
       limit: 1,
     }),
@@ -28,4 +19,4 @@ const getVideoByTitle = async (slug: string) => {
   });
 };
 
-export default getVideoByTitle;
+export default getVideoBySlug;
