@@ -94,7 +94,7 @@ const VideoCard = ({
           )}
         </Link>
       )}
-      <section className="flex justify-between sm:flex-row flex-col text-left gap-2 mt-4 mx-auto sm:items-center">
+      <section className="flex justify-between lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
         <address className="author flex gap-2 items-center my-auto">
           {author.data.image && (
             <Image
