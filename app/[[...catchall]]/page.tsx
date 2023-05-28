@@ -82,8 +82,14 @@ export async function generateMetadata({
 
   return {
     title: metaData?.title,
+    description:
+      metaData?.description ??
+      "Discover the power of words with Gen Z Writes. Get ready to unleash your writing potential with high-quality advice from award-winning authors.",
     openGraph: {
       title: metaData?.title ?? "Gen Z Writes",
+      description:
+        metaData?.description ??
+        "Discover the power of words with Gen Z Writes. Get ready to unleash your writing potential with high-quality advice from award-winning authors.",
       images: [
         {
           url:
