@@ -84,7 +84,7 @@ export default async function Page({ params }: PageProps) {
   const author = await getAuthor(video.rows[0].data.author);
 
   return (
-    <section className="sm:min-h-[704px] min-h-[600px] px-4">
+    <section className="sm:min-h-[750px] min-h-[650px] px-4">
       <VideoCard
         author={author.rows[0]}
         video={video.rows[0]}
