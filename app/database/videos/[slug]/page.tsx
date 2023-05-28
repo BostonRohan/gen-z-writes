@@ -72,9 +72,9 @@ export async function generateMetadata({
 }
 
 import { Metadata } from "next";
-import { Video } from "@/components/VideoGrid";
+import { Video } from "@/components/CardGrid";
 import { PageProps } from "@/.next/types/app/database/page";
-import VideoCard from "@/components/VideoCard";
+import VideoCard from "@/components/Card";
 import getYoutubeId from "@/utils/getYoutubeId";
 import getVideoBySlug from "@/utils/getVideoBySlug";
 import getAuthorById from "@/utils/getAuthorById";
