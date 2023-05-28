@@ -23,7 +23,7 @@ const SearchInput = ({
       <input
         type="search"
         className={`rounded-xl bg-primary border-white border-2 p-4 w-full max-w-[450px] text-white outline-none ${poppins.className} placeholder:font-normal pl-10`}
-        placeholder="Search by category, artist or title..."
+        placeholder="Search by category, author or title..."
         onChange={handleSearch}
       />
     </section>
