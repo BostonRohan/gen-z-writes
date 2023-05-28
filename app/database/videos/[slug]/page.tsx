@@ -35,9 +35,11 @@ export async function generateStaticParams() {
       throw new Error("Failed to generate videos slugs");
     });
 
-  return videos.rows.map((video: Video) => ({
-    slug: video.data.slug,
-  }));
+  return videos.rows.map((video: Video) => {
+    if (video.data.link) {
+      return { slug: video.data.slug };
+    }
+  });
 }
 
 export async function generateMetadata({
