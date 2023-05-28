@@ -2,6 +2,8 @@
 
 import { PlasmicRootProvider } from "@plasmicapp/loader-nextjs";
 import { PLASMIC } from "./plasmic-init";
+import dynamic from "next/dynamic";
+const Nav = dynamic(() => import("@/components/Nav"));
 
 // You can register any code components that you want to use here; see
 // https://docs.plasmic.app/learn/code-components-ref/
@@ -11,6 +13,13 @@ import { PLASMIC } from "./plasmic-init";
 // https://docs.plasmic.app/learn/app-hosting/#set-a-plasmic-project-to-use-your-app-host
 
 // PLASMIC.registerComponent(...);
+
+PLASMIC.registerComponent(Nav, {
+  name: "Nav",
+  props: {},
+  isDefaultExport: true,
+  importPath: "@components/Nav",
+});
 
 /**
  * PlasmicClientRootProvider is a Client Component that passes in the loader for you.

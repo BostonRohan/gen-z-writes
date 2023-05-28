@@ -1,0 +1,23 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start:author": "cd dist && node addAuthorData.js",
+    "start:videos": "cd dist && node addVideoSlug.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "node-fetch": "^3.3.1",
+    "serpapi": "^1.1.1"
+  }
+}

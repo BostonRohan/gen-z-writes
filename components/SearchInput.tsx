@@ -7,7 +7,7 @@ const SearchInput = ({
   handleSearch: (e: ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
-    <section className="w-full flex justify-center relative my-12">
+    <section className="w-full flex justify-center relative my-12 sm:p-0 px-4">
       <div className="relative">
         <i className="absolute top-[20px] left-4">
           <svg

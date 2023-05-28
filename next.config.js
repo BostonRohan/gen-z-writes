@@ -5,7 +5,7 @@ const nextConfig = {
   // https://github.com/adobe/react-spectrum/labels/strict%20mode
   reactStrictMode: false,
   images: {
-    domains: ["img.youtube.com"],
+    domains: ["img.youtube.com", "serpapi.com", "img.plasmic.app"],
   },
 };
 

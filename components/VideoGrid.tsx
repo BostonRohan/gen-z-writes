@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import VideoCard from "./VideoCard";
+import VideoCard, { Author } from "./VideoCard";
 import SearchInput from "./SearchInput";
 import { inter } from "../app/fonts";
 
@@ -14,7 +14,8 @@ export interface Video {
     title: string;
     link: string;
     type: string;
-    author: string;
+    author: Author;
+    slug: string;
   };
 }
 
@@ -36,7 +37,7 @@ const VideoGrid = ({ rows }: { rows: Video[] }) => {
       //search by title, author or genre/type
       return (
         searchCriteria(video.data.title, searchInput) ||
-        searchCriteria(video.data.author, searchInput) ||
+        searchCriteria(video.data.author.data.name, searchInput) ||
         searchCriteria(video.data.type, searchInput)
       );
     });
@@ -54,13 +55,22 @@ const VideoGrid = ({ rows }: { rows: Video[] }) => {
           No Results Found
         </h1>
       )}
-      <main className="text-white grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
+      <section className="text-white grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center min-h-[50vh] sm:mb-32 mb-64">
         {!!videos.length &&
           videos.map(
-            (video) =>
-              video.data?.link && <VideoCard key={video.id} video={video} />
+            (video, i) =>
+              video.data?.link && (
+                <VideoCard
+                  loadImages={i < 2 ? "eager" : "lazy"}
+                  author={video.data.author}
+                  key={video.id}
+                  video={video}
+                  videoWidth={450}
+                  videoHeight={338}
+                />
+              )
           )}
-      </main>
+      </section>
     </>
   );
 };
