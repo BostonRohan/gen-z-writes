@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { PLASMIC } from "../../plasmic-init";
 import { PlasmicClientRootProvider } from "../../plasmic-init-client";
 
+export const dynamic = "force-static";
+
 // Use revalidate if you want incremental static regeneration
 export const revalidate = 60;
 

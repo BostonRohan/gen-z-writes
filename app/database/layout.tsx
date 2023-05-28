@@ -4,6 +4,7 @@ import { PlasmicClientRootProvider } from "../../plasmic-init-client";
 import { PlasmicComponent } from "@plasmicapp/loader-nextjs";
 import { inter } from "../fonts";
 import { Metadata } from "next";
+import Nav from "@/components/Nav";
 
 export const metadata: Metadata = {
   title: "Database",
@@ -26,6 +27,7 @@ export default async function DatabaseLayout({
   const plasmicData = await PLASMIC.fetchComponentData("Footer");
   return (
     <main className={`bg-primary ${inter.className}`}>
+      <Nav />
       <PlasmicClientRootProvider prefetchedData={plasmicData}>
         {children}
         <PlasmicComponent component="Footer" />
