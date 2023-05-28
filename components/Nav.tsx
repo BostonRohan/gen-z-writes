@@ -22,7 +22,7 @@ const Nav = () => {
             <li className="text-white sm:text-lg">Database</li>
           </Link>
           <Link href="/how-to-participate">
-            <li className="text-white sm:text-lg">How to Participate?</li>
+            <li className="text-white sm:text-lg">How to Participate</li>
           </Link>
         </ul>
       </div>
