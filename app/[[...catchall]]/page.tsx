@@ -1,7 +1,12 @@
-import { PlasmicComponent } from "@plasmicapp/loader-nextjs";
+import { PageMetadata, PlasmicComponent } from "@plasmicapp/loader-nextjs";
 import { notFound } from "next/navigation";
 import { PLASMIC } from "../../plasmic-init";
 import { PlasmicClientRootProvider } from "../../plasmic-init-client";
+import { Metadata } from "next";
+
+interface PlasmicMetadata extends PageMetadata {
+  canonical?: string;
+}
 
 export const dynamic = "force-static";
 
@@ -28,6 +33,7 @@ export default async function PlasmicLoaderPage({
   }
 
   const pageMeta = prefetchedData.entryCompMetas[0];
+
   return (
     <PlasmicClientRootProvider
       prefetchedData={prefetchedData}
@@ -58,4 +64,33 @@ export async function generateStaticParams() {
       catchall,
     };
   });
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params?: { catchall: string[] | undefined };
+}): Promise<Metadata> {
+  const plasmicPath =
+    "/" + (params?.catchall ? params?.catchall.join("/") : "");
+  const prefetchedData = await PLASMIC.maybeFetchComponentData(plasmicPath);
+  if (!prefetchedData) {
+    notFound();
+  }
+  const pageMeta = prefetchedData.entryCompMetas[0];
+  const metaData = pageMeta.pageMetadata as PlasmicMetadata;
+
+  return {
+    title: metaData?.title,
+    openGraph: {
+      title: metaData?.title ?? "Gen Z Writes",
+      images: [
+        {
+          url:
+            metaData?.openGraphImageUrl ??
+            "https://site-assets.plasmic.app/64c6038e269ed9367ffa5e31b6005910.png",
+        },
+      ],
+    },
+  };
 }
