@@ -1,6 +1,7 @@
 import "global.css";
 import { inter } from "./fonts";
 import Head from "next/head";
+import { Analytics } from "@vercel/analytics/react";
 
 export default async function RootLayout({
   children,
@@ -29,7 +30,10 @@ export default async function RootLayout({
         />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <body className={`bg-primary ${inter.className}`}>{children}</body>
+      <body className={`bg-primary ${inter.className}`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
