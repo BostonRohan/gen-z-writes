@@ -11,19 +11,19 @@ const Nav = () => {
             src="https://img.plasmic.app/img-optimizer/v1/img/e0f14830c802382c0463b987fc8a3887.png?w=48&q=75&f=webp"
             alt="Gen Z Writes Logo"
             loading="eager"
-            width={60}
-            height={60}
+            width={50}
+            height={48}
             className="[@media(max-width:330px)]:!w-[40px] [@media(max-width:330px)]:!h-[40px]"
-            style={{ width: "60px", height: "60px" }}
+            style={{ width: "50px", height: "48px" }}
           />
         </Link>
         <ul className="flex w-full justify-end sm:gap-4 gap-2 [@media(max-width:315px)]:text-[13px]">
-          <Link href="/database">
-            <li className="text-white sm:text-lg">Database</li>
-          </Link>
-          <Link href="/how-to-participate">
-            <li className="text-white sm:text-lg">How to Participate</li>
-          </Link>
+          <li className="text-white sm:text-lg">
+            <Link href="/database">Database</Link>
+          </li>
+          <li className="text-white sm:text-lg">
+            <Link href="/how-to-participate">How to Participate</Link>
+          </li>
         </ul>
       </div>
     </nav>

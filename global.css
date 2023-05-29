@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .nav-background {
-  background: rgb(51, 51, 55);
+  background: rgb(27, 27, 29);
   background: linear-gradient(
     90deg,
-    rgba(51, 51, 55, 1) 15%,
-    rgba(39, 39, 42, 1) 39%,
+    rgba(27, 27, 29, 1) 15%,
+    rgba(27, 27, 29, 1) 39%,
     rgba(0, 0, 0, 1) 100%
   );
 }

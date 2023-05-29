@@ -22,7 +22,7 @@ const SearchInput = ({
       </div>
       <input
         type="search"
-        className={`rounded-xl bg-primary border-white border-2 p-4 w-full max-w-[450px] text-white outline-none ${poppins.className} placeholder:font-normal pl-10`}
+        className={`rounded-xl bg-primary border-white border-2 p-4 w-full max-w-[450px] text-white placeholder:text-[#d8d8d8] outline-none ${poppins.className} placeholder:font-normal pl-10`}
         placeholder="Search by category, author or title..."
         onChange={handleSearch}
       />
