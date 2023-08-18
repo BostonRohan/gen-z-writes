@@ -5,7 +5,6 @@ import Link from "next/link";
 import getYoutubeId from "@/utils/getYoutubeId";
 import YoutubePlayer from "./Youtube";
 import YoutubeThumbnail from "./YoutubeThumbnail";
-import Image from "next/image";
 import AuthorImage from "./AuthorImage";
 
 export type LoadImages = "eager" | "lazy";
@@ -73,17 +72,7 @@ const VideoCard = ({
           height={videoHeight.toString()}
         />
       ) : (
-        <Link
-          href={
-            video.data.link
-              ? `/database/videos/${video.data.title
-                  .trim()
-                  .replace(/[^\w\s]/gi, "")
-                  .toLowerCase()
-                  .replace(/\s/gi, "-")}`
-              : {}
-          }
-        >
+        <Link href={`/database/videos/${video.data.slug}`}>
           {video.data.link && (
             <YoutubeThumbnail
               id={youtubeId}
