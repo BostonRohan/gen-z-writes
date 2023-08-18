@@ -5,7 +5,9 @@ import Link from "next/link";
 import getYoutubeId from "@/utils/getYoutubeId";
 import YoutubePlayer from "./Youtube";
 import YoutubeThumbnail from "./YoutubeThumbnail";
-import Image from "next/image";
+import AuthorImage from "./AuthorImage";
+
+export type LoadImages = "eager" | "lazy";
 
 interface VideoCardProps {
   video: Video;
@@ -16,7 +18,7 @@ interface VideoCardProps {
   thumbnailIconClassName?: string;
   thumbnailClassName?: string;
   author: Author;
-  loadImages?: "eager" | "lazy";
+  loadImages?: LoadImages;
 }
 
 export interface Author {
@@ -70,17 +72,7 @@ const VideoCard = ({
           height={videoHeight.toString()}
         />
       ) : (
-        <Link
-          href={
-            video.data.link
-              ? `/database/videos/${video.data.title
-                  .trim()
-                  .replace(/[^\w\s]/gi, "")
-                  .toLowerCase()
-                  .replace(/\s/gi, "-")}`
-              : {}
-          }
-        >
+        <Link href={`/database/videos/${video.data.slug}`}>
           {video.data.link && (
             <YoutubeThumbnail
               id={youtubeId}
@@ -96,17 +88,11 @@ const VideoCard = ({
       )}
       <section className="flex justify-between lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
         <address className="author flex gap-2 items-center my-auto">
-          {author.data.image && (
-            <Image
-              src={author.data.image}
-              height={30}
-              width={30}
-              className="rounded-full"
-              style={{ width: "30px", height: "30px" }}
-              alt={author.data.name}
-              loading={loadImages}
-            />
-          )}
+          <AuthorImage
+            src={author.data.image ?? ""}
+            alt={author.data.name}
+            loading={"lazy"}
+          />
           <p className={`${poppins.className} truncate text-lg`}>
             {author.data.name}
           </p>
