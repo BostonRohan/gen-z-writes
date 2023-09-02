@@ -12,6 +12,7 @@ export interface Author {
   data: {
     name: string;
     bio: string;
+    slug: string;
   };
 }
 
