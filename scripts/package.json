@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@sanity/client": "^6.4.9",
     "typescript": "^5.0.4"
   },
   "dependencies": {

@@ -14,6 +14,7 @@ export interface Video {
     link: string;
     type: string;
     author: string;
+    slug: string;
   };
 }
 
