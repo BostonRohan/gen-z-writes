@@ -5,6 +5,7 @@ import { q } from "groqd";
 import { cache } from "react";
 import { notFound } from "next/navigation";
 import getYoutubeId from "@/utils/getYoutubeId";
+import videoFragment from "@/utils/fragments/video";
 
 const client = sanityClient({ useCdn: true });
 
@@ -14,16 +15,7 @@ const getVideoBySlug = cache(async (slug: string) => {
       .filterByType("video")
       .filter(`slug.current == "${slug}"`)
       .slice(0)
-      .grab({
-        _id: q.string(),
-        title: q.string(),
-        url: q.string(),
-        slug: q.slug("slug"),
-        tags: q.array(q.string()),
-        author: q("author.ref")
-          .deref()
-          .grab({ name: q.string(), slug: q.slug("slug") }),
-      });
+      .grab(videoFragment);
     return schema.parse(await client.fetch(query));
   } catch (err) {
     console.error(

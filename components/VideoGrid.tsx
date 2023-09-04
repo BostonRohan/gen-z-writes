@@ -1,12 +1,13 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import VideoCard, { Author } from "./VideoCard";
+import VideoCard from "./VideoCard";
 import SearchInput from "./SearchInput";
 import { inter } from "../app/fonts";
+import { Video } from "@/app/database/videos/[slug]/page";
 
-const VideoGrid = ({ rows }: { rows: Video[] }) => {
-  const [videos, setVideos] = useState(rows);
+const VideoGrid = ({ videos }: { videos: Video[] }) => {
+  const [videosState, setVideosState] = useState(videos);
 
   const searchCriteria = (searchTerm: string, input: string) => {
     searchTerm = searchTerm?.toLowerCase().replace(/[^0-9a-z]/gi, "");
@@ -14,7 +15,7 @@ const VideoGrid = ({ rows }: { rows: Video[] }) => {
   };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const filteredVideos = rows.filter((video) => {
+    const filteredVideos = videos.filter((video: Video) => {
       const searchInput = e.target.value
         .toLowerCase()
         .replace(/^[ ]+|[ ]+$/g, "")
@@ -22,19 +23,19 @@ const VideoGrid = ({ rows }: { rows: Video[] }) => {
 
       //search by title, author or genre/type
       return (
-        searchCriteria(video.data.title, searchInput) ||
-        searchCriteria(video.data.author.data.name, searchInput) ||
-        searchCriteria(video.data.type, searchInput)
+        searchCriteria(video.title, searchInput) ||
+        searchCriteria(video.author.name, searchInput) ||
+        searchCriteria(video.tags.join(" "), searchInput)
       );
     });
 
-    setVideos(filteredVideos);
+    setVideosState(filteredVideos);
   };
 
   return (
     <>
       <SearchInput handleSearch={handleSearch} />
-      {!videos.length && (
+      {!videosState.length && (
         <h1
           className={`${inter.className} font-bold text-3xl text-white text-center`}
         >
@@ -42,20 +43,15 @@ const VideoGrid = ({ rows }: { rows: Video[] }) => {
         </h1>
       )}
       <section className="text-white grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center min-h-[50vh] sm:mb-32 mb-64">
-        {!!videos.length &&
-          videos.map(
-            (video, i) =>
-              video.data?.link && (
-                <VideoCard
-                  loadImages={i < 2 ? "eager" : "lazy"}
-                  author={video.data.author}
-                  key={video.id}
-                  video={video}
-                  videoWidth={450}
-                  videoHeight={338}
-                />
-              )
-          )}
+        {videosState.map((video, i) => (
+          <VideoCard
+            loadImages={i < 3 ? "eager" : "lazy"}
+            key={video._id}
+            video={video}
+            videoWidth={450}
+            videoHeight={338}
+          />
+        ))}
       </section>
     </>
   );
