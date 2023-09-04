@@ -5,20 +5,6 @@ import VideoCard, { Author } from "./VideoCard";
 import SearchInput from "./SearchInput";
 import { inter } from "../app/fonts";
 
-export interface Video {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-  identifier: string;
-  data: {
-    title: string;
-    link: string;
-    type: string;
-    author: Author;
-    slug: string;
-  };
-}
-
 const VideoGrid = ({ rows }: { rows: Video[] }) => {
   const [videos, setVideos] = useState(rows);
 

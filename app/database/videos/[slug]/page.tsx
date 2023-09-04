@@ -1,38 +1,60 @@
 import { Metadata } from "next";
-import { Video } from "@/components/VideoGrid";
-import { PageProps } from "@/.next/types/app/database/page";
 import VideoCard from "@/components/VideoCard";
-import getYoutubeId from "@/utils/getYoutubeId";
-import getVideoBySlug from "@/utils/getVideoBySlug";
-import getAuthorById from "@/utils/getAuthorById";
-import { groq } from "next-sanity";
 import sanityClient from "@/sanity/client";
+import { q } from "groqd";
+import { cache } from "react";
+import { notFound } from "next/navigation";
+import getYoutubeId from "@/utils/getYoutubeId";
 
-async function getVideo(slug: string) {
-  const res = await getVideoBySlug(slug);
+const client = sanityClient({ useCdn: true });
 
-  const video = await res.json();
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch data for ${slug}`);
+const getVideoBySlug = cache(async (slug: string) => {
+  try {
+    const { query, schema } = q("*")
+      .filterByType("video")
+      .filter(`slug.current == "${slug}"`)
+      .slice(0)
+      .grab({
+        _id: q.string(),
+        title: q.string(),
+        url: q.string(),
+        slug: q.slug("slug"),
+        tags: q.array(q.string()),
+        author: q("author.ref")
+          .deref()
+          .grab({ name: q.string(), slug: q.slug("slug") }),
+      });
+    return schema.parse(await client.fetch(query));
+  } catch (err) {
+    console.error(
+      "there was an issue getting the data for the following video",
+      `"${slug}"`,
+      "err:",
+      err
+    );
+    return notFound();
   }
-  return video;
-}
+});
 
-async function getAuthor(id: string) {
-  const res = await getAuthorById(id);
-
-  const author = await res.json();
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch data for author with the id of: ${id}`);
-  }
-  return author;
-}
+export type Video = Awaited<ReturnType<typeof getVideoBySlug>>;
 
 export async function generateStaticParams() {
-  const client = sanityClient({ useCdn: false });
-  const data = await client.fetch(groq`*[_type == 'video']{slug{current}}`);
+  try {
+    const client = sanityClient({ useCdn: false });
+    const { query, schema } = q("*{slug{current}}")
+      .filterByType("video")
+      .filter()
+      .grab({
+        slug: q.slug("slug"),
+      });
+    return schema.parse(await client.fetch(query)).map((slug) => slug);
+  } catch (err) {
+    console.error(
+      "there was an error getting the video slugs statically:",
+      err
+    );
+    return [];
+  }
 }
 
 export async function generateMetadata({
@@ -40,39 +62,50 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const res = await getVideoBySlug(params.slug)
-    .then((res) => res.json())
-    .catch((err) => {
-      console.error(err);
-      throw new Error(
-        `there was an error generating the page metadata for ${params.slug} `
-      );
-    });
+  const { title, url, author, tags } = await getVideoBySlug(params.slug);
 
-  const video: Video = res.rows[0];
+  const youtubeId = getYoutubeId(url);
 
-  const youtubeId = getYoutubeId(video.data.link);
+  const intlFormat = new Intl.ListFormat("en", {
+    style: "long",
+    type: "conjunction",
+  });
+
+  const description = `Explore, learn, and be inspired by '${title},' a captivating video by author ${
+    author.name
+  }. Delve into the world of ${intlFormat.format(
+    tags
+  )} as the author shares expertise and insights. Gain valuable knowledge and creative inspiration from this engaging multimedia experience.`;
+
+  const images = [
+    { url: `https://img.youtube.com/vi/${youtubeId}/sddefault.jpg` },
+  ];
 
   return {
-    title: video.data.title,
+    title,
+    description,
+    twitter: {
+      images,
+      card: "summary",
+      title,
+      description,
+    },
     openGraph: {
-      title: video.data.title,
-      images: [
-        { url: `https://img.youtube.com/vi/${youtubeId}/sddefault.jpg` },
-      ],
+      title,
+      description,
+      url: `https://www.projectgenzwrites.com/database/videos/${params.slug}`,
+      images,
     },
   };
 }
 
-export default async function Page({ params }: PageProps) {
-  const video = await getVideo(params.slug);
-  const author = await getAuthor(video.rows[0].data.author);
+export default async function Page({ params }: { params: { slug: string } }) {
+  const video = await getVideoBySlug(params.slug);
 
   return (
     <section className="sm:min-h-[750px] min-h-[650px] px-4">
       <VideoCard
-        author={author.rows[0]}
-        video={video.rows[0]}
+        video={video}
         cardClassName="max-w-[800px] mx-auto"
         videoHeight={600}
         videoWidth={800}
