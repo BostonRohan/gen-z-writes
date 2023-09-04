@@ -1,3 +1,13 @@
+import { Metadata } from "next";
+import { Video } from "@/components/VideoGrid";
+import { PageProps } from "@/.next/types/app/database/page";
+import VideoCard from "@/components/VideoCard";
+import getYoutubeId from "@/utils/getYoutubeId";
+import getVideoBySlug from "@/utils/getVideoBySlug";
+import getAuthorById from "@/utils/getAuthorById";
+import { groq } from "next-sanity";
+import sanityClient from "@/sanity/client";
+
 async function getVideo(slug: string) {
   const res = await getVideoBySlug(slug);
 
@@ -21,25 +31,8 @@ async function getAuthor(id: string) {
 }
 
 export async function generateStaticParams() {
-  const videos = await fetch(
-    `https://studio.plasmic.app/api/v1/cms/databases/${process.env.NEXT_PUBLIC_CMS_ID}/tables/videos/query`,
-    {
-      headers: {
-        "x-plasmic-api-cms-tokens": `${process.env.NEXT_PUBLIC_CMS_ID}:${process.env.NEXT_PUBLIC_CMS_PUBLIC_TOKEN}`,
-      },
-    }
-  )
-    .then((res) => res.json())
-    .catch((err) => {
-      console.error(err);
-      throw new Error("Failed to generate videos slugs");
-    });
-
-  return videos.rows.map((video: Video) => {
-    if (video.data.link) {
-      return { slug: video.data.slug };
-    }
-  });
+  const client = sanityClient({ useCdn: false });
+  const data = await client.fetch(groq`*[_type == 'video']{slug{current}}`);
 }
 
 export async function generateMetadata({
@@ -70,14 +63,6 @@ export async function generateMetadata({
     },
   };
 }
-
-import { Metadata } from "next";
-import { Video } from "@/components/VideoGrid";
-import { PageProps } from "@/.next/types/app/database/page";
-import VideoCard from "@/components/VideoCard";
-import getYoutubeId from "@/utils/getYoutubeId";
-import getVideoBySlug from "@/utils/getVideoBySlug";
-import getAuthorById from "@/utils/getAuthorById";
 
 export default async function Page({ params }: PageProps) {
   const video = await getVideo(params.slug);
