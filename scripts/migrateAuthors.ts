@@ -27,14 +27,14 @@ const migrateAuthors = async () => {
       useCdn: false, // We can't use the CDN for writing
     });
 
-    console.log(authors);
-
     for (let i = 0; i < authors.length; i++) {
       try {
         await client
           .patch(authors[i].id)
-          .set({ slug: { _type: "slug", current: authors[i].data.slug } })
+          .set({ name: authors[i].data.name.trim() })
           .commit();
+
+        console.log("author updated", authors[i].data.name);
       } catch (err) {
         console.log("couldnt create record ---  err:", err);
       }

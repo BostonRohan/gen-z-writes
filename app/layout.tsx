@@ -1,6 +1,5 @@
 import "global.css";
 import { inter } from "./fonts";
-import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 
 export default async function RootLayout({
@@ -10,7 +9,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
+      <body className={`bg-primary ${inter.className}`}>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -29,8 +28,6 @@ export default async function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-      </Head>
-      <body className={`bg-primary ${inter.className}`}>
         {children}
         <Analytics />
       </body>
