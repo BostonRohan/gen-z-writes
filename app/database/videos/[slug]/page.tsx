@@ -33,9 +33,8 @@ export type Video = Awaited<ReturnType<typeof getVideoBySlug>>;
 export async function generateStaticParams() {
   try {
     const client = sanityClient({ useCdn: false });
-    const { query, schema } = q("*{slug{current}}")
+    const { query, schema } = q("*")
       .filterByType("video")
-      .filter()
       .grab({
         slug: q.slug("slug"),
       });
