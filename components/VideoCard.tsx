@@ -45,7 +45,7 @@ const VideoCard = ({
           height={videoHeight.toString()}
         />
       ) : (
-        <>
+        <Link href={`/database/videos/${video.slug}`}>
           {video.url && (
             <YoutubeThumbnail
               id={youtubeId}
@@ -57,7 +57,7 @@ const VideoCard = ({
               iconClassName={thumbnailIconClassName}
             />
           )}
-        </>
+        </Link>
       )}
       <section className="flex justify-between lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
         <address className="author flex gap-2 items-center my-auto">
