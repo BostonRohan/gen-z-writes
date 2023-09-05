@@ -11,6 +11,7 @@ async function getVideos() {
     const { query, schema } = q("*").filterByType("video").grab(videoFragment);
     return schema.parse(await client.fetch(query));
   } catch (err) {
+    console.log("testtt test");
     console.error("there was an error getting the videos err:", err);
     return notFound();
   }

@@ -29,5 +29,5 @@ export default async function DatabaseLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main className={`bg-primary ${inter.className}`}></main>;
+  return <main className={`bg-primary ${inter.className}`}>{children}</main>;
 }
