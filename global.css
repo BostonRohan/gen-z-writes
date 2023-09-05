@@ -11,3 +11,51 @@
     rgba(0, 0, 0, 1) 100%
   );
 }
+
+.gradient-text-animation {
+  --bg-size: 400%;
+  --primary: #074aac;
+  --secondary: #7a49a5;
+  background: linear-gradient(
+      90deg,
+      var(--primary),
+      var(--secondary),
+      var(--primary)
+    )
+    0 0 / var(--bg-size) 100%;
+  color: transparent;
+  background-clip: text;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gradient-text-animation {
+    animation: move-bg 20s linear infinite;
+  }
+  .type-animation span {
+    word-break: break-all;
+    height: 1.4em;
+    width: 0%;
+    overflow: hidden;
+    animation: t 5s linear infinite alternate;
+  }
+  @keyframes move-bg {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
+  @keyframes t {
+    90%,
+    100% {
+      width: 100%;
+    }
+  }
+}
+
+.type-animation {
+  display: inline-flex;
+}
+
+.type-animation span:before {
+  content: " ";
+  display: inline-block;
+}
