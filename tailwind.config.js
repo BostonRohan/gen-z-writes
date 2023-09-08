@@ -16,7 +16,11 @@ module.exports = {
       ...defaultTheme.screens,
     },
     extend: {
+      willChange: {
+        filter: "filter",
+      },
       colors: {
+        ring: "hsl(var(--ring))",
         primary: "#074AAC",
         secondary: "#7a49a5",
         background: {

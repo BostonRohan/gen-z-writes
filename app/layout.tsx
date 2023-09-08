@@ -1,5 +1,6 @@
 import "global.css";
 import { Analytics } from "@vercel/analytics/react";
+import Link from "next/link";
 
 export default async function RootLayout({
   children,

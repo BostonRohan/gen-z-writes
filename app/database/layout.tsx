@@ -2,6 +2,7 @@ import "global.css";
 import { inter } from "../fonts";
 import { Metadata } from "next";
 import Nav from "@/components/Nav";
+import Link from "next/link";
 
 const title = "Database";
 const description =
@@ -29,5 +30,14 @@ export default async function DatabaseLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main className={`bg-primary ${inter.className}`}>{children}</main>;
+  return (
+    <main className={`${inter.className}`}>
+      <nav className="pt-4">
+        <Link href="/" className="font-bold gradient-text-animation pl-24">
+          Gen Z Writes
+        </Link>
+      </nav>
+      {children}
+    </main>
+  );
 }

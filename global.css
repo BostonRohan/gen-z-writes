@@ -2,14 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-.nav-background {
-  background: rgb(27, 27, 29);
-  background: linear-gradient(
-    90deg,
-    rgba(27, 27, 29, 1) 15%,
-    rgba(27, 27, 29, 1) 39%,
-    rgba(0, 0, 0, 1) 100%
+@layer base {
+  :root {
+    --gradient-angle: 360deg;
+    --ring: 240 5% 64.9%;
+    --primary: #074aac;
+    --secondary: #7a49a5;
+  }
+}
+
+html,
+body,
+#__next,
+main {
+  scroll-behavior: smooth !important;
+  min-height: 100%;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 0s 600000s, color 0s 600000s;
+}
+
+@property --gradient-angle {
+  syntax: "<angle>"; /* <- defined as type angle for the transition to work */
+  initial-value: 360deg;
+  inherits: false;
+}
+
+.titlebar {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #ebebeb, color-stop(1, #d5d5d5))
   );
+  background: -webkit-linear-gradient(to top, #ebebeb, #d5d5d5);
+  background: -moz-linear-gradient(ro top, #ebebeb, #d5d5d5);
+  background: -ms-linear-gradient(to top, #ebebeb, #d5d5d5);
+  background: -o-linear-gradient(to top, #ebebeb, #d5d5d5);
+  background: linear-gradient(to top, #ebebeb, #d5d5d5);
+  color: #4d494d;
+  font-size: 11pt;
+  line-height: 20px;
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid #f3f1f3;
+  border-bottom: 1px solid #b1aeb1;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  cursor: default;
 }
 
 .gradient-text-animation {
@@ -38,6 +85,28 @@
     overflow: hidden;
     animation: t 5s linear infinite alternate;
   }
+  .email-button {
+    background: linear-gradient(
+      var(--gradient-angle),
+      var(--primary),
+      var(--secondary),
+      var(--primary),
+      #fff,
+      hsla(0, 0%, 100%, 0.3)
+    ) !important;
+    animation: gradient-rotate 5s linear infinite reverse;
+  }
+
+  @keyframes gradient-rotate {
+    0% {
+      --gradient-angle: 360deg;
+    }
+
+    100% {
+      --gradient-angle: 0deg;
+    }
+  }
+
   @keyframes move-bg {
     to {
       background-position: var(--bg-size) 0;
