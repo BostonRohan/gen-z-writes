@@ -2,16 +2,16 @@ import type { NextRequest } from "next/server";
 import { Ratelimit } from "@upstash/ratelimit";
 import { kv } from "@vercel/kv";
 
+const ratelimit = new Ratelimit({
+  redis: kv,
+  // 3 requests from the same IP in 10 seconds
+  limiter: Ratelimit.slidingWindow(3, "10 s"),
+});
+
 export default async function middleware(request: NextRequest) {
   //only use rate limiting on prod
   if (process.env.NODE_ENV === "production") {
     // You could alternatively limit based on user ID or similar
-    const ratelimit = new Ratelimit({
-      redis: kv,
-      // 3 requests from the same IP in 10 seconds
-      limiter: Ratelimit.slidingWindow(3, "10 s"),
-    });
-
     const ip = request.ip ?? "127.0.0.1";
     const { limit, reset, remaining } = await ratelimit.limit(ip);
 
