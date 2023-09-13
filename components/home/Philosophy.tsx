@@ -35,7 +35,10 @@ export default function Philosophy() {
         <h4 className="font-semibold sm:text-lg text-base">
           Join the newsletter
         </h4>
-        <Email />
+        <Email
+          submissionMessage="Thank you for joining!"
+          apiUrl="/api/newsletter"
+        />
       </section>
     </section>
   );

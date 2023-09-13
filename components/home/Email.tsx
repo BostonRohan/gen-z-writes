@@ -5,9 +5,20 @@ import * as Yup from "yup";
 import { useState } from "react";
 import Image from "next/image";
 import classnames from "classnames";
+import handleSubmit from "@/utils/handleEmailSubmit";
+import Error from "../auth/Error";
 
-export default function Email() {
+export default function Email({
+  submissionMessage,
+  apiUrl,
+  pageError,
+}: {
+  submissionMessage: string;
+  apiUrl: string;
+  pageError?: string;
+}) {
   const [animateSend, setAnimateSend] = useState(false);
+  const [pageErrorState, setPageErrorState] = useState(pageError);
 
   const handleReset = () => {
     setAnimateSend(false);
@@ -22,16 +33,22 @@ export default function Email() {
       email: Yup.string().email("Invalid email address").required("Required"),
     }),
     onSubmit: async ({ email }) => {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        body: JSON.stringify({ email }),
-      });
-      const { error } = await res.json();
-      if (error) {
+      try {
+        const res = await handleSubmit(apiUrl, email);
+
+        if (res.ok) {
+          setPageErrorState && setPageErrorState(undefined);
+          setAnimateSend(true);
+          setTimeout(() => handleReset(), 5000);
+        } else {
+          const responseBody = await res.json();
+          formik.setErrors({
+            email: responseBody.data ?? "An error occurred please try again.",
+          });
+        }
+      } catch (err) {
+        console.error(err);
         formik.setErrors({ email: "An error occurred please try again." });
-      } else {
-        setAnimateSend(true);
-        setTimeout(() => handleReset(), 5000);
       }
     },
   });
@@ -61,16 +78,17 @@ export default function Email() {
         onBlur={formik.handleBlur}
         value={formik.values.email}
       />
-      {formik.touched.email &&
-        formik.errors.email &&
-        formik.submitCount > 0 && (
-          <p className="text-red-200 text-sm mt-4">{formik.errors.email}</p>
+      <div className="mt-4">
+        {formik.touched.email &&
+          formik.errors.email &&
+          formik.submitCount > 0 && <Error>{formik.errors.email}</Error>}
+        {pageErrorState && <Error>{pageErrorState}</Error>}
+        {animateSend && (
+          <p className="text-primary text-sm font-semibold">
+            {submissionMessage}
+          </p>
         )}
-      {animateSend && (
-        <p className="text-primary text-sm mt-4 font-semibold">
-          Thank you for joining!
-        </p>
-      )}
+      </div>
       <motion.img
         alt="paper plane icon"
         src="/icons/paper-plane.svg"

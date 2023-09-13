@@ -14,12 +14,12 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      return NextResponse.json({ data: true });
+      return NextResponse.json({});
     } else {
-      return NextResponse.json({ error: "Unauthorized" });
+      return NextResponse.json({}, { status: 401 });
     }
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Unexpected" });
+    return NextResponse.json({}, { status: 500 });
   }
 }
