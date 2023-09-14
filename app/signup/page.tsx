@@ -1,4 +1,5 @@
 import GoogleSignIn from "@/components/auth/GoogleSignIn";
+import Form from "@/components/auth/SignupForm";
 import authOptions from "@/utils/auth/authOptions";
 import { getServerSession } from "next-auth/next";
 import { getProviders, signIn } from "next-auth/react";
@@ -10,14 +11,8 @@ export default async function SignIn() {
   if (session) return redirect("/profile");
 
   return (
-    <form>
-      <input name="csrfToken" type="hidden" defaultValue={""} />
-      <label>
-        Email address
-        <input type="email" id="email" name="email" />
-      </label>
-      <button type="submit">Sign in with Email</button>
-      <GoogleSignIn />
-    </form>
+    <div className="min-h-[calc(100vh_-_16px)] h-full w-full flex items-center px-4 justify-center">
+      <Form />
+    </div>
   );
 }

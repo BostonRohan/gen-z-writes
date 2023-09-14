@@ -1,5 +1,5 @@
 import GoogleSignIn from "@/components/auth/GoogleSignIn";
-import Form from "@/components/auth/SigninForm";
+import Form from "@/components/auth/LoginForm";
 import authOptions from "@/utils/auth/authOptions";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
