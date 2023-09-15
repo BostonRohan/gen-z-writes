@@ -17,7 +17,7 @@ export default async function ForgotPassword({
 
   const EmailSection = ({ error }: { error?: string }) => {
     return (
-      <section className="min-h-[calc(100vh_-_16px)] h-full w-full flex flex-col items-center px-4 justify-center text-slate-200">
+      <section className="min-h-[calc(100vh_-_16px)] h-full w-full flex flex-col items-center overflow-hidden px-4 justify-center text-slate-200">
         <h1 className="text-4xl text-slate-200 font-bold text-center max-w-[450px]">
           Enter your email to reset your password
         </h1>
