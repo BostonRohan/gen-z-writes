@@ -72,13 +72,13 @@ export default function Form() {
         )}
         <Link
           href="/forgot-password"
-          className="text-primary opacity-80 text-sm"
+          className="text-truePrimary opacity-80 text-sm"
         >
           Forgot password?
         </Link>
 
         <button
-          className="bg-primary hover:bg-opacity-80 p-2 rounded-md xs:text-base w-full text-sm"
+          className="bg-truePrimary hover:bg-opacity-80 p-2 rounded-md xs:text-base w-full text-sm"
           type="submit"
         >
           Sign in with Email

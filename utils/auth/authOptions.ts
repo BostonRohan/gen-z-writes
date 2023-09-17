@@ -71,8 +71,13 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    jwt: async ({ token, user }) => {
+    jwt: async ({ token, user, trigger, session }) => {
       user && (token.user = user);
+
+      if (trigger === "update" && typeof token.user === "object") {
+        token.user = { ...token.user, ...session.data };
+      }
+
       return token;
     },
     //whatever value we return here will be the value of the next-auth session

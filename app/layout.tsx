@@ -9,7 +9,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-background-primary">
+      <body className="bg-background-primary dark">
         <link
           rel="apple-touch-icon"
           sizes="180x180"

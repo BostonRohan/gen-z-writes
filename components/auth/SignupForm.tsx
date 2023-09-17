@@ -113,7 +113,7 @@ export default function Form() {
           </Link>
         )}
         <button
-          className="bg-primary hover:bg-opacity-80 p-2 rounded-md xs:text-base w-full text-sm"
+          className="bg-truePrimary hover:bg-opacity-80 p-2 rounded-md xs:text-base w-full text-sm"
           type="submit"
         >
           Sign up

@@ -84,7 +84,7 @@ export default function Email({
           formik.submitCount > 0 && <Error>{formik.errors.email}</Error>}
         {pageErrorState && <Error>{pageErrorState}</Error>}
         {animateSend && (
-          <p className="text-primary text-sm font-semibold">
+          <p className="text-truePrimary text-sm font-semibold">
             {submissionMessage}
           </p>
         )}
@@ -102,7 +102,7 @@ export default function Email({
       <button
         type="submit"
         disabled={animateSend || formik.isSubmitting}
-        className="items-center justify-center absolute top-4 right-0 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none ring-offset-background-primary bg-primary text-primary-foreground hover:bg-primary/90 h-8 w-8 email-button group mx-auto overflow-hidden p-[1px] font-bold transition-all duration-300 block dark:hover:shadow-[0_0_2rem_-0.5rem_#fff8] md:mr-0 lg:mr-auto"
+        className="items-center justify-center absolute top-4 right-0 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none ring-offset-background-truePrimary bg-truePrimary text-primary-foreground hover:bg-primary/90 h-8 w-8 email-button group mx-auto overflow-hidden p-[1px] font-bold transition-all duration-300 block dark:hover:shadow-[0_0_2rem_-0.5rem_#fff8] md:mr-0 lg:mr-auto"
       >
         <span
           className={classnames(

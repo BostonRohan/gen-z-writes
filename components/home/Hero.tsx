@@ -27,14 +27,14 @@ export default function Hero() {
       <section className="w-full max-w-[450px] mx-auto flex flex-wrap text-center justify-center items-center font-semibold pt-4 gap-4">
         <GradientButton
           href="/database"
-          gradient="bg-gradient-to-r from-primary to-secondary"
+          gradient="bg-gradient-to-r from-truePrimary to-trueSecondary"
         >
           View Database
         </GradientButton>
         <GradientButton
           scroll={false}
           href="#newsletter"
-          gradient="bg-gradient-to-r from-primary to-slate-700"
+          gradient="bg-gradient-to-r from-truePrimary to-slate-700"
         >
           Join Newsletter
         </GradientButton>

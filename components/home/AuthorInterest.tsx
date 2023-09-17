@@ -11,7 +11,7 @@ export default function AuthorInterest() {
         Click below to send us an email to discuss next steps.
       </p>
       <GradientButton
-        gradient="bg-gradient-to-r from-primary to-slate-700"
+        gradient="bg-gradient-to-r from-truePrimary to-slate-700"
         href="mailto:projectgenzwrites@gmail.com"
       >
         Connect with us
