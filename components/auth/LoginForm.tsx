@@ -4,14 +4,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import GoogleSignIn from "./GoogleSignIn";
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import getCharacterValidationError from "@/utils/getCharacterValidationError";
 import Error from "./Error";
 
-export default function Form() {
-  const searchParams = useSearchParams();
-
+export default function Form({ error }: { error?: boolean }) {
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: Yup.object({
@@ -65,9 +62,10 @@ export default function Form() {
           )}
         </label>
 
-        {searchParams.get("error") && (
+        {error && (
           <Error>
-            There was an error signing you in, please retry your password.
+            There was an error signing you in, please retry your email or
+            password.
           </Error>
         )}
         <Link
