@@ -29,7 +29,7 @@ export default function Form({ userId }: { userId: string }) {
     initialValues: {
       name: data?.user?.name ?? "",
       username: data?.user?.username ?? "",
-      email: data?.user.email ?? "",
+      email: data?.user?.email ?? "",
       password: "",
     },
     validationSchema: Yup.object({
