@@ -17,7 +17,10 @@ export default async function Profile() {
         <header className="flex xs:flex-row flex-col gap-4">
           <h1 className="text-6xl">Profile</h1>
           <div className="xs:ml-auto xs:mr-0 xs:flex-row flex-row-reverse mr-auto flex items-center gap-4">
-            <ProfileImage name={session.user.name} image={session.user.image} />
+            <ProfileImage
+              name={session.user?.name}
+              image={session.user?.image}
+            />
           </div>
         </header>
         <Form userId={session.user.id} />
