@@ -8,7 +8,7 @@ import Link from "next/link";
 import getCharacterValidationError from "@/utils/getCharacterValidationError";
 import Error from "./Error";
 
-export default function Form({ error }: { error?: boolean }) {
+export default function Form() {
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: Yup.object({
@@ -23,7 +23,14 @@ export default function Form({ error }: { error?: boolean }) {
         .matches(/[A-Z]/, getCharacterValidationError("uppercase")),
     }),
     onSubmit: async ({ email, password }) => {
-      await signIn("credentials", { email, password });
+      const user = await signIn("credentials", { email, password });
+
+      if (!user) {
+        formik.setErrors({
+          password:
+            "There was an error signing you in, please retry your email or password.",
+        });
+      }
     },
   });
 
@@ -62,12 +69,6 @@ export default function Form({ error }: { error?: boolean }) {
           )}
         </label>
 
-        {error && (
-          <Error>
-            There was an error signing you in, please retry your email or
-            password.
-          </Error>
-        )}
         <Link
           href="/forgot-password"
           className="text-truePrimary opacity-80 text-sm"
