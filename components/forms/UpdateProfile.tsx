@@ -27,8 +27,8 @@ export default function Form({ userId }: { userId: string }) {
 
   const formik = useFormik({
     initialValues: {
-      name: data?.user.name ?? "",
-      username: data?.user.username ?? "",
+      name: data?.user?.name ?? "",
+      username: data?.user?.username ?? "",
       email: data?.user.email ?? "",
       password: "",
     },
@@ -114,7 +114,7 @@ export default function Form({ userId }: { userId: string }) {
       onSubmit={formik.handleSubmit}
       className="mt-20 max-w-lg gap-4 flex flex-col"
     >
-      {!data?.user.name && status !== "loading" && (
+      {!data?.user?.name && status !== "loading" && (
         <label className="text-slate-200 space-y-2">
           <span>Name</span>
           <input
