@@ -8,8 +8,8 @@ import bcrypt from "bcrypt";
 const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
-    signOut: "/logout",
-    error: "/",
+    signOut: "/",
+    error: "/login",
     verifyRequest: "/",
   },
   adapter: PrismaAdapter(prisma),
@@ -30,7 +30,7 @@ const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email) {
           console.error("no email provided");
-          return null;
+          throw new Error("no-email");
         }
         const { email } = credentials;
         try {
@@ -41,8 +41,10 @@ const authOptions: NextAuthOptions = {
           });
 
           if (!user?.password) {
-            console.error("password does not exist for the user:", user.email);
-            return null;
+            console.error(
+              `password does not exist for the user: ${user.email}`
+            );
+            throw new Error(`no-password`);
           }
 
           const match = await bcrypt.compare(
@@ -51,17 +53,21 @@ const authOptions: NextAuthOptions = {
           );
 
           if (!match) {
-            console.error("passwords did not match");
-            return null;
+            console.error(
+              `password does not exist for the user: ${user.email}`
+            );
+            throw new Error("invalid-password");
           }
 
           return user;
         } catch (err) {
           console.error(
-            `there was an error authenticating the user: ${email}`,
-            err
+            `there was an error authenticating the user: ${email} -- err: ${err}`
           );
-          return null;
+          if (err instanceof Error) {
+            throw new Error(err.message);
+          }
+          throw new Error("unexpected");
         }
       },
     }),

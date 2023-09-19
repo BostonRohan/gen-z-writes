@@ -7,8 +7,11 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import getCharacterValidationError from "@/utils/getCharacterValidationError";
 import Error from "./Error";
+import { useSearchParams } from "next/navigation";
 
 export default function Form() {
+  const searchParams = useSearchParams();
+
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: Yup.object({
@@ -23,12 +26,12 @@ export default function Form() {
         .matches(/[A-Z]/, getCharacterValidationError("uppercase")),
     }),
     onSubmit: async ({ email, password }) => {
-      const user = await signIn("credentials", { email, password });
-
-      if (!user) {
+      try {
+        await signIn("credentials", { email, password });
+      } catch (err) {
         formik.setErrors({
           password:
-            "There was an error signing you in, please retry your email or password.",
+            "There was an issue signing you in, please retry your email or password.",
         });
       }
     },
@@ -68,6 +71,11 @@ export default function Form() {
             <Error>{formik.errors.password}</Error>
           )}
         </label>
+        {searchParams.get("error") && (
+          <Error>
+            There was an error signing you in, please retry your password.
+          </Error>
+        )}
 
         <Link
           href="/forgot-password"
