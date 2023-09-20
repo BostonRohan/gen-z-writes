@@ -18,11 +18,10 @@ const NEXT_SSG_FILES = [
 ];
 
 /** @type {import('next-sitemap').IConfig} */
-const config = {
+module.exports = {
   siteUrl: "https://www.projectgenzwrites.com",
   generateRobotsTxt: true,
   exclude,
-  additionalPaths: ["/api/server-sitemap-index.xml"],
   robotsTxtOptions: {
     policies: [
       {
@@ -30,7 +29,8 @@ const config = {
         disallow: NEXT_SSG_FILES,
       },
     ],
+    additionalSitemaps: [
+      "https://www.projectgenzwrites.com/api/server-sitemap-index.xml",
+    ],
   },
 };
-
-export default config;
