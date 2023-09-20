@@ -38,7 +38,7 @@ export async function generateStaticParams() {
       .grab({
         slug: q.slug("slug"),
       });
-    return schema.parse(await client.fetch(query)).map((slug) => slug);
+    return schema.parse(await client.fetch(query));
   } catch (err) {
     console.error(
       "there was an error getting the video slugs statically:",
