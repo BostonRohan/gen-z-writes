@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     title,
     url: "https://www.projectgenzwrites.com/",
     description,
-    images: ["/public/gen-z-writes-og.png"],
+    images: ["/gen-z-writes-og.png"],
   },
   twitter: {
     card: "summary",
     title,
     description,
-    images: ["/public/gen-z-writes-og.png"],
+    images: ["/gen-z-writes-og.png"],
   },
 };
 

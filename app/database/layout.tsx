@@ -15,13 +15,15 @@ export const metadata: Metadata = {
   category: title,
   openGraph: {
     title,
-    url: "https://www.projectgenzwrites.com/",
+    url: "https://www.projectgenzwrites.com/database",
     description,
+    images: ["/gen-z-writes-og.png"],
   },
   twitter: {
     card: "summary",
     title,
     description,
+    images: ["/gen-z-writes-og.png"],
   },
 };
 

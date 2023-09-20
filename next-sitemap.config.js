@@ -2,7 +2,6 @@ const exclude = [
   "/forgot-password",
   "/profile",
   "/studio/*",
-  "/user/*",
   "/login",
   "/signup",
   "/profile",
