@@ -121,6 +121,9 @@ devDependencies:
   next-auth:
     specifier: ^4.22.1
     version: 4.22.1(next@13.4.4)(react-dom@18.2.0)(react@18.2.0)
+  next-sitemap:
+    specifier: ^4.2.3
+    version: 4.2.3(next@13.4.4)
   postcss:
     specifier: ^8.4.21
     version: 8.4.21
@@ -487,6 +490,10 @@ packages:
       style-mod: 4.1.0
       w3c-keyname: 2.2.8
     dev: false
+
+  /@corex/deepmerge@4.0.43:
+    resolution: {integrity: sha512-N8uEMrMPL0cu/bdboEWpQYb/0i2K5Qn8eCsxzOmxSggJbbQte7ljMRoXm917AbntqTGOzdTu+vP3KOOzoC70HQ==}
+    dev: true
 
   /@emotion/is-prop-valid@0.8.8:
     resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}
@@ -5793,6 +5800,20 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /next-sitemap@4.2.3(next@13.4.4):
+    resolution: {integrity: sha512-vjdCxeDuWDzldhCnyFCQipw5bfpl4HmZA7uoo3GAaYGjGgfL4Cxb1CiztPuWGmS+auYs7/8OekRS8C2cjdAsjQ==}
+    engines: {node: '>=14.18'}
+    hasBin: true
+    peerDependencies:
+      next: '*'
+    dependencies:
+      '@corex/deepmerge': 4.0.43
+      '@next/env': 13.4.4
+      fast-glob: 3.3.1
+      minimist: 1.2.8
+      next: 13.4.4(@babel/core@7.22.20)(react-dom@18.2.0)(react@18.2.0)
+    dev: true
 
   /next@13.4.4(@babel/core@7.22.20)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-C5S0ysM0Ily9McL4Jb48nOQHT1BukOWI59uC3X/xCMlYIh9rJZCv7nzG92J6e1cOBqQbKovlpgvHWFmz4eKKEA==}

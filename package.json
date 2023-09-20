@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && next-sitemap"
   },
   "dependencies": {
     "@portabletext/react": "^3.0.7",
@@ -51,6 +51,7 @@
     "framer-motion": "^10.16.4",
     "jsonwebtoken": "^9.0.2",
     "next-auth": "^4.22.1",
+    "next-sitemap": "^4.2.3",
     "postcss": "^8.4.21",
     "prisma": "^5.2.0",
     "react-hotkeys-hook": "^4.4.1",
