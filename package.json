@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "prisma generate && next-sitemap"
+    "postinstall": "prisma generate",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@portabletext/react": "^3.0.7",
