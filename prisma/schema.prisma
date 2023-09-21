@@ -14,6 +14,7 @@ datasource db {
 enum RoleTypes {
   USER
   AUTHOR
+  ASPIRING_AUTHOR
 }
 
 // Necessary for Next auth
@@ -46,12 +47,6 @@ model Session {
   @@index([userId])
 }
 
-model Role {
-  id   String    @id @default(uuid())
-  user User[]
-  role RoleTypes @unique
-}
-
 // /// This is a table that contains all the user links they can add to profile
 // model UserLink {
 //   id   String @id @default(uuid())
@@ -72,7 +67,7 @@ model User {
   forgotPassword String?   @unique
   emailVerified  DateTime?
   image          String?
-  roles          Role[]
+  role           RoleTypes @default(USER)
   Account        Account[]
   Session        Session[]
 }

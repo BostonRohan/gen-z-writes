@@ -10,7 +10,9 @@ declare module "next-auth" {
       image?: string | null;
       id: string;
       username?: string | null;
+      emailVerified?: null | Date;
       email: string;
+      role: "USER" | "AUTHOR" | "ASPIRING_AUTHOR";
     };
   }
 }

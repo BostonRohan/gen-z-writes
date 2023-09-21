@@ -10,7 +10,8 @@ import {
 import { useHotkeys } from "react-hotkeys-hook";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import Image from "next/image";
 
 export default function ProfileImage({
   image,
@@ -28,9 +29,15 @@ export default function ProfileImage({
   return (
     <DropdownMenu onOpenChange={setOpen} open={open}>
       <DropdownMenuTrigger asChild>
-        <Avatar className="cursor-pointer">
+        <Avatar>
           {image ? (
-            <AvatarImage src={image} />
+            <Image
+              width={100}
+              height={100}
+              className="aspect-square"
+              src={image}
+              alt={name ?? "Profile Image"}
+            />
           ) : (
             <AvatarFallback className="uppercase">
               {name
