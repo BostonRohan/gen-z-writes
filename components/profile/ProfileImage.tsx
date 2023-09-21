@@ -1,6 +1,5 @@
 "use client";
 import { LogOut } from "lucide-react";
-import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,13 +10,16 @@ import {
 import { useHotkeys } from "react-hotkeys-hook";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function ProfileImage({
   image,
   name,
+  email,
 }: {
   image?: string | null;
   name?: string | null;
+  email: string;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -26,18 +28,19 @@ export default function ProfileImage({
   return (
     <DropdownMenu onOpenChange={setOpen} open={open}>
       <DropdownMenuTrigger asChild>
-        <section className="cursor-pointer flex xs:flex-row flex-row-reverse items-center gap-4">
-          {name && <h2 className="text-xl opacity-80">{name}</h2>}
-          <Image
-            width={36}
-            height={36}
-            src={image ?? "/icons/user.svg"}
-            alt={name ?? "Profile Image"}
-            className="rounded-full"
-          />
-        </section>
+        <Avatar className="cursor-pointer">
+          {image ? (
+            <AvatarImage src={image} />
+          ) : (
+            <AvatarFallback className="uppercase">
+              {name
+                ? `${name[0]}${name.split(" ")[name.split(" ").length - 1][0]}`
+                : email[0]}
+            </AvatarFallback>
+          )}
+        </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-44">
+      <DropdownMenuContent className="w-40">
         <DropdownMenuItem onClick={() => signOut()}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>

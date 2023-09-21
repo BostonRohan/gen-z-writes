@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -6,11 +7,13 @@ export default function GradientButton({
   href,
   children,
   scroll,
+  textClassName,
 }: {
   gradient: string;
   href: string;
   children: ReactNode;
   scroll?: boolean;
+  textClassName?: string;
 }) {
   return (
     <div className="flex justify-center">
@@ -27,7 +30,9 @@ export default function GradientButton({
           <span
             className={`block p-2 min-w-[134px] inset-0.5 rounded-lg ${gradient}`}
           >
-            <span className="text-slate-200">{children}</span>
+            <span className={`text-slate-200 ${classNames(textClassName)}`}>
+              {children}
+            </span>
           </span>
         </Link>
       </div>

@@ -65,7 +65,7 @@ export default function Form({ userId }: { userId: string }) {
         const validUsernameBody = await validUsername.json();
 
         //profanity and things of that nature
-        if (validUsernameBody.result !== username) {
+        if (username && validUsernameBody.result !== username) {
           formik.setErrors({ username: "Invalid username." });
           return;
         }

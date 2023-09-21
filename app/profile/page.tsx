@@ -20,6 +20,7 @@ export default async function Profile() {
             <ProfileImage
               name={session.user?.name}
               image={session.user?.image}
+              email={session.user.email}
             />
           </div>
         </header>

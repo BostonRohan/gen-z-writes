@@ -5,7 +5,7 @@ import MacWindow from "./MacWindow";
 
 export default function Philosophy() {
   return (
-    <section className="pt-[calc(50vh_-_4px)] text-slate-200 text-center px-4 flex flex-col gap-24">
+    <section className="pt-[calc(40vh_-_4px)] text-slate-200 text-center px-4 flex flex-col gap-24">
       <div className="flex flex-wrap justify-center gap-16">
         <article>
           <h2

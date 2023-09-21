@@ -7,14 +7,12 @@ export default function AuthorInterest() {
         Are you an author interested in{" "}
         <span className="gradient-text-animation">participating?</span>
       </h2>
-      <p className="xs:text-lg text-slate-200 font-semibold opacity-50 xs:max-w-none max-w-[250px] mx-auto text-sm mb-4">
-        Click below to send us an email to discuss next steps.
-      </p>
       <GradientButton
         gradient="bg-gradient-to-r from-truePrimary to-slate-700"
-        href="mailto:projectgenzwrites@gmail.com"
+        href="/signup"
+        textClassName="font-semibold"
       >
-        Connect with us
+        Sign Up
       </GradientButton>
     </section>
   );
