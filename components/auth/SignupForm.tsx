@@ -5,13 +5,17 @@ import * as Yup from "yup";
 import GoogleSignIn from "./GoogleSignIn";
 import getCharacterValidationError from "@/utils/getCharacterValidationError";
 import Error from "./Error";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 
 export default function Form() {
   const router = useRouter();
   const [exsistingUser, setExsistingUser] = useState(false);
+  const searchParams = useSearchParams();
+  const referrer = searchParams.get("referrer");
+  const queryParam = referrer ? `?referrer=${referrer}` : "";
+
   const formik = useFormik({
     initialValues: { email: "", password: "", confirmPassword: "" },
     validationSchema: Yup.object({
@@ -37,7 +41,7 @@ export default function Form() {
           body: JSON.stringify({ email, password }),
         });
         if (res.ok) {
-          router.replace("/login");
+          router.replace(`/login${queryParam}`);
         } else {
           const resBody = await res.json();
           if (resBody.data === "Existing user") {
@@ -59,7 +63,7 @@ export default function Form() {
 
   return (
     <div className="bg-black bg-opacity-10 rounded-md p-8 flex flex-col gap-4 w-full max-w-[450px] text-slate-200">
-      <GoogleSignIn />
+      <GoogleSignIn callbackUrl={`/profile${queryParam}`} />
       <form onSubmit={formik.handleSubmit} className="space-y-4 w-full">
         <input name="csrfToken" type="hidden" defaultValue={""} />
         <label className="flex flex-col">

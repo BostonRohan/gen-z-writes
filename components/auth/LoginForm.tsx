@@ -11,6 +11,9 @@ import { useSearchParams } from "next/navigation";
 
 export default function Form() {
   const searchParams = useSearchParams();
+  const referrer = searchParams.get("referrer");
+
+  const queryParam = referrer ? `?referrer=${referrer}` : "";
 
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -27,7 +30,11 @@ export default function Form() {
     }),
     onSubmit: async ({ email, password }) => {
       try {
-        await signIn("credentials", { email, password });
+        await signIn("credentials", {
+          email,
+          password,
+          callbackUrl: `/profile${queryParam}`,
+        });
       } catch (err) {
         formik.setErrors({
           password:
