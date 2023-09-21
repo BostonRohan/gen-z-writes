@@ -10,29 +10,17 @@ export default function Contributors() {
         Contributors
       </h2>
       <section className="flex justify-center gap-16">
-        <Contributor
-          name="Boston Rohan"
-          src="/boston-headshot.jpg"
-          alt="Boston Rohan"
-        />
+        <Contributor name="Ruby Seidner" src="/ruby.webp" />
+
         <Contributor
           href="https://bostonrohan.com/"
           name="Boston Rohan"
-          src="/boston-headshot.jpg"
-          alt="Boston Rohan"
+          src="/boston.jpg"
         />
       </section>
       <section className="flex justify-center mt-16 gap-16">
-        <Contributor
-          name="Boston Rohan"
-          src="/boston-headshot.jpg"
-          alt="Boston Rohan"
-        />
-        <Contributor
-          name="Boston Rohan"
-          src="/boston-headshot.jpg"
-          alt="Boston Rohan"
-        />
+        <Contributor name="Randi Seidner" src="/randi.webp" />
+        <Contributor name="Shannan Johnson" src="/shannan.jpeg" />
       </section>
     </section>
   );

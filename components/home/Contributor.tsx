@@ -1,14 +1,13 @@
 import Image from "next/image";
 import ConditionalLink from "../global/ConditionalLink";
+import classNames from "classnames";
 
 export default function Contributor({
   src,
-  alt,
   name,
   href,
 }: {
   src: string;
-  alt: string;
   name: string;
   href?: string;
 }) {
@@ -16,13 +15,17 @@ export default function Contributor({
     <article>
       <Image
         src={src}
-        width={200}
-        height={200}
-        alt={alt}
-        className="rounded-xl mb-4 hover:shadow-[0_0_2rem_-0.5rem_#fff8]"
+        width={175}
+        height={175}
+        alt={name}
+        className="mb-4 max-h-[175px] rounded-[50%] w-[175px] h-full overflow-hidden !object-cover "
       />
       <ConditionalLink href={href} target="_blank">
-        <h3 className="text-lg text-center text-opacity-50 hover:text-opacity-80 text-slate-200 font-semibold">
+        <h3
+          className={`text-lg text-center ${classNames({
+            "hover:text-opacity-80": href,
+          })} text-opacity-50 text-slate-200 font-semibold`}
+        >
           {name}
         </h3>
       </ConditionalLink>
