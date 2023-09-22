@@ -1,10 +1,8 @@
 import "global.css";
-import { PLASMIC } from "../../plasmic-init";
-import { PlasmicClientRootProvider } from "../../plasmic-init-client";
-import { PlasmicComponent } from "@plasmicapp/loader-nextjs";
 import { inter } from "../fonts";
 import { Metadata } from "next";
 import Nav from "@/components/Nav";
+import Link from "next/link";
 
 const title = "Database";
 const description =
@@ -17,13 +15,15 @@ export const metadata: Metadata = {
   category: title,
   openGraph: {
     title,
-    url: "https://www.projectgenzwrites.com/",
+    url: "https://www.projectgenzwrites.com/database",
     description,
+    images: ["/gen-z-writes-og.png"],
   },
   twitter: {
     card: "summary",
     title,
     description,
+    images: ["/gen-z-writes-og.png"],
   },
 };
 
@@ -32,14 +32,5 @@ export default async function DatabaseLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const plasmicData = await PLASMIC.fetchComponentData("Footer");
-  return (
-    <main className={`bg-primary ${inter.className}`}>
-      <Nav />
-      <PlasmicClientRootProvider prefetchedData={plasmicData}>
-        {children}
-        <PlasmicComponent component="Footer" />
-      </PlasmicClientRootProvider>
-    </main>
-  );
+  return <main className={`${inter.className}`}>{children}</main>;
 }

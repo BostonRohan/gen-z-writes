@@ -1,6 +1,6 @@
 import "global.css";
-import { inter } from "./fonts";
 import { Analytics } from "@vercel/analytics/react";
+import Link from "next/link";
 
 export default async function RootLayout({
   children,
@@ -9,7 +9,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-primary ${inter.className}`}>
+      <body className="bg-background-primary dark">
         <link
           rel="apple-touch-icon"
           sizes="180x180"
