@@ -32,14 +32,5 @@ export default async function DatabaseLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <main className={`${inter.className}`}>
-      <nav className="pt-4">
-        <Link href="/" className="font-bold gradient-text-animation pl-24">
-          Gen Z Writes
-        </Link>
-      </nav>
-      {children}
-    </main>
-  );
+  return <main className={`${inter.className}`}>{children}</main>;
 }
