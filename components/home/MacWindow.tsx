@@ -37,9 +37,8 @@ export default function MacWindow() {
         <h4 className="mr-auto font-semibold text-sm">Gen Z Writes</h4>
       </div>
       <textarea
-        defaultValue="Hey Ruby, can we think of some text to put here? :)"
-        className="w-full h-full min-h-[292px] text-black rounded-md p-4 focus:outline-none"
-      ></textarea>
+        defaultValue="The writer is an explorer. Every step is an advance into a new land.” – Ralph Waldo Emerson"
+        className="w-full h-full min-h-[292px] text-black rounded-md p-4 focus:outline-none"></textarea>
     </div>
   );
 }
