@@ -21,15 +21,13 @@ module.exports = {
   siteUrl: "https://www.projectgenzwrites.com",
   generateRobotsTxt: true,
   exclude,
+  changefreq: "weekly",
   robotsTxtOptions: {
     policies: [
       {
         userAgent: "*",
         disallow: NEXT_SSG_FILES,
       },
-    ],
-    additionalSitemaps: [
-      "https://www.projectgenzwrites.com/api/server-sitemap-index.xml",
     ],
   },
 };
