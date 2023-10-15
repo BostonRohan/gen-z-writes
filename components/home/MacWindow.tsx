@@ -10,6 +10,7 @@ export default function MacWindow() {
   }) => {
     return (
       <button
+        role="presentation"
         className={`${color} rounded-[50%] w-[11px] h-[11px] active:${activeColor} active:border ${activeBorderColor}`}
       />
     );
