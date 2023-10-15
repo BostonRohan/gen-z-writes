@@ -3,17 +3,14 @@ export default function MacWindow() {
     color,
     activeBorderColor,
     activeColor,
-    ariaLabel,
   }: {
     color: string;
     activeColor: string;
     activeBorderColor: string;
-    ariaLabel: string;
   }) => {
     return (
-      <button
+      <div
         role="presentation"
-        aria-label={ariaLabel}
         className={`${color} rounded-[50%] w-[11px] h-[11px] active:${activeColor} active:border ${activeBorderColor}`}
       />
     );
@@ -26,19 +23,16 @@ export default function MacWindow() {
             activeBorderColor="border-[#b03537]"
             activeColor="bg-[#ff5c5c]"
             color="bg-[#ff5c5c]"
-            ariaLabel="Green Primary Mac Window Button"
           />
           <TabButton
             activeBorderColor="border-[#af7c33]"
             activeColor="bg-[#c08e38]"
             color="bg-[#ffbd4c]"
-            ariaLabel="Yellow Minimize Mac Window Button"
           />
           <TabButton
             activeBorderColor="border-[#128435]"
             activeColor="bg-[#c08e38]"
             color="bg-[#00ca56]"
-            ariaLabel="Red Close Mac Window Button"
           />
         </div>
         <label htmlFor="textarea" className="mr-auto font-semibold text-sm">
