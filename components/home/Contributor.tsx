@@ -24,8 +24,7 @@ export default function Contributor({
         <h3
           className={`text-lg text-center ${classNames({
             "hover:text-opacity-80": href,
-          })} text-opacity-50 text-slate-200 font-semibold`}
-        >
+          })} text-opacity-60 text-slate-300 font-semibold`}>
           {name}
         </h3>
       </ConditionalLink>

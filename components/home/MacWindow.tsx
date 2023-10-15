@@ -9,7 +9,8 @@ export default function MacWindow() {
     activeBorderColor: string;
   }) => {
     return (
-      <button
+      <div
+        role="presentation"
         className={`${color} rounded-[50%] w-[11px] h-[11px] active:${activeColor} active:border ${activeBorderColor}`}
       />
     );
@@ -34,9 +35,12 @@ export default function MacWindow() {
             color="bg-[#00ca56]"
           />
         </div>
-        <h4 className="mr-auto font-semibold text-sm">Gen Z Writes</h4>
+        <label htmlFor="textarea" className="mr-auto font-semibold text-sm">
+          Gen Z Writes
+        </label>
       </div>
       <textarea
+        id="textarea"
         defaultValue="The writer is an explorer. Every step is an advance into a new land.” – Ralph Waldo Emerson"
         className="w-full h-full min-h-[292px] text-black rounded-md p-4 focus:outline-none"></textarea>
     </div>
