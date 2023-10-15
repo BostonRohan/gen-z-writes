@@ -35,7 +35,7 @@ export default function MacWindow() {
             color="bg-[#00ca56]"
           />
         </div>
-        <h4 className="mr-auto font-semibold text-sm">Gen Z Writes</h4>
+        <span className="mr-auto font-semibold text-sm">Gen Z Writes</span>
       </div>
       <textarea
         defaultValue="The writer is an explorer. Every step is an advance into a new land.” – Ralph Waldo Emerson"
