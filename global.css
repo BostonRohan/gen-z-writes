@@ -137,13 +137,6 @@ input:-webkit-autofill:focus {
   .gradient-text-animation {
     animation: move-bg 20s linear infinite;
   }
-  .type-animation span {
-    word-break: break-all;
-    height: 1.4em;
-    width: 0%;
-    overflow: hidden;
-    animation: t 5s linear infinite alternate;
-  }
   .email-button {
     background: linear-gradient(
       var(--gradient-angle),
@@ -177,13 +170,4 @@ input:-webkit-autofill:focus {
       width: 100%;
     }
   }
-}
-
-.type-animation {
-  display: inline-flex;
-}
-
-.type-animation span:before {
-  content: " ";
-  display: inline-block;
 }
