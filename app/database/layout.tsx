@@ -1,8 +1,6 @@
 import "global.css";
 import { inter } from "../fonts";
 import { Metadata } from "next";
-import Nav from "@/components/Nav";
-import Link from "next/link";
 
 const title = "Database";
 const description =
