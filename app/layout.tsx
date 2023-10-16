@@ -1,5 +1,7 @@
 import "global.css";
 import { Analytics } from "@vercel/analytics/react";
+import Nav from "@/components/Nav";
+import NextAuthProvider from "@/components/global/NextAuthProvider";
 
 export default async function RootLayout({
   children,
@@ -27,6 +29,9 @@ export default async function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <NextAuthProvider>
+          <Nav />
+        </NextAuthProvider>
         {children}
         <Analytics />
       </body>

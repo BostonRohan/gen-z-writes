@@ -21,6 +21,7 @@ export default async function Profile() {
               name={session.user?.name}
               image={session.user?.image}
               email={session.user.email}
+              useDropDown={true}
             />
           </div>
         </header>
