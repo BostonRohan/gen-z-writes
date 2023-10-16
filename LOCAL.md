@@ -4,7 +4,7 @@ Provide your values as needed
 
 ### 2. Remote Database (using PlanetScale)
 
-[Follow the PlanetScale quick start guide to get started][planetscale-quick-start]
+[Follow the PlanetScale quick start guide to get started](https://planetscale.com/docs/prisma/prisma-quickstart)
 
 After creating an account and creating a database using the steps above:
 
