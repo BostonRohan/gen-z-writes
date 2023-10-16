@@ -91,7 +91,7 @@ export default function Form({ userId }: { userId: string }) {
           update({
             data: {
               ...(username && { username }),
-              ...(email && { email }),
+              // ...(email && { email }),
               ...(name && { name }),
             },
           });
@@ -112,8 +112,7 @@ export default function Form({ userId }: { userId: string }) {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="mt-20 max-w-lg gap-4 flex flex-col"
-    >
+      className="mt-20 max-w-lg gap-4 flex flex-col">
       {!data?.user?.name && status !== "loading" && (
         <label className="text-slate-200 space-y-2">
           <span>Name</span>
@@ -157,6 +156,7 @@ export default function Form({ userId }: { userId: string }) {
           id="email"
           name="email"
           type="email"
+          readOnly
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
@@ -189,8 +189,7 @@ export default function Form({ userId }: { userId: string }) {
       <button
         disabled={formik.isSubmitting || updatedPassword}
         type="submit"
-        className="p-2 bg-truePrimary text-slate-200 w-full rounded-md hover:opacity-80 ml-auto max-w-[120px]"
-      >
+        className="p-2 bg-truePrimary text-slate-200 w-full rounded-md hover:opacity-80 ml-auto max-w-[120px]">
         Update
       </button>
     </form>

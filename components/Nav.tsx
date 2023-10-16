@@ -5,8 +5,6 @@ import { useState, useEffect } from "react";
 import { debounce } from "@/utils/debounce";
 import ProfileImage from "./profile/ProfileImage";
 import { useSession } from "next-auth/react";
-import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
-import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
