@@ -33,7 +33,7 @@ GOOGLE_CLIENT_SECRET=<client_secret>
 In the end your local `.env` file should look something like the following
 
 ```
-DATABASE_URL="mysql://dev:dev@localhost/typehero"
+DATABASE_URL="mysql://dev:dev@localhost/gen-z-writes"
 GOOGLE_CLIENT_ID=<client_id>
 GOOGLE_CLIENT_SECRET=<client_secret>
 
