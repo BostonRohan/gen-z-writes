@@ -30,7 +30,7 @@ dependencies:
     specifier: ^1.0.2
     version: 1.0.2
   '@sanity/vision':
-    specifier: '3'
+    specifier: ^3.0.0
     version: 3.0.0(@babel/runtime@7.22.15)(@codemirror/lint@6.4.2)(@codemirror/state@6.2.1)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.0.4)(@sanity/client@6.4.9)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(rxjs@6.6.7)(styled-components@5.3.11)
   class-variance-authority:
     specifier: ^0.7.0
@@ -60,7 +60,7 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
   sanity:
-    specifier: '3'
+    specifier: ^3.0.0
     version: 3.0.0(@types/node@18.15.11)(@types/react@18.0.31)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.11)
   tailwind-merge:
     specifier: ^1.14.0

@@ -3,5 +3,6 @@ declare namespace NodeJS {
     GOOGLE_CLIENT_ID: string;
     GOOGLE_CLIENT_SECRET: string;
     FORGOT_PASSWORD_SECRET: string;
+    SANITY_API_TOKEN: string;
   }
 }
