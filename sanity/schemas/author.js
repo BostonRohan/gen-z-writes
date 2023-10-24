@@ -27,6 +27,21 @@ const author = {
       title: "Bio",
       validation: (Rule) => Rule.required().min(10).max(5000),
     },
+    {
+      name: "user",
+      type: "object",
+      title: "User",
+      fields: [
+        { name: "id", type: "string", title: "Id" },
+        {
+          title: "Emails",
+          name: "emails",
+          type: "array",
+          of: [{ type: "string" }],
+        },
+        { name: "emailVerified", type: "datetime", title: "Email Verified" },
+      ],
+    },
   ],
 };
 
