@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import videoFragment from "@/utils/fragments/video";
 import VideoGrid from "@/components/VideoGrid";
 
-const client = sanityClient({});
+const client = sanityClient({ useCdn: true });
 
 async function getVideos() {
   try {
