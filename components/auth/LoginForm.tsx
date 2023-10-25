@@ -2,7 +2,7 @@
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import GoogleSignIn from "./GoogleSignIn";
+import GoogleLogin from "./GoogleLogin";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import getCharacterValidationError from "@/utils/getCharacterValidationError";
@@ -34,7 +34,7 @@ export default function Form() {
       } catch (err) {
         formik.setErrors({
           password:
-            "There was an issue signing you in, please retry your email or password.",
+            "There was an issue logging you in, please retry your email or password.",
         });
       }
     },
@@ -42,7 +42,7 @@ export default function Form() {
 
   return (
     <div className="bg-black bg-opacity-10 rounded-md p-8 flex flex-col gap-4 w-full max-w-[450px] text-slate-200">
-      <GoogleSignIn />
+      <GoogleLogin />
       <form onSubmit={formik.handleSubmit} className="space-y-4 w-full">
         <input name="csrfToken" type="hidden" defaultValue={""} />
         <label className="flex flex-col">
@@ -76,22 +76,20 @@ export default function Form() {
         </label>
         {searchParams.get("error") && (
           <Error>
-            There was an error signing you in, please retry your password.
+            There was an error logging you in, please retry your password.
           </Error>
         )}
 
         <Link
           href="/forgot-password"
-          className="text-truePrimary opacity-80 text-sm"
-        >
+          className="text-truePrimary opacity-80 text-sm">
           Forgot password?
         </Link>
 
         <button
           className="bg-truePrimary hover:bg-opacity-80 p-2 rounded-md xs:text-base w-full text-sm"
-          type="submit"
-        >
-          Sign in with Email
+          type="submit">
+          Login with Email
         </button>
       </form>
     </div>

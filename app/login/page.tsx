@@ -1,4 +1,4 @@
-import GoogleSignIn from "@/components/auth/GoogleSignIn";
+import GoogleSignIn from "@/components/auth/GoogleLogin";
 import Form from "@/components/auth/LoginForm";
 import authOptions from "@/utils/auth/authOptions";
 import { Metadata } from "next";
