@@ -7,7 +7,6 @@ const description =
   "Explore our collection of videos, our database features a curated selection of videos that cover a wide range of topics, including writing tips, author interviews, and more. Watch and learn from experienced writers in the industry and discover new insights into the craft of writing.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.projectgenzwrites.com/"),
   title,
   description,
   category: title,
@@ -15,13 +14,11 @@ export const metadata: Metadata = {
     title,
     url: "https://www.projectgenzwrites.com/database",
     description,
-    images: ["/gen-z-writes-og.png"],
   },
   twitter: {
     card: "summary",
     title,
     description,
-    images: ["/gen-z-writes-og.png"],
   },
 };
 
