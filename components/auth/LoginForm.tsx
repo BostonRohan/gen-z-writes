@@ -79,12 +79,17 @@ export default function Form() {
             There was an error logging you in, please retry your password.
           </Error>
         )}
-
-        <Link
-          href="/forgot-password"
-          className="text-truePrimary opacity-80 text-sm">
-          Forgot password?
-        </Link>
+        <section className=" text-sm text-slate-200">
+          <Link href="/forgot-password" className="text-blue-500 underline">
+            Forgot password?
+          </Link>
+          <p>
+            Don&apos;t have an account?{" "}
+            <Link href="/signup" className="text-blue-500 w-fit underline">
+              Create an account
+            </Link>
+          </p>
+        </section>
 
         <button
           className="bg-truePrimary hover:bg-opacity-80 p-2 rounded-md xs:text-base w-full text-sm"
