@@ -14,6 +14,7 @@ const getVideoBySlug = cache(async (slug: string) => {
     const { query, schema } = q("*")
       .filterByType("video")
       .filter(`slug.current == "${slug}"`)
+      .filter(`!(_id in path("drafts.**"))`)
       .slice(0)
       .grab(videoFragment);
     return schema.parse(await client.fetch(query));
@@ -35,6 +36,7 @@ export async function generateStaticParams() {
     const client = sanityClient({ useCdn: false });
     const { query, schema } = q("*")
       .filterByType("video")
+      .filter(`!(_id in path("drafts.**"))`)
       .grab({
         slug: q.slug("slug"),
       });

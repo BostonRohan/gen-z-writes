@@ -8,7 +8,10 @@ const client = sanityClient({});
 
 async function getVideos() {
   try {
-    const { query, schema } = q("*").filterByType("video").grab(videoFragment);
+    const { query, schema } = q("*")
+      .filterByType("video")
+      .filter(`!(_id in path("drafts.**"))`)
+      .grab(videoFragment);
     return schema.parse(await client.fetch(query));
   } catch (err) {
     console.error("there was an error getting the videos err:", err);
