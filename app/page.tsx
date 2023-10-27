@@ -3,6 +3,7 @@ import Philosophy from "@/components/home/Philosophy";
 import Contributors from "@/components/home/Contributors";
 import AuthorInterest from "@/components/home/AuthorInterest";
 import { Metadata } from "next";
+import { sharedOGImage } from "./layout";
 
 const title = "Project Gen Z Writes";
 const description =
@@ -16,11 +17,13 @@ export const metadata: Metadata = {
     title,
     url: "https://www.projectgenzwrites.com/",
     description,
+    ...sharedOGImage,
   },
   twitter: {
     card: "summary",
     title,
     description,
+    ...sharedOGImage,
   },
 };
 

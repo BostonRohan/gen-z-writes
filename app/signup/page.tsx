@@ -1,8 +1,9 @@
 import Form from "@/components/auth/SignupForm";
 import authOptions from "@/utils/auth/authOptions";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
+import { sharedOGImage } from "../layout";
 
 const title = "Signup";
 const description =
@@ -16,11 +17,13 @@ export const metadata: Metadata = {
     title,
     url: "https://www.projectgenzwrites.com/signup",
     description,
+    ...sharedOGImage,
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
+    ...sharedOGImage,
   },
 };
 

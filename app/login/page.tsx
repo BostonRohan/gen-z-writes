@@ -1,9 +1,9 @@
-import GoogleSignIn from "@/components/auth/GoogleLogin";
 import Form from "@/components/auth/LoginForm";
 import authOptions from "@/utils/auth/authOptions";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
+import { sharedOGImage } from "../layout";
 
 const title = "Login";
 const description =
@@ -17,11 +17,13 @@ export const metadata: Metadata = {
     title,
     url: "https://www.projectgenzwrites.com/login",
     description,
+    ...sharedOGImage,
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
+    ...sharedOGImage,
   },
 };
 

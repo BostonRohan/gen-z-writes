@@ -4,6 +4,10 @@ import Nav from "@/components/Nav";
 import NextAuthProvider from "@/components/global/NextAuthProvider";
 import { Metadata } from "next";
 
+export const sharedOGImage = {
+  images: ["/gen-z-writes-og.png"],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.projectgenzwrites.com/"),
   keywords: [
@@ -24,10 +28,10 @@ export const metadata: Metadata = {
     "Writing Innovators",
   ],
   openGraph: {
-    images: ["/gen-z-writes-og.png"],
+    ...sharedOGImage,
   },
   twitter: {
-    images: ["/gen-z-writes-og.png"],
+    ...sharedOGImage,
   },
 };
 

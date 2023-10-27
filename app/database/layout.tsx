@@ -1,6 +1,7 @@
 import "global.css";
 import { inter } from "../fonts";
 import { Metadata } from "next";
+import { sharedOGImage } from "../layout";
 
 const title = "Database";
 const description =
@@ -14,11 +15,13 @@ export const metadata: Metadata = {
     title,
     url: "https://www.projectgenzwrites.com/database",
     description,
+    ...sharedOGImage,
   },
   twitter: {
     card: "summary",
     title,
     description,
+    ...sharedOGImage,
   },
 };
 
