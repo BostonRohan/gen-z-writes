@@ -1,9 +1,31 @@
-import GoogleSignIn from "@/components/auth/GoogleSignIn";
 import Form from "@/components/auth/SignupForm";
 import authOptions from "@/utils/auth/authOptions";
+import { Metadata, ResolvingMetadata } from "next";
 import { getServerSession } from "next-auth/next";
-import { getProviders, signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { sharedOGImage } from "../layout";
+
+const title = "Signup";
+const description =
+  "Signup for Project Gen Z Writes: Your Gateway to an Inspirational Literary Social Network, Igniting the Future of Literary Changemakers. Dive into a world of creativity and innovation.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  category: title,
+  openGraph: {
+    title,
+    url: "https://www.projectgenzwrites.com/signup",
+    description,
+    ...sharedOGImage,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    ...sharedOGImage,
+  },
+};
 
 export default async function SignIn() {
   const session = await getServerSession(authOptions);

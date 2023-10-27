@@ -65,8 +65,7 @@ export default function Email({
       viewport={{ once: true }}
       transition={{ delay: 1.5 }}
       className="relative w-full max-w-[300px]"
-      onSubmit={formik.handleSubmit}
-    >
+      onSubmit={formik.handleSubmit}>
       <label hidden>Email</label>
       <input
         className="p-1 rounded-2xl placeholder:text-slate-200 focus:outline-none pl-4 placeholder:opacity-50 mt-4 bg-neutral-500 bg-opacity-20 w-full"
@@ -92,6 +91,7 @@ export default function Email({
       <motion.img
         alt="paper plane icon"
         src="/icons/paper-plane.svg"
+        loading="lazy"
         className={`mx-auto w-4 h-4 absolute right-1 top-5 ${
           animateSend ? "block" : "hidden"
         }`}
@@ -102,14 +102,12 @@ export default function Email({
       <button
         type="submit"
         disabled={animateSend || formik.isSubmitting}
-        className="items-center justify-center absolute top-4 right-0 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none ring-offset-background-truePrimary bg-truePrimary text-primary-foreground hover:bg-primary/90 h-8 w-8 email-button group mx-auto overflow-hidden p-[1px] font-bold transition-all duration-300 block dark:hover:shadow-[0_0_2rem_-0.5rem_#fff8] md:mr-0 lg:mr-auto"
-      >
+        className="items-center justify-center absolute top-4 right-0 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none ring-offset-background-truePrimary bg-truePrimary text-primary-foreground hover:bg-primary/90 h-8 w-8 email-button group mx-auto overflow-hidden p-[1px] font-bold transition-all duration-300 block dark:hover:shadow-[0_0_2rem_-0.5rem_#fff8] md:mr-0 lg:mr-auto">
         <span
           className={classnames(
             "inline-flex h-full w-fit items-center rounded-xl p-2 transition-all duration-300 bg-neutral-900 group-hover:bg-black",
             { "w-full": animateSend }
-          )}
-        >
+          )}>
           <Image
             alt="paper plane icon"
             src="/icons/paper-plane.svg"

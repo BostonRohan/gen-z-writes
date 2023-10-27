@@ -1,11 +1,4 @@
-const exclude = [
-  "/forgot-password",
-  "/profile",
-  "/studio/*",
-  "/login",
-  "/signup",
-  "/profile",
-];
+const exclude = ["/forgot-password", "/profile", "/studio/*"];
 
 // Save crawling budget by not fetching SSG meta files
 const NEXT_SSG_FILES = [

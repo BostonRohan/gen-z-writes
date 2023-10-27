@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
           {
             data: "Existing user",
           },
-          { status: 401, headers: { "content-type": "text/html" } }
+          { status: 401 }
         );
       }
     }

@@ -2,7 +2,7 @@
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import GoogleSignIn from "./GoogleSignIn";
+import GoogleLogin from "./GoogleLogin";
 import getCharacterValidationError from "@/utils/getCharacterValidationError";
 import Error from "./Error";
 import { useRouter } from "next/navigation";
@@ -60,7 +60,7 @@ export default function Form() {
 
   return (
     <div className="bg-black bg-opacity-10 rounded-md p-8 flex flex-col gap-4 w-full max-w-[450px] text-slate-200">
-      <GoogleSignIn />
+      <GoogleLogin />
       <form onSubmit={formik.handleSubmit} className="space-y-4 w-full">
         <input name="csrfToken" type="hidden" defaultValue={""} />
         <label className="flex flex-col">
@@ -115,8 +115,7 @@ export default function Form() {
         )}
         <button
           className="bg-truePrimary hover:bg-opacity-80 p-2 rounded-md xs:text-base w-full text-sm"
-          type="submit"
-        >
+          type="submit">
           Sign up
         </button>
       </form>
