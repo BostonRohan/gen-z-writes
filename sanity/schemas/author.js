@@ -23,10 +23,46 @@ const author = {
     },
     {
       name: "bio",
-      type: "string",
+      type: "array",
+      of: [{ type: "block" }],
       title: "Bio",
-      validation: (Rule) => Rule.required().min(10).max(5000),
+      validation: (Rule) => Rule.required(),
     },
+    {
+      name: "books",
+      type: "array",
+      title: "Books",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "title", type: "string", title: "Title" },
+            {
+              title: "Url",
+              name: "url",
+              type: "string",
+            },
+            {
+              name: "cover",
+              type: "image",
+              title: "Cover",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "image",
+      type: "image",
+      title: "Image",
+    },
+
+    {
+      name: "website",
+      type: "string",
+      title: "Website",
+    },
+
     {
       name: "user",
       type: "object",
@@ -40,6 +76,17 @@ const author = {
           of: [{ type: "string" }],
         },
         { name: "emailVerified", type: "datetime", title: "Email Verified" },
+      ],
+    },
+    {
+      title: "Videos",
+      name: "videos",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "video" }],
+        },
       ],
     },
   ],

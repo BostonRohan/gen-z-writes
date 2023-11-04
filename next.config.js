@@ -5,7 +5,7 @@ const { NormalModuleReplacementPlugin } = require("webpack");
 
 const nextConfig = {
   images: {
-    domains: ["img.youtube.com", "lh3.googleusercontent.com"],
+    domains: ["img.youtube.com", "lh3.googleusercontent.com", "cdn.sanity.io"],
   },
   webpack: (
     config,
