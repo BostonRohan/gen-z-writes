@@ -64,7 +64,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const author = await getAuthorBySlug(params.slug);
   return (
     <div className="text-slate-200 mb-10">
-      <section className="sm:mt-60 mt-40 max-w-[800px] mx-auto">
+      <section className="sm:mt-40 mt-20 max-w-[800px] mx-auto">
         <div className="px-4">
           <div className="space-y-4">
             {author.image && (
