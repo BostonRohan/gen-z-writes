@@ -2,7 +2,7 @@ import sanityClient from "@/sanity/client";
 import { q } from "groqd";
 import { notFound } from "next/navigation";
 import authorFragment from "@/utils/fragments/author";
-import { cache } from "react";
+import { Suspense, cache } from "react";
 import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
@@ -14,7 +14,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import Swiper from "@/components/Swiper";
+import dynamic from "next/dynamic";
+const Swiper = dynamic(() => import("@/components/Swiper"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex flex-row gap-6 pl-4">
+      <div className="rounded-md aspect-[5/8] bg-slate-200 animate-pulse w-[180px] h-[280px] block relative" />
+      <div className="rounded-md aspect-[5/8] bg-slate-200 animate-pulse w-[180px] h-[280px] block relative" />
+      <div className="rounded-md aspect-[5/8] bg-slate-200 animate-pulse w-[180px] h-[280px] block relative" />
+    </div>
+  ),
+});
 
 const client = sanityClient({ useCdn: true });
 
@@ -59,6 +69,10 @@ export async function generateStaticParams() {
     return [];
   }
 }
+
+//TODO: Share Functionality
+//Metadata
+//scroll navbar pop up - so the authors name/photo can be visible at all times
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const author = await getAuthorBySlug(params.slug);
