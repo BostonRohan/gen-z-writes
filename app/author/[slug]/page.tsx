@@ -8,6 +8,13 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { ExternalLinkIcon } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import Swiper from "@/components/Swiper";
 
 const client = sanityClient({ useCdn: true });
 
@@ -56,41 +63,48 @@ export async function generateStaticParams() {
 export default async function Page({ params }: { params: { slug: string } }) {
   const author = await getAuthorBySlug(params.slug);
   return (
-    <div className="text-slate-200 px-4 mb-10">
+    <div className="text-slate-200 mb-10">
       <section className="sm:mt-60 mt-40 max-w-[800px] mx-auto">
-        <div className="space-y-4">
-          <Image
-            src={builder.image(author.image).url()}
-            alt={`${author.name} Profile Photo`}
-            width={120}
-            height={120}
-            className="rounded-[50%]"
-          />
-          <div className="flex justify-between gap-2">
-            <h1 className="sm:text-4xl text-3xl">{author.name}</h1>{" "}
-            {author?.website && (
-              <Link
-                className="text-white hover:bg-slate-200 hover:bg-opacity-30 h-8 w-8 flex items-center justify-center rounded-md"
-                href={author.website}
-                target="_blank">
-                <ExternalLinkIcon />
-              </Link>
+        <div className="px-4">
+          <div className="space-y-4">
+            {author.image && (
+              <Image
+                src={builder.image(author.image).url()}
+                alt={`${author.name} Profile Photo`}
+                width={120}
+                height={120}
+                className="rounded-[50%]"
+              />
             )}
+            <div className="flex justify-between gap-2">
+              <h1 className="sm:text-4xl text-3xl">{author.name}</h1>{" "}
+              {author?.website && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Link
+                        className="text-white hover:bg-slate-200 hover:bg-opacity-30 h-8 w-8 flex items-center justify-center rounded-md"
+                        href={author.website}
+                        target="_blank">
+                        <ExternalLinkIcon />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>{`${author.name} Website`}</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+            </div>
           </div>
+          <section className="mt-20">
+            <h2 className="text-2xl mb-2">About</h2>
+            <div className="space-y-4 leading-8">
+              {author.bio && <PortableText value={author.bio} />}
+            </div>
+          </section>
         </div>
         <section className="mt-20">
-          <h2 className="text-2xl mb-2">About</h2>
-          <div className="space-y-4">
-            <PortableText value={author.bio} />
-          </div>
-        </section>
-        <section className="mt-20">
-          <h2 className="text-2xl mb-2">Books</h2>
-          {author.books.map((book) => (
-            <Link key={book._key} target="_blank" href={book.url}>
-              fake image<h3 className="text-xl">{book.title}</h3>
-            </Link>
-          ))}
+          <h2 className="text-2xl mb-2 px-4">Books</h2>
+          {author.books && <Swiper books={author.books} />}
         </section>
       </section>
     </div>
