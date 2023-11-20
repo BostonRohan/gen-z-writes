@@ -5,8 +5,11 @@ import Link from "next/link";
 
 export default function FeaturedAuthor() {
   return (
-    <section className="pt-[calc(30vh_-_4px)] text-slate-200 text-center">
-      <h2 className={`text-6xl ${bebasNeue.className}`}>Featured Author</h2>
+    <section className="pt-[calc(30vh_-_4px)] text-slate-200 text-center px-4">
+      <h2
+        className={`xs:text-6xl xs:leading-[1] text-[15vw] leading-[15vw] ${bebasNeue.className}`}>
+        Featured Author
+      </h2>
       <h3 className="text-3xl font-bold">Abigail Tarttelin</h3>
       <Image
         src="https://cdn.sanity.io/images/oud5udhr/production/19183b64273b974292beeef5cc68cf6f451e8f49-1080x1058.jpg"
