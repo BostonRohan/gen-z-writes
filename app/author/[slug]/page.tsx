@@ -109,14 +109,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
               )}
             </div>
           </div>
-          <section className="mt-20">
+          <section className="mt-16">
             <h2 className="text-2xl mb-2">About</h2>
             <div className="space-y-4 leading-8">
               {author.bio && <PortableText value={author.bio} />}
             </div>
           </section>
         </div>
-        <section className="mt-20">
+        <section className="mt-16">
           <h2 className="text-2xl mb-2 px-4">Books</h2>
           {author.books && <Swiper books={author.books} />}
         </section>
