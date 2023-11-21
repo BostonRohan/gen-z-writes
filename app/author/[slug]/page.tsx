@@ -93,7 +93,7 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || [];
 
   const images = author?.image
-    ? [builder.image(author.image).url(), ...previousImages]
+    ? [builder.image(author.image).url()]
     : [...previousImages];
 
   //use the first paragraph of the bio to create the description
