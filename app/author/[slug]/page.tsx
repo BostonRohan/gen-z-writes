@@ -145,8 +145,10 @@ export default async function Page({ params }: Props) {
                   className="rounded-[50%]"
                 />
               )}
-              <div className="flex justify-between gap-2">
-                <h1 className="sm:text-4xl text-3xl">{author.name}</h1>{" "}
+              <div className="flex justify-between items-center gap-6 flex-wrap">
+                <h1 className="sm:text-4xl xs:text-3xl text-2xl">
+                  {author.name}
+                </h1>{" "}
                 <div className="flex items-center gap-4">
                   {author?.website && (
                     <TooltipProvider>
@@ -154,7 +156,7 @@ export default async function Page({ params }: Props) {
                         <TooltipTrigger>
                           <Link href={author.website} target="_blank">
                             <div className="flex flex-col items-center">
-                              <ExternalLinkIcon className="text-white hover:bg-slate-200 hover:bg-opacity-30 p-1 h-8 w-8 flex items-center justify-center rounded-md" />
+                              <ExternalLinkIcon className="text-white hover:bg-slate-200 hover:bg-opacity-30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
                               <span className="text-xs">Website</span>
                             </div>
                           </Link>
