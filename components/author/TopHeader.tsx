@@ -41,7 +41,7 @@ export default function TopHeader({
     <header
       className={classNames(
         "sticky top-0 h-20 bg-gradient-to-b from-neutral-500/80 text-white to-background-primary/80 w-full flex items-center transition-all ease-in-out duration-200",
-        { "opacity-0 h-0": !showHeader }
+        { "opacity-0 !h-0": !showHeader }
       )}>
       <div className="px-4 flex justify-between w-full">
         <div className="flex gap-2 items-center">
