@@ -133,7 +133,7 @@ export default async function Page({ params }: Props) {
         slug={params.slug}
       />
       <div className="text-slate-200 mb-10">
-        <section className="sm:mt-40 mt-20 max-w-[800px] mx-auto">
+        <section className="sm:mt-36 mt-20 max-w-[800px] mx-auto">
           <div className="px-4">
             <div className="space-y-4">
               {author.image && (
