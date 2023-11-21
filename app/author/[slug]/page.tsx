@@ -120,16 +120,14 @@ export async function generateMetadata(
 
 export default async function Page({ params }: Props) {
   const author = await getAuthorBySlug(params.slug);
-  const description = author?.bio
-    ? shortenDescription(author.bio[0].children[0].text, 160)
-    : author.name;
+  const shareText = `Visit ${author.name} on Project Gen Z Writes`;
 
   return (
     <>
       <TopHeader
         src={author?.image ? builder.image(author.image).url() : undefined}
         name={author.name}
-        description={description}
+        description={shareText}
         slug={params.slug}
       />
       <div className="text-slate-200 mb-10">
@@ -171,7 +169,7 @@ export default async function Page({ params }: Props) {
                         <ShareButton
                           title={author.name}
                           slug={author.slug}
-                          text={description}
+                          text={shareText}
                         />
                       </TooltipTrigger>
                       <TooltipContent>Share</TooltipContent>
