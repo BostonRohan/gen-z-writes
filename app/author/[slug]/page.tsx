@@ -2,7 +2,8 @@ import sanityClient from "@/sanity/client";
 import { q } from "groqd";
 import { notFound } from "next/navigation";
 import authorFragment from "@/utils/fragments/author";
-import { Suspense, cache } from "react";
+import { cache } from "react";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
@@ -15,6 +16,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import dynamic from "next/dynamic";
+import ShareButton from "@/components/global/ShareButton";
+import shortenDescription from "@/utils/shortenDescription";
 const Swiper = dynamic(() => import("@/components/Swiper"), {
   ssr: false,
   loading: () => (
@@ -70,12 +73,55 @@ export async function generateStaticParams() {
   }
 }
 
-//TODO: Share Functionality
-//Metadata
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
+
+  // fetch data
+  const author = await getAuthorBySlug(slug);
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  const images = author?.image
+    ? [builder.image(author.image).url(), ...previousImages]
+    : [...previousImages];
+
+  //use the first paragraph of the bio to create the description
+  const description = author?.bio
+    ? shortenDescription(author.bio[0].children[0].text, 160)
+    : (await parent).description;
+
+  return {
+    title: author.name,
+    ...(description && { description }),
+    openGraph: {
+      images,
+      url: `https://www.projectgenzwrites.com/author/${slug}`,
+      title: author.name,
+      ...(description && { description }),
+    },
+    twitter: {
+      images,
+      title: author.name,
+      ...(description && { description }),
+    },
+  };
+}
+
+//TODO:
 //scroll navbar pop up - so the authors name/photo can be visible at all times
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: Props) {
   const author = await getAuthorBySlug(params.slug);
+
   return (
     <div className="text-slate-200 mb-10">
       <section className="sm:mt-40 mt-20 max-w-[800px] mx-auto">
@@ -92,21 +138,42 @@ export default async function Page({ params }: { params: { slug: string } }) {
             )}
             <div className="flex justify-between gap-2">
               <h1 className="sm:text-4xl text-3xl">{author.name}</h1>{" "}
-              {author?.website && (
+              <div className="flex items-center gap-4">
+                {author?.website && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Link href={author.website} target="_blank">
+                          <div className="flex flex-col items-center">
+                            <ExternalLinkIcon className="text-white hover:bg-slate-200 hover:bg-opacity-30 p-1 h-8 w-8 flex items-center justify-center rounded-md" />
+                            <span className="text-xs">Website</span>
+                          </div>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent>{`${author.name} Website`}</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>
-                      <Link
-                        className="text-white hover:bg-slate-200 hover:bg-opacity-30 h-8 w-8 flex items-center justify-center rounded-md"
-                        href={author.website}
-                        target="_blank">
-                        <ExternalLinkIcon />
-                      </Link>
+                      <ShareButton
+                        title={author.name}
+                        slug={author.slug}
+                        text={
+                          author?.bio
+                            ? shortenDescription(
+                                author.bio[0].children[0].text,
+                                20
+                              )
+                            : author.name
+                        }
+                      />
                     </TooltipTrigger>
-                    <TooltipContent>{`${author.name} Website`}</TooltipContent>
+                    <TooltipContent>Share</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-              )}
+              </div>
             </div>
           </div>
           <section className="mt-16">
