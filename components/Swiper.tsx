@@ -16,6 +16,7 @@ export default function SwiperReact({ books }: { books: Author["books"] }) {
   return (
     <Swiper
       slidesPerView="auto"
+      className="!py-4"
       spaceBetween={24}
       slidesOffsetAfter={16}
       slidesOffsetBefore={16}
@@ -36,7 +37,7 @@ export default function SwiperReact({ books }: { books: Author["books"] }) {
           <Link
             href={book.url}
             target="_blank"
-            className="hover:scale-[1.03] transition block">
+            className="hover:scale-105 transition block">
             <Image
               src={builder.image(book.cover).url()}
               alt={`${book.title} Cover`}

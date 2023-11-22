@@ -186,7 +186,7 @@ export default async function Page({ params }: Props) {
             </section>
           </div>
           <section className="mt-16">
-            <h2 className="text-2xl mb-2 px-4">Books</h2>
+            <h2 className="text-2xl px-4">Books</h2>
             {author.books && <Swiper books={author.books} />}
           </section>
         </section>
