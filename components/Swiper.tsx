@@ -33,7 +33,10 @@ export default function SwiperReact({ books }: { books: Author["books"] }) {
       }}>
       {books!.map((book) => (
         <SwiperSlide key={book._key} className="max-w-[180px]">
-          <Link href={book.url} target="_blank">
+          <Link
+            href={book.url}
+            target="_blank"
+            className="hover:scale-[1.03] transition block">
             <Image
               src={builder.image(book.cover).url()}
               alt={`${book.title} Cover`}
