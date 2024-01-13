@@ -29,13 +29,18 @@ export default function ShareButton({
           url,
         });
       }
-    } catch (err) {
-      console.error(err);
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem sharing this page. Please try again.",
-      });
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        if (err.message.indexOf("user denied permission") !== -1) {
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description:
+              "There was a problem sharing this page. Please try again.",
+          });
+          console.error(err.message);
+        }
+      }
     }
   };
   return (
