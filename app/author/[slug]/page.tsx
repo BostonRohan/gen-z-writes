@@ -2,7 +2,7 @@ import sanityClient from "@/sanity/client";
 import { q } from "groqd";
 import { notFound } from "next/navigation";
 import authorFragment from "@/utils/fragments/author";
-import { cache } from "react";
+import { ReactNode, cache } from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
@@ -122,6 +122,27 @@ export default async function Page({ params }: Props) {
   const author = await getAuthorBySlug(params.slug);
   const shareText = `Visit ${author.name} on Project Gen Z Writes`;
 
+  const components: any = {
+    marks: {
+      link: ({
+        value,
+        children,
+      }: {
+        value: { _type: string };
+        children: ReactNode;
+      }) => {
+        const { blank, href }: any = value;
+        return blank ? (
+          <Link href={href} target="_blank">
+            {children}
+          </Link>
+        ) : (
+          <Link href={href}>{children}</Link>
+        );
+      },
+    },
+  };
+
   return (
     <>
       <TopHeader
@@ -135,13 +156,14 @@ export default async function Page({ params }: Props) {
           <div className="px-4">
             <div className="space-y-4">
               {author.image && (
-                <Image
-                  src={builder.image(author.image).url()}
-                  alt={author.name}
-                  width={120}
-                  height={120}
-                  className="rounded-[50%]"
-                />
+                <div className="w-[120px] h-[120px] relative">
+                  <Image
+                    src={builder.image(author.image).url()}
+                    alt={author.name}
+                    fill
+                    className="object-cover absolute rounded-[50%]"
+                  />
+                </div>
               )}
               <div className="flex justify-between items-center gap-6 flex-wrap">
                 <h1 className="sm:text-4xl xs:text-3xl text-2xl">
@@ -181,7 +203,9 @@ export default async function Page({ params }: Props) {
             <section className="mt-16">
               <h2 className="text-2xl mb-2">About</h2>
               <div className="space-y-4 leading-8">
-                {author.bio && <PortableText value={author.bio} />}
+                {author.bio && (
+                  <PortableText value={author.bio} components={components} />
+                )}
               </div>
             </section>
           </div>

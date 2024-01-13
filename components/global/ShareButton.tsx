@@ -39,7 +39,9 @@ export default function ShareButton({
     }
   };
   return (
-    <div onClick={handleClick} className="flex flex-col items-center">
+    <div
+      onClick={handleClick}
+      className="flex flex-col items-center cursor-pointer">
       <ShareIcon className="text-white hover:bg-slate-200 hover:bg-opacity-30 p-1 xs:h-8 xs:w-8 w-6 h-6 flex items-center justify-center rounded-md" />
       <span className="text-xs">Share</span>
     </div>

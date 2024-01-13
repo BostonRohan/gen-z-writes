@@ -46,13 +46,14 @@ export default function TopHeader({
       <div className="px-4 flex justify-between w-full max-w-[800px] mx-auto">
         <div className="flex gap-2 items-center">
           {src && (
-            <Image
-              src={src}
-              alt={name}
-              width={50}
-              height={50}
-              className="rounded-[50%]"
-            />
+            <div className="rounded-[50%] w-[50px] h-[50px] relative">
+              <Image
+                src={src}
+                alt={name}
+                fill
+                className="object-cover absolute rounded-[50%]"
+              />
+            </div>
           )}
           <h2 className="text-slate-200 font-semibold">{name}</h2>
         </div>
