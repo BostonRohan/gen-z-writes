@@ -156,7 +156,7 @@ export default async function Page({ params }: Props) {
           <div className="px-4">
             <div className="space-y-4">
               {author.image && (
-                <div className="w-[120px] h-[120px] relative">
+                <div className="xs:w-[120px] xs:h-[120px] w-[80px] h-[80px] relative">
                   <Image
                     src={builder.image(author.image).url()}
                     alt={author.name}
@@ -166,7 +166,7 @@ export default async function Page({ params }: Props) {
                 </div>
               )}
               <div className="flex justify-between items-center gap-6 flex-wrap">
-                <h1 className="sm:text-4xl xs:text-3xl text-2xl">
+                <h1 className="sm:text-4xl xs:text-3xl text-2xl font-semibold">
                   {author.name}
                 </h1>{" "}
                 <div className="flex items-center gap-4">
@@ -216,7 +216,7 @@ export default async function Page({ params }: Props) {
               </div>
             </div>
             <section className="mt-16">
-              <h2 className="text-2xl mb-2">About</h2>
+              <h2 className="text-2xl mb-2 font-medium">About</h2>
               <div className="space-y-4 leading-8">
                 {author.bio && (
                   <PortableText value={author.bio} components={components} />
@@ -225,7 +225,7 @@ export default async function Page({ params }: Props) {
             </section>
           </div>
           <section className="mt-16">
-            <h2 className="text-2xl px-4">Books</h2>
+            <h2 className="text-2xl px-4 font-medium">Books</h2>
             {author.books && <Swiper books={author.books} />}
           </section>
         </section>
