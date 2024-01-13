@@ -12,7 +12,7 @@ export default function FeaturedAuthor() {
       </h2>
       <h3 className="text-3xl font-bold">Abigail Tarttelin</h3>
       <Image
-        src="https://cdn.sanity.io/images/oud5udhr/production/19183b64273b974292beeef5cc68cf6f451e8f49-1080x1058.jpg"
+        src="https://cdn.sanity.io/images/oud5udhr/production/772f40147dc6f4a3ee1ed898feeacc300e157a34-2263x3357.jpg"
         width={500}
         height={500}
         className="mx-auto mt-10 rounded-md shadow-2xl shadow-trueSecondary"
