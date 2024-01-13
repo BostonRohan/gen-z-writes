@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Nav from "@/components/Nav";
 import NextAuthProvider from "@/components/global/NextAuthProvider";
 import { Metadata } from "next";
+import { Toaster } from "@/components/ui/toaster";
 
 export const sharedOGImage = {
   images: ["/gen-z-writes-og.png"],
@@ -61,10 +62,12 @@ export default async function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="sitemap" href="/sitemap.xml" />
         <NextAuthProvider>
           <Nav />
         </NextAuthProvider>
         {children}
+        <Toaster />
         <Analytics />
       </body>
     </html>

@@ -4,6 +4,7 @@ import Contributors from "@/components/home/Contributors";
 import AuthorInterest from "@/components/home/AuthorInterest";
 import { Metadata } from "next";
 import { sharedOGImage } from "./layout";
+import FeaturedAuthor from "@/components/home/FeaturedAuthor";
 
 const title = "Project Gen Z Writes";
 const description =
@@ -31,6 +32,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
+      <FeaturedAuthor />
       <Philosophy />
       <Contributors />
       <AuthorInterest />

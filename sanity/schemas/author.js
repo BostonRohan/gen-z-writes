@@ -23,9 +23,85 @@ const author = {
     },
     {
       name: "bio",
-      type: "string",
+      type: "array",
+      of: [
+        {
+          type: "block",
+          marks: {
+            annotations: [
+              {
+                name: "link",
+                type: "object",
+                title: "External link",
+                fields: [
+                  {
+                    name: "href",
+                    type: "url",
+                    title: "URL",
+                  },
+                  {
+                    title: "Open in new tab",
+                    name: "blank",
+                    type: "boolean",
+                  },
+                ],
+              },
+              {
+                name: "internalLink",
+                type: "object",
+                title: "Internal link",
+                fields: [
+                  {
+                    name: "reference",
+                    type: "reference",
+                    title: "Reference",
+                    to: [{ type: "writtenSubmissions" }],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
       title: "Bio",
-      validation: (Rule) => Rule.required().min(10).max(5000),
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "books",
+      type: "array",
+      title: "Books",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "title", type: "string", title: "Title" },
+            {
+              title: "Url",
+              name: "url",
+              type: "string",
+            },
+            {
+              name: "cover",
+              type: "image",
+              title: "Cover",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "image",
+      type: "image",
+      title: "Image",
+    },
+    {
+      name: "socials",
+      type: "object",
+      title: "Socials",
+      fields: [
+        { name: "website", type: "string", title: "Website" },
+        { name: "instagram", type: "string", title: "Instagram" },
+      ],
     },
     {
       name: "user",
@@ -40,6 +116,17 @@ const author = {
           of: [{ type: "string" }],
         },
         { name: "emailVerified", type: "datetime", title: "Email Verified" },
+      ],
+    },
+    {
+      title: "Videos",
+      name: "videos",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "video" }],
+        },
       ],
     },
   ],
