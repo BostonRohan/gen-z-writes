@@ -40,8 +40,8 @@ export default function VideosSwiper({ videos }: { videos: Author["videos"] }) {
                 width={250}
                 height={250}
               />
+              <h3 className="line-clamp-1 mt-1">{video.title}</h3>
             </Link>
-            <h3 className="line-clamp-1 mt-1">{video.title}</h3>
           </SwiperSlide>
         );
       })}
