@@ -13,10 +13,10 @@ export default function FeaturedAuthor() {
       <h3 className="text-3xl font-bold">Abigail Tarttelin</h3>
       <Image
         src="https://cdn.sanity.io/images/oud5udhr/production/772f40147dc6f4a3ee1ed898feeacc300e157a34-2263x3357.jpg"
+        className="w-full h-full aspect-square mt-10 object-cover rounded-md shadow-2xl shadow-trueSecondary max-h-[500px] max-w-[500px] mx-auto"
+        alt="Abigail Tarttelin"
         width={500}
         height={500}
-        className="mx-auto mt-10 rounded-md shadow-2xl shadow-trueSecondary"
-        alt="Abigail Tarttelin"
       />
       <Link
         className="flex items-center justify-center gap-2 mt-12 text-white text-lg font-semibold relative hover:text-slate-200"
