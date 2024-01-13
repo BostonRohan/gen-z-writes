@@ -6,7 +6,6 @@ const authorFragment = {
   slug: q.slug("slug"),
   bio: q.contentBlocks().nullable(),
   image: sanityImage("image").nullable(),
-  website: q.string().nullable(),
   books: q
     .array(
       q.object({
@@ -17,6 +16,12 @@ const authorFragment = {
         cover: q.object({ asset: q.object({ _ref: q.string() }) }),
       })
     )
+    .nullable(),
+  socials: q
+    .object({
+      website: q.string().nullable(),
+      instagram: q.string().nullable(),
+    })
     .nullable(),
   videos: q("videos")
     .filter()

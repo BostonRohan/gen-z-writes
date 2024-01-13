@@ -94,13 +94,15 @@ const author = {
       type: "image",
       title: "Image",
     },
-
     {
-      name: "website",
-      type: "string",
-      title: "Website",
+      name: "socials",
+      type: "object",
+      title: "Socials",
+      fields: [
+        { name: "website", type: "string", title: "Website" },
+        { name: "instagram", type: "string", title: "Instagram" },
+      ],
     },
-
     {
       name: "user",
       type: "object",

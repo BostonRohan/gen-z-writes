@@ -8,7 +8,7 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon, InstagramIcon } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -170,11 +170,11 @@ export default async function Page({ params }: Props) {
                   {author.name}
                 </h1>{" "}
                 <div className="flex items-center gap-4">
-                  {author?.website && (
+                  {author?.socials?.website && (
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger>
-                          <Link href={author.website} target="_blank">
+                          <Link href={author.socials.website} target="_blank">
                             <div className="flex flex-col items-center">
                               <ExternalLinkIcon className="text-white hover:bg-slate-200 hover:bg-opacity-30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
                               <span className="text-xs">Website</span>
@@ -182,6 +182,21 @@ export default async function Page({ params }: Props) {
                           </Link>
                         </TooltipTrigger>
                         <TooltipContent>{`${author.name} Website`}</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
+                  {author?.socials?.instagram && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Link href={author.socials.instagram} target="_blank">
+                            <div className="flex flex-col items-center">
+                              <InstagramIcon className="text-white hover:bg-slate-200 hover:bg-opacity-30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
+                              <span className="text-xs">Instagram</span>
+                            </div>
+                          </Link>
+                        </TooltipTrigger>
+                        <TooltipContent>{`${author.name} Instagram`}</TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                   )}
