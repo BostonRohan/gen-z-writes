@@ -8,7 +8,7 @@ import sanityClient from "@/sanity/client";
 import "swiper/css";
 import Link from "next/link";
 
-export default function SwiperReact({ books }: { books: Author["books"] }) {
+export default function BooksSwiper({ books }: { books: Author["books"] }) {
   const client = sanityClient({ useCdn: true });
 
   const builder = imageUrlBuilder(client);
@@ -45,7 +45,7 @@ export default function SwiperReact({ books }: { books: Author["books"] }) {
               height={180}
               className="rounded-md aspect-[5/8]"
             />
-            <h3 className="mt-auto">{book.title}</h3>
+            <h3 className="mt-1">{book.title}</h3>
           </Link>
         </SwiperSlide>
       ))}

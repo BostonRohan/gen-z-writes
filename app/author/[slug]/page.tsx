@@ -20,13 +20,23 @@ import ShareButton from "@/components/global/ShareButton";
 import shortenDescription from "@/utils/shortenDescription";
 import TopHeader from "@/components/author/TopHeader";
 
-const Swiper = dynamic(() => import("@/components/Swiper"), {
+const BooksSwiper = dynamic(() => import("@/components/swipers/Books"), {
   ssr: false,
   loading: () => (
-    <div className="flex flex-row gap-6 pl-4">
+    <div className="flex flex-row gap-6 pl-4 mt-4">
       <div className="rounded-md aspect-[5/8] bg-slate-200 animate-pulse w-[180px] h-[280px] block relative" />
       <div className="rounded-md aspect-[5/8] bg-slate-200 animate-pulse w-[180px] h-[280px] block relative" />
       <div className="rounded-md aspect-[5/8] bg-slate-200 animate-pulse w-[180px] h-[280px] block relative" />
+    </div>
+  ),
+});
+const VideosSwiper = dynamic(() => import("@/components/swipers/Videos"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex flex-row gap-6 pl-4 mt-4">
+      <div className="rounded-md bg-slate-200 animate-pulse w-[250px] h-[187.5px] block relative" />
+      <div className="rounded-md bg-slate-200 animate-pulse w-[250px] h-[187.5px] block relative" />
+      <div className="rounded-md bg-slate-200 animate-pulse w-[250px] h-[187.5px] block relative" />
     </div>
   ),
 });
@@ -216,7 +226,9 @@ export default async function Page({ params }: Props) {
               </div>
             </div>
             <section className="mt-16">
-              <h2 className="text-2xl mb-2 font-medium">About</h2>
+              <h2 className="sm:text-[28px] xs:text-2xl text-xl mb-2 font-medium">
+                About
+              </h2>
               <div className="space-y-4 leading-8">
                 {author.bio && (
                   <PortableText value={author.bio} components={components} />
@@ -224,10 +236,22 @@ export default async function Page({ params }: Props) {
               </div>
             </section>
           </div>
-          <section className="mt-16">
-            <h2 className="text-2xl px-4 font-medium">Books</h2>
-            {author.books && <Swiper books={author.books} />}
-          </section>
+          {author.books && (
+            <section className="mt-16">
+              <h2 className="sm:text-[28px] xs:text-2xl text-xl px-4 font-medium">
+                Books
+              </h2>
+              <BooksSwiper books={author.books} />
+            </section>
+          )}
+          {author.videos && (
+            <section className="mt-16">
+              <h2 className="sm:text-[28px] xs:text-2xl text-xl px-4 font-medium">
+                Videos
+              </h2>
+              <VideosSwiper videos={author.videos} />
+            </section>
+          )}
         </section>
       </div>
     </>
