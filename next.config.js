@@ -5,7 +5,14 @@ const { NormalModuleReplacementPlugin } = require("webpack");
 
 const nextConfig = {
   images: {
-    domains: ["img.youtube.com", "lh3.googleusercontent.com", "cdn.sanity.io"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+      },
+      { protocol: "https", hostname: "cdn.sanity.io" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+    ],
   },
   webpack: (
     config,
