@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({});
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
-      if (err.code === "P2002") {
+      if ((err as Prisma.PrismaClientKnownRequestError).code === "P2002") {
         return NextResponse.json(
           {
             data: "Existing user",

@@ -99,9 +99,13 @@ export default function Form({ userId }: { userId: string }) {
         const resBody = await res.json();
 
         if (resBody.data === "Existing user") {
-          formik.setErrors({
-            email: "There is already a user with that email.",
-          });
+          formik.initialValues.email !== email
+            ? formik.setErrors({
+                email: "There is already a user with that email.",
+              })
+            : formik.setErrors({
+                username: "There is already a user with that username.",
+              });
         }
       } catch (err) {
         console.error(err);
