@@ -152,7 +152,7 @@ export default function Form({ userId }: { userId: string }) {
       <label className="space-y-2">
         <span>Email</span>
         <input
-          className="p-2 bg-black bg-opacity-10 rounded-md w-full opacity-80 space-y-2"
+          className="p-2 cursor-not-allowed bg-black bg-opacity-10 rounded-md w-full opacity-80 space-y-2"
           id="email"
           name="email"
           type="email"
