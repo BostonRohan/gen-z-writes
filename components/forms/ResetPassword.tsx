@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import getCharacterValidationError from "@/utils/getCharacterValidationError";
 import { useRouter } from "next/navigation";
 import Error from "../auth/Error";
+import { Elsie_Swash_Caps } from "next/font/google";
 
 export default function ResetPassword({
   forgotPassword,
@@ -26,7 +27,7 @@ export default function ResetPassword({
       confirmPassword: Yup.string()
         .required("Please re-type your password")
         // use oneOf to match one of the values inside the array.
-        // use "ref" to get the value of passwrod.
+        // use "ref" to get the value of password.
         .oneOf([Yup.ref("password")], "Passwords does not match"),
     }),
     onSubmit: async ({ password }) => {
@@ -37,6 +38,8 @@ export default function ResetPassword({
         });
         if (res.ok) {
           router.replace("/login");
+        } else {
+          router.replace("/forgot-password?error=true");
         }
       } catch (err) {
         console.error(err);
@@ -87,8 +90,7 @@ export default function ResetPassword({
 
         <button
           className="bg-truePrimary hover:bg-opacity-80 p-2 rounded-md xs:text-base w-full text-sm"
-          type="submit"
-        >
+          type="submit">
           Submit
         </button>
       </form>

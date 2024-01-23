@@ -7,19 +7,16 @@ export async function POST(request: NextRequest) {
 
   if (password && forgotPassword) {
     try {
-      bcrypt.hash(password, 10, async function (err, hash) {
-        if (err) throw err;
-        await prisma.user.update({
-          where: { forgotPassword },
-          data: {
-            password: hash,
-            forgotPassword: null,
-          },
-        });
+      await prisma.user.update({
+        where: { forgotPassword },
+        data: {
+          password: await bcrypt.hash(password, 10),
+          forgotPassword: null,
+        },
       });
       return NextResponse.json({});
     } catch (err) {
-      console.error(err);
+      console.error("there was an error updating the users password", err);
       return NextResponse.json({}, { status: 500 });
     }
   } else {

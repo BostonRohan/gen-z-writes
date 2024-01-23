@@ -14,6 +14,7 @@ export default async function ForgotPassword({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const token = searchParams?.token;
+  const error = searchParams?.error;
 
   const EmailSection = ({ error }: { error?: string }) => {
     return (
@@ -30,24 +31,28 @@ export default async function ForgotPassword({
     );
   };
 
+  if (!!error) {
+    return (
+      <EmailSection error="There was an error resetting your password, please try again." />
+    );
+  }
   if (token && typeof token === "string") {
     try {
       const forgotPasswordJwt = jwt.verify(
         token,
         process.env.FORGOT_PASSWORD_SECRET
       ) as TokenJWT;
-
       return (
         <section className="min-h-[calc(100vh_-_16px)] h-full flex items-center justify-center">
           <ResetPassword forgotPassword={forgotPasswordJwt.data} />
         </section>
       );
-    } catch (err: unknown) {
-      console.error(err);
+    } catch (err) {
       return (
         <EmailSection error="There was an error resetting your password, please try again." />
       );
     }
+  } else {
+    return <EmailSection />;
   }
-  return <EmailSection />;
 }

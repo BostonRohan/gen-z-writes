@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     try {
       const forgotPassword = crypto.randomBytes(24).toString("hex").toString();
 
-      const user = await prisma.user.update({
+      await prisma.user.update({
         where: { email },
         data: {
           forgotPassword,
@@ -31,8 +31,8 @@ export async function POST(request: NextRequest) {
       );
 
       resend.emails.send({
-        //TODO update domain
-        from: "onboarding@resend.dev",
+        from: "support@projectgenzwrites.com",
+        reply_to: "noreply@projectgenzwrites.com",
         to: email,
         subject: "Gen Z Writes Password Reset",
         html: `<a href=${`${process.env.NEXTAUTH_URL}/forgot-password?token=${hashedForgotPassword}`}>Click here to reset your password.</a>`,
