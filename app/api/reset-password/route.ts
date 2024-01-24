@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
         data: {
           password: await bcrypt.hash(password, 10),
           forgotPassword: null,
+          passwordLength: password.length,
         },
       });
       return NextResponse.json({});

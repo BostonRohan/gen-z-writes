@@ -17,7 +17,10 @@ export async function POST(request: NextRequest) {
         ...(username && { username }),
         ...(name && { name }),
         // ...(email && { email }),
-        ...(password && { password: await bcrypt.hash(password, 10) }),
+        ...(password && {
+          password: await bcrypt.hash(password, 10),
+          passwordLength: password.length,
+        }),
       },
     });
 
