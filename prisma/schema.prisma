@@ -65,6 +65,7 @@ model User {
   email          String?   @unique
   password       String?
   forgotPassword String?   @unique
+  passwordLength Int?
   emailVerified  DateTime?
   image          String?
   role           RoleTypes @default(USER)
