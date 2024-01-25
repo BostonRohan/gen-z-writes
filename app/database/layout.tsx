@@ -1,4 +1,4 @@
-import "global.css";
+import "../../global.css";
 import { inter } from "../fonts";
 import { Metadata } from "next";
 import { sharedOGImage } from "../layout";
