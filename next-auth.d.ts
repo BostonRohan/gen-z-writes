@@ -12,6 +12,7 @@ declare module "next-auth" {
       username?: string | null;
       emailVerified?: null | Date;
       email: string;
+      passwordLength?: number | null;
       role: "USER" | "AUTHOR" | "ASPIRING_AUTHOR";
     };
   }

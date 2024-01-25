@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { Prisma } from "@prisma/client";
 
 export async function POST(request: NextRequest) {
-  const { username, email, password, id, name } = await request.json();
+  const { username, email, password, id } = await request.json();
 
   if (!id) {
     return NextResponse.json({}, { status: 401 });
@@ -15,7 +15,6 @@ export async function POST(request: NextRequest) {
       where: { id },
       data: {
         ...(username && { username }),
-        ...(name && { name }),
         // ...(email && { email }),
         ...(password && {
           password: await bcrypt.hash(password, 10),

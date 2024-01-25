@@ -6,11 +6,14 @@ import getCharacterValidationError from "@/utils/getCharacterValidationError";
 import Error from "../auth/Error";
 import { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
+import classNames from "classnames";
+import { useToast } from "../ui/use-toast";
 
 //user id never changes so we can grab it from the server
 export default function Form({ userId }: { userId: string }) {
   const [usernameActive, setUserNameActive] = useState(false);
-  const [updatedPassword, setUpdatedPassword] = useState(false);
+  const [changePassword, setChangePassword] = useState(false);
+  const { toast } = useToast();
 
   const { data, update, status } = useSession();
 
@@ -21,7 +24,6 @@ export default function Form({ userId }: { userId: string }) {
     email: string;
     password: string;
   }) => {
-    setUpdatedPassword(false);
     signIn("credentials", { email, password });
   };
 
@@ -31,9 +33,13 @@ export default function Form({ userId }: { userId: string }) {
       username: data?.user?.username ?? "",
       email: data?.user?.email ?? "",
       password: "",
+      ...(changePassword && {
+        confirmPassword: "",
+      }),
     },
     validationSchema: Yup.object({
       name: Yup.string()
+        .label("Name")
         .min(3)
         .max(60)
         .matches(
@@ -41,6 +47,7 @@ export default function Form({ userId }: { userId: string }) {
           "Name cannot contain non-alphanumeric characters or numbers."
         ),
       username: Yup.string()
+        .label("Username")
         .min(4)
         .max(20)
         .matches(
@@ -49,12 +56,21 @@ export default function Form({ userId }: { userId: string }) {
         ),
       email: Yup.string().email("Invalid email address"),
       password: Yup.string()
+        .label("Password")
         // check minimum characters
         .min(8, "Password must have at least 8 characters")
         // different error messages for different requirements
         .matches(/[0-9]/, getCharacterValidationError("digit"))
         .matches(/[a-z]/, getCharacterValidationError("lowercase"))
         .matches(/[A-Z]/, getCharacterValidationError("uppercase")),
+      ...(changePassword && {
+        confirmPassword: Yup.string()
+          .required("Please re-type your password")
+          .label("Confirm Password")
+          // use oneOf to match one of the values inside the array.
+          // use "ref" to get the value of password.
+          .oneOf([Yup.ref("password")], "Passwords do not match"),
+      }),
     }),
     onSubmit: async ({ username, email, password, name }) => {
       try {
@@ -66,17 +82,16 @@ export default function Form({ userId }: { userId: string }) {
 
         //profanity and things of that nature
         if (username && validUsernameBody.result !== username) {
-          formik.setErrors({ username: "Invalid username." });
+          toast({ description: "Invalid username.", variant: "destructive" });
           return;
         }
 
         const res = await fetch("/api/update-user", {
           method: "POST",
           body: JSON.stringify({
-            username,
-            email,
-            password,
-            name,
+            ...(username && { username }),
+            // ...(email && { email }),
+            ...(password && { password }),
             id: userId,
           }),
         });
@@ -84,15 +99,19 @@ export default function Form({ userId }: { userId: string }) {
         if (res.ok) {
           //create a new session for the user if they changed their password
           if (password) {
-            setUpdatedPassword(true);
+            toast({ description: "Password updated" });
             setTimeout(() => handleReset({ email, password }), 2500);
             return;
           }
+          //TODO: improve on this when more fields are added to this view
+          if (username) {
+            toast({ description: "Username updated" });
+          }
+
           update({
             data: {
               ...(username && { username }),
               // ...(email && { email }),
-              ...(name && { name }),
             },
           });
         }
@@ -100,11 +119,13 @@ export default function Form({ userId }: { userId: string }) {
 
         if (resBody.data === "Existing user") {
           formik.initialValues.email !== email
-            ? formik.setErrors({
-                email: "There is already a user with that email.",
+            ? toast({
+                description: "There is already a user with that email.",
+                variant: "destructive",
               })
-            : formik.setErrors({
-                username: "There is already a user with that username.",
+            : toast({
+                description: "There is already a user with that username.",
+                variant: "destructive",
               });
         }
       } catch (err) {
@@ -113,30 +134,43 @@ export default function Form({ userId }: { userId: string }) {
     },
     enableReinitialize: true,
   });
+
+  const handleUpdateClick = () => {
+    const errors = Object.values(formik.errors);
+
+    errors.map((error) =>
+      toast({ description: error, variant: "destructive" })
+    );
+  };
+
+  const hasFormedChanged =
+    formik.initialValues.name !== formik.values.name ||
+    formik.initialValues.email !== formik.values.email ||
+    formik.initialValues.username !== formik.values.username ||
+    formik.initialValues.password != formik.values.password;
+
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="mt-20 max-w-lg gap-4 flex flex-col">
+      className="my-20 max-w-lg gap-4 flex flex-col">
       {!data?.user?.name && status !== "loading" && (
-        <label className="text-slate-200 space-y-2">
-          <span>Name</span>
-          <input
-            className="p-2 bg-black bg-opacity-10 rounded-md w-full opacity-80"
-            type="text"
-            id="name"
-            name="name"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.name}
-          />
-          {formik.errors.name && formik.submitCount > 0 && (
-            <Error>{formik.errors.name}</Error>
-          )}
-        </label>
+        <div className="space-y-2">
+          <label className="text-slate-200">
+            <span>Name</span>
+            <input
+              className="p-2 bg-black bg-opacity-10 rounded-md w-full opacity-80"
+              type="text"
+              id="name"
+              name="name"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.name}
+            />
+          </label>
+        </div>
       )}
-
-      <label className="text-slate-200 space-y-2">
-        <span>Username</span>
+      <div className="space-y-2">
+        <label className="text-slate-200 font-semibold">Username</label>
         <input
           className="p-2 bg-black bg-opacity-10 rounded-md w-full opacity-80"
           type="text"
@@ -149,14 +183,11 @@ export default function Form({ userId }: { userId: string }) {
           onBlur={formik.handleBlur}
           value={formik.values.username}
         />
-        {formik.errors.username && formik.submitCount > 0 && (
-          <Error>{formik.errors.username}</Error>
-        )}
-      </label>
-      <label className="space-y-2">
-        <span>Email</span>
+      </div>
+      <div className="space-y-2">
+        <label className="font-semibold">Email</label>
         <input
-          className="p-2 cursor-not-allowed bg-black bg-opacity-10 rounded-md w-full opacity-80 space-y-2"
+          className="p-2 cursor-not-allowed outline-none bg-black bg-opacity-10 rounded-md w-full opacity-80 space-y-2"
           id="email"
           name="email"
           type="email"
@@ -165,35 +196,70 @@ export default function Form({ userId }: { userId: string }) {
           onBlur={formik.handleBlur}
           value={formik.values.email}
         />
-        {formik.errors.email && formik.submitCount > 0 && (
-          <Error>{formik.errors.email}</Error>
-        )}
-      </label>
-      <label className="space-y-2">
-        <span>Password</span>
-        <input
-          className="p-2 bg-black bg-opacity-10 rounded-md w-full opacity-80"
-          type="password"
-          id="password"
-          name="password"
-          autoComplete="new-password"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.password}
-        />
-        {formik.errors.password && formik.submitCount > 0 && (
-          <Error>{formik.errors.password}</Error>
-        )}
-        {updatedPassword && (
-          <p className="text-truePrimary xs:text-xs text-sm">
-            Password updated.
-          </p>
-        )}
-      </label>
+      </div>
+      {!!data?.user.passwordLength && (
+        <div className="flex gap-2 justify-center items-center w-full">
+          <div className="flex flex-col w-full gap-2">
+            <label className="font-semibold">
+              {changePassword && "Enter new "}Password
+            </label>
+            <input
+              className={classNames(
+                { hidden: changePassword },
+                "p-2 bg-black bg-opacity-10 rounded-md cursor-not-allowed outline-none w-full block opacity-80"
+              )}
+              type="password"
+              readOnly
+              value={"•".repeat(data.user.passwordLength)}></input>
+            <input
+              className={classNames(
+                { hidden: !changePassword },
+                "p-2 bg-black bg-opacity-10 rounded-md w-full block opacity-80"
+              )}
+              type="password"
+              id="password"
+              name="password"
+              autoComplete="new-password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+            />
+          </div>
+          {changePassword &&
+            formik.initialValues.password != formik.values.password && (
+              <div
+                className={classNames(
+                  { hidden: !changePassword },
+                  "flex flex-col w-full gap-2"
+                )}>
+                <label className="font-semibold">Confirm new Password</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  autoComplete="confirm-password"
+                  className="bg-black bg-opacity-10 opacity-80 w-full block rounded-md p-2"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.confirmPassword}
+                />
+              </div>
+            )}
+
+          {!changePassword && (
+            <button
+              onClick={() => setChangePassword(true)}
+              className="w-full h-10 max-w-[160px] hover:bg-gray-600 bg-gray-500 rounded-md self-end">
+              Change Password
+            </button>
+          )}
+        </div>
+      )}
       <button
-        disabled={formik.isSubmitting || updatedPassword}
+        onClick={handleUpdateClick}
+        disabled={formik.isSubmitting || !hasFormedChanged}
         type="submit"
-        className="p-2 bg-truePrimary text-slate-200 w-full rounded-md hover:opacity-80 ml-auto max-w-[120px]">
+        className="p-2 bg-truePrimary text-slate-200 w-full rounded-md hover:opacity-80 sm:max-w-[344px] disabled:opacity-60">
         Update
       </button>
     </form>
