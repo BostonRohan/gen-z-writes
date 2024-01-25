@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import getYoutubeId from "@/utils/getYoutubeId";
 import videoFragment from "@/utils/fragments/video";
 
-const client = sanityClient({ useCdn: true });
+const client = sanityClient({ useCdn: false });
 
 const getVideoBySlug = cache(async (slug: string) => {
   try {
