@@ -330,7 +330,7 @@ export default function Form({
         />
       </div>
       {/* server side session comes before client side session */}
-      {serverSession.passwordLength && (
+      {serverSession?.passwordLength && (
         <div className="flex gap-2 justify-center items-center w-full xs:flex-row flex-col">
           <div className="flex flex-col w-full gap-2">
             <label className="font-semibold">

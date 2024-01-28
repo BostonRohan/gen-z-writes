@@ -64,7 +64,7 @@ export default async function Profile({
           userId={session.user.id}
           serverSession={{
             name: session.user.name,
-            passwordLength: session.user.passwordLength,
+            passwordLength: session.user?.passwordLength,
             username: session.user.username,
             email: session.user.email,
             emailVerified: session.user.emailVerified,
