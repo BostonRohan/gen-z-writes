@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import jwt from "jsonwebtoken";
 
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
+
 const resend = new Resend(process.env.RESEND_TOKEN);
 
 export async function POST(request: NextRequest) {
