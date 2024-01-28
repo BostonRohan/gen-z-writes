@@ -1,10 +1,11 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import crypto from "crypto";
-import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from "uuid";
+import * as jose from "jose";
 
-export const runtime = "edge";
+export const runtime =
+  process.env.NODE_ENV === "development" ? "nodejs" : "edge";
 export const dynamic = "force-dynamic";
 
 const resend = new Resend(process.env.RESEND_TOKEN);
@@ -14,7 +15,7 @@ export async function POST(request: NextRequest) {
 
   if (email) {
     try {
-      const forgotPassword = crypto.randomBytes(24).toString("hex").toString();
+      const forgotPassword = uuidv4();
 
       await prisma.user.update({
         where: { email },
@@ -24,21 +25,20 @@ export async function POST(request: NextRequest) {
       });
 
       //jwt the forgot password token
-      const hashedForgotPassword = jwt.sign(
-        {
-          //one hour expiration
-          exp: Math.floor(Date.now() / 1000) + 60 * 60,
-          data: forgotPassword,
-        },
-        process.env.FORGOT_PASSWORD_SECRET
-      );
+      const signedForgotPassword = await new jose.SignJWT({
+        data: forgotPassword,
+      })
+        .setProtectedHeader({ alg: "HS256" })
+        .setIssuedAt()
+        .setExpirationTime("1h")
+        .sign(new TextEncoder().encode(process.env.FORGOT_PASSWORD_SECRET));
 
       resend.emails.send({
         from: "support@projectgenzwrites.com",
         reply_to: "noreply@projectgenzwrites.com",
         to: email,
         subject: "Gen Z Writes Password Reset",
-        html: `<a href=${`${process.env.NEXTAUTH_URL}/forgot-password?token=${hashedForgotPassword}`}>Click here to reset your password.</a>`,
+        html: `<a href=${`${process.env.NEXTAUTH_URL}/forgot-password?token=${signedForgotPassword}`}>Click here to reset your password.</a>`,
       });
 
       return NextResponse.json({});

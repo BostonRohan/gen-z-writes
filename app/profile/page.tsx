@@ -1,5 +1,4 @@
 import Form from "@/components/forms/UpdateProfile";
-import Input from "@/components/forms/profile/input";
 import NextAuthProvider from "@/components/global/NextAuthProvider";
 import ProfileImage from "@/components/profile/ProfileImage";
 import authOptions from "@/utils/auth/authOptions";

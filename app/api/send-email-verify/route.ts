@@ -1,9 +1,10 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import jwt from "jsonwebtoken";
+import * as jose from "jose";
 
-export const runtime = "edge";
+export const runtime =
+  process.env.NODE_ENV === "development" ? "nodejs" : "edge";
 export const dynamic = "force-dynamic";
 
 const resend = new Resend(process.env.RESEND_TOKEN);
@@ -24,13 +25,15 @@ export async function POST(request: NextRequest) {
         subject: "Gen Z Writes Verify Email",
         html: `<a href=${`${
           process.env.NEXTAUTH_URL
-        }/api/verify-email?eid=${jwt.sign(
-          {
-            data: email,
-          },
-          process.env.EMAIL_SECRET,
-          { expiresIn: "1h" }
-        )}`}>Click here to verify your email.</a>`,
+        }/api/verify-email?eid=${await new jose.SignJWT({
+          data: email,
+        })
+          .setProtectedHeader({ alg: "HS256" })
+          .setIssuedAt()
+          .setExpirationTime("1h")
+          .sign(
+            new TextEncoder().encode(process.env.EMAIL_SECRET)
+          )}`}>Click here to verify your email.</a>`,
       });
 
       return NextResponse.json({});
