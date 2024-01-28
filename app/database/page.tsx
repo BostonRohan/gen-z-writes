@@ -11,6 +11,7 @@ async function getVideos() {
     const { query, schema } = q("*")
       .filterByType("video")
       .filter(`!(_id in path("drafts.**"))`)
+      .order("_createdAt desc")
       .grab(videoFragment);
     return schema.parse(await client.fetch(query));
   } catch (err) {
