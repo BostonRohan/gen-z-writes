@@ -25,7 +25,15 @@ export default async function Profile() {
             />
           </div>
         </header>
-        <Form userId={session.user.id} />
+        <Form
+          userId={session.user.id}
+          serverSession={{
+            name: session.user.name,
+            passwordLength: session.user.passwordLength,
+            username: session.user.username,
+            email: session.user.email,
+          }}
+        />
       </NextAuthProvider>
     </div>
   );
