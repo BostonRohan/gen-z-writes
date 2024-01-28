@@ -1,13 +1,10 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 import * as jose from "jose";
 
 export const runtime =
   process.env.NODE_ENV === "development" ? "nodejs" : "edge";
 export const dynamic = "force-dynamic";
-
-const resend = new Resend(process.env.RESEND_TOKEN);
 
 export async function POST(request: NextRequest) {
   const { email } = await request.json();
@@ -18,22 +15,29 @@ export async function POST(request: NextRequest) {
         where: { email },
       });
 
-      resend.emails.send({
-        from: "support@projectgenzwrites.com",
-        reply_to: "noreply@projectgenzwrites.com",
-        to: user.email,
-        subject: "Gen Z Writes Verify Email",
-        html: `<a href=${`${
-          process.env.VERCEL_URL
-        }/api/verify-email?eid=${await new jose.SignJWT({
-          data: email,
-        })
-          .setProtectedHeader({ alg: "HS256" })
-          .setIssuedAt()
-          .setExpirationTime("1h")
-          .sign(
-            new TextEncoder().encode(process.env.EMAIL_SECRET)
-          )}`}>Click here to verify your email.</a>`,
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.RESEND_TOKEN}`,
+        },
+        body: JSON.stringify({
+          from: "support@projectgenzwrites.com",
+          reply_to: "noreply@projectgenzwrites.com",
+          to: user.email,
+          subject: "Gen Z Writes Verify Email",
+          html: `<a href=${`${
+            process.env.VERCEL_URL
+          }/api/verify-email?eid=${await new jose.SignJWT({
+            data: email,
+          })
+            .setProtectedHeader({ alg: "HS256" })
+            .setIssuedAt()
+            .setExpirationTime("1h")
+            .sign(
+              new TextEncoder().encode(process.env.EMAIL_SECRET)
+            )}`}>Click here to verify your email.</a>`,
+        }),
       });
 
       return NextResponse.json({});
