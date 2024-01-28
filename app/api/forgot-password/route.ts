@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
         reply_to: "noreply@projectgenzwrites.com",
         to: email,
         subject: "Gen Z Writes Password Reset",
-        html: `<a href=${`${process.env.NEXTAUTH_URL}/forgot-password?token=${signedForgotPassword}`}>Click here to reset your password.</a>`,
+        html: `<a href=${`${process.env.VERCEL_URL}/forgot-password?token=${signedForgotPassword}`}>Click here to reset your password.</a>`,
       });
 
       return NextResponse.json({});

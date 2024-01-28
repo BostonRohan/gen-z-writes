@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         to: user.email,
         subject: "Gen Z Writes Verify Email",
         html: `<a href=${`${
-          process.env.NEXTAUTH_URL
+          process.env.VERCEL_URL
         }/api/verify-email?eid=${await new jose.SignJWT({
           data: email,
         })
