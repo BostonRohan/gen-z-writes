@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { Prisma } from "@prisma/client";
 
 export async function POST(request: NextRequest) {
-  const { username, email, password, id, name } = await request.json();
+  const { username, email, password, id } = await request.json();
 
   if (!id) {
     return NextResponse.json({}, { status: 401 });
@@ -15,16 +15,18 @@ export async function POST(request: NextRequest) {
       where: { id },
       data: {
         ...(username && { username }),
-        ...(name && { name }),
         // ...(email && { email }),
-        ...(password && { password: await bcrypt.hash(password, 10) }),
+        ...(password && {
+          password: await bcrypt.hash(password, 10),
+          passwordLength: password.length,
+        }),
       },
     });
 
     return NextResponse.json({});
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
-      if (err.code === "P2002") {
+      if ((err as Prisma.PrismaClientKnownRequestError).code === "P2002") {
         return NextResponse.json(
           {
             data: "Existing user",

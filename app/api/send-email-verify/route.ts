@@ -1,6 +1,5 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { v4 as uuidv4 } from "uuid";
 import * as jose from "jose";
 
 export const runtime =
@@ -10,25 +9,11 @@ export const dynamic = "force-dynamic";
 export async function POST(request: NextRequest) {
   const { email } = await request.json();
 
-  if (email) {
+  if (email && process.env.EMAIL_SECRET) {
     try {
-      const forgotPassword = uuidv4();
-
-      await prisma.user.update({
+      const user = await prisma.user.findUniqueOrThrow({
         where: { email },
-        data: {
-          forgotPassword,
-        },
       });
-
-      //jwt the forgot password token
-      const signedForgotPassword = await new jose.SignJWT({
-        data: forgotPassword,
-      })
-        .setProtectedHeader({ alg: "HS256" })
-        .setIssuedAt()
-        .setExpirationTime("1h")
-        .sign(new TextEncoder().encode(process.env.FORGOT_PASSWORD_SECRET));
 
       await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -39,21 +24,24 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({
           from: "support@projectgenzwrites.com",
           reply_to: "noreply@projectgenzwrites.com",
-          to: email,
-          subject: "Gen Z Writes Password Reset",
-          html: `<a href=${`${process.env.VERCEL_URL}/forgot-password?token=${signedForgotPassword}`}>Click here to reset your password.</a>`,
+          to: user.email,
+          subject: "Gen Z Writes Verify Email",
+          html: `<a href=${`${
+            process.env.VERCEL_URL
+          }/api/verify-email?eid=${await new jose.SignJWT({
+            data: email,
+          })
+            .setProtectedHeader({ alg: "HS256" })
+            .setIssuedAt()
+            .setExpirationTime("1h")
+            .sign(
+              new TextEncoder().encode(process.env.EMAIL_SECRET)
+            )}`}>Click here to verify your email.</a>`,
         }),
       });
 
       return NextResponse.json({});
     } catch (err) {
-      //prisma error - if the email was not found
-      if ((err as any).meta.cause === "Record to update not found.") {
-        return NextResponse.json(
-          { data: "We could not find a user with that email." },
-          { status: 401 }
-        );
-      }
       console.error(err);
       return NextResponse.json({}, { status: 500 });
     }

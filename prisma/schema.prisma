@@ -59,12 +59,13 @@ model Session {
 
 model User {
   id String @id @default(uuid())
-
+  
   name           String?
-  username       String?
-  email          String?   @unique
+  username       String?   @unique
+  email          String    @unique
   password       String?
   forgotPassword String?   @unique
+  passwordLength Int?
   emailVerified  DateTime?
   image          String?
   role           RoleTypes @default(USER)

@@ -1,4 +1,4 @@
-import "global.css";
+import "../global.css";
 import { Analytics } from "@vercel/analytics/react";
 import Nav from "@/components/Nav";
 import NextAuthProvider from "@/components/global/NextAuthProvider";

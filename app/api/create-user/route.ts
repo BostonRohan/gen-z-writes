@@ -11,7 +11,11 @@ export async function POST(request: NextRequest) {
   }
   try {
     await prisma.user.create({
-      data: { email, password: await bcrypt.hash(password, 10) },
+      data: {
+        email,
+        password: await bcrypt.hash(password, 10),
+        passwordLength: password.length,
+      },
     });
     return NextResponse.json({});
   } catch (err) {
