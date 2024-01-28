@@ -24,11 +24,17 @@ interface Props {
     email: string;
     passwordLength?: number | null;
     name?: string | null;
+    emailVerified?: Date | null;
   };
+  emailJustVerified?: boolean | null;
 }
 
 //user id never changes so we can grab it from the server
-export default function Form({ userId, serverSession }: Props) {
+export default function Form({
+  userId,
+  serverSession,
+  emailJustVerified,
+}: Props) {
   const [usernameActive, setUserNameActive] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
@@ -45,6 +51,33 @@ export default function Form({ userId, serverSession }: Props) {
     password: string;
   }) => {
     signIn("credentials", { email, password });
+  };
+
+  const handleVerifyEmail = async () => {
+    try {
+      const res = await fetch("/api/send-email-verify", {
+        method: "POST",
+        body: JSON.stringify({ email: data?.user.email }),
+      });
+      if (!res.ok) {
+        toast({
+          description:
+            "There was an error sending your verification email, please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+      toast({
+        description: "An email has been sent to your inbox for next steps.",
+      });
+    } catch (err) {
+      toast({
+        description:
+          "There was an error sending your verification email, please try again.",
+        variant: "destructive",
+      });
+      console.error(err);
+    }
   };
 
   const currentPasswordForm = useFormik({
@@ -242,7 +275,7 @@ export default function Form({ userId, serverSession }: Props) {
     <form
       onSubmit={formik.handleSubmit}
       className="my-20 max-w-lg gap-4 flex flex-col">
-      {!data?.user?.name && status !== "loading" && (
+      {/* {!data?.user?.name && status !== "loading" && (
         <div className="space-y-2">
           <label className="text-slate-200">
             <span>Name</span>
@@ -257,7 +290,7 @@ export default function Form({ userId, serverSession }: Props) {
             />
           </label>
         </div>
-      )}
+      )} */}
       <div className="space-y-2">
         <label className="text-slate-200 font-semibold">Username</label>
         <input
@@ -274,7 +307,17 @@ export default function Form({ userId, serverSession }: Props) {
         />
       </div>
       <div className="space-y-2">
-        <label className="font-semibold">Email</label>
+        <div className="flex justify-between items-center">
+          <label className="font-semibold">Email</label>
+          {!serverSession.emailVerified && !emailJustVerified && (
+            <button
+              type="button"
+              onClick={handleVerifyEmail}
+              className="text-blue-300 underline">
+              Verify
+            </button>
+          )}
+        </div>
         <input
           className="p-2 cursor-not-allowed outline-none bg-black bg-opacity-40 rounded-md w-full opacity-80 space-y-2"
           id="email"
