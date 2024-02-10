@@ -37,12 +37,11 @@ const VideoGrid = ({ videos }: { videos: Video[] }) => {
       <SearchInput handleSearch={handleSearch} />
       {!videosState.length && (
         <h1
-          className={`${inter.className} font-bold text-3xl text-white text-center`}
-        >
+          className={`${inter.className} font-bold text-3xl text-white text-center`}>
           No Results Found
         </h1>
       )}
-      <section className="text-white grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center min-h-[50vh] sm:mb-32 mb-64">
+      <section className="text-white max-w-[2000px] mx-auto grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
         {videosState.map((video, i) => (
           <VideoCard
             loadImages={i < 3 ? "eager" : "lazy"}

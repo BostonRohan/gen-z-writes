@@ -12,13 +12,13 @@ export default function Contributor({
   href?: string;
 }) {
   return (
-    <article>
+    <article className="flex flex-col items-center justify-center max-w-[175px] shrink-0 mx-4">
       <Image
         src={src}
         width={175}
         height={175}
         alt={name}
-        className="mb-4 max-h-[175px] rounded-[50%] w-[175px] h-full overflow-hidden !object-cover "
+        className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover"
       />
       <ConditionalLink href={href} target="_blank">
         <h3

@@ -3,6 +3,7 @@ import { q } from "groqd";
 import { notFound } from "next/navigation";
 import videoFragment from "@/utils/fragments/video";
 import VideoGrid from "@/components/VideoGrid";
+import Footer from "@/components/Footer";
 
 const client = sanityClient({ useCdn: true });
 
@@ -22,5 +23,10 @@ async function getVideos() {
 
 export default async function Page() {
   const videos = await getVideos();
-  return <VideoGrid videos={videos} />;
+  return (
+    <>
+      <VideoGrid videos={videos} />
+      <Footer />
+    </>
+  );
 }

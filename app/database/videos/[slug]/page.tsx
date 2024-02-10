@@ -96,7 +96,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const video = await getVideoBySlug(params.slug);
 
   return (
-    <section className="sm:min-h-[750px] min-h-[650px] px-4">
+    <section className="py-16 px-4">
       <VideoCard
         video={video}
         cardClassName="max-w-[800px] mx-auto"

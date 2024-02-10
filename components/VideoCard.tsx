@@ -34,8 +34,7 @@ const VideoCard = ({
   return (
     <article
       key={video._id}
-      className={`md:my-8 my-12 shrink-0 w-full capitalize h-full max-w-[450px] text-white ${cardClassName}`}
-    >
+      className={`md:my-8 my-12 shrink-0 w-full capitalize h-full max-w-[450px] text-white ${cardClassName}`}>
       <h1 className="font-bold mb-4 truncate text-2xl">{video.title}</h1>
       {showVideo ? (
         <YoutubePlayer
@@ -59,7 +58,7 @@ const VideoCard = ({
           )}
         </Link>
       )}
-      <section className="flex justify-between lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
+      <section className="flex justify-between flex-wra lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
         <address className="author flex gap-2 items-center my-auto">
           {/* <AuthorImage
             src={author.data.image ?? ""}
@@ -70,14 +69,13 @@ const VideoCard = ({
             {video.author.name}
           </p>
         </address>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {video.tags.map((tag: string) => {
             const id = uuidv4();
             return (
               <span
                 className="p-2 bg-[#0749ac43] shrink-1 rounded-xl h-10 w-fit truncate text-base"
-                key={id}
-              >
+                key={id}>
                 {tag}
               </span>
             );
