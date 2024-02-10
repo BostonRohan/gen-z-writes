@@ -58,7 +58,7 @@ const VideoCard = ({
           )}
         </Link>
       )}
-      <section className="flex justify-between flex-wrap lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
+      <section className="flex justify-between flex-wra lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
         <address className="author flex gap-2 items-center my-auto">
           {/* <AuthorImage
             src={author.data.image ?? ""}
@@ -69,7 +69,7 @@ const VideoCard = ({
             {video.author.name}
           </p>
         </address>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {video.tags.map((tag: string) => {
             const id = uuidv4();
             return (
