@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import NextAuthProvider from "@/components/global/NextAuthProvider";
 import { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/Footer";
 
 export const sharedOGImage = {
   images: ["/gen-z-writes-og.png"],
@@ -69,6 +70,7 @@ export default async function RootLayout({
         {children}
         <Toaster />
         <Analytics />
+        <Footer />
       </body>
     </html>
   );
