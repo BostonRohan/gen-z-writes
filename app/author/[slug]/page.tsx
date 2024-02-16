@@ -156,6 +156,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <div />
       <TopHeader
         src={author?.image ? builder.image(author.image).url() : undefined}
         name={author.name}
