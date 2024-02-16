@@ -45,7 +45,7 @@ export default async function Profile({
   }
 
   return (
-    <div className="text-slate-200 mt-40 max-w-[1000px] mx-auto px-4">
+    <div className="text-slate-200 mt-40 max-w-4xl mx-auto px-4">
       <NextAuthProvider>
         <header className="flex xs:flex-row flex-col gap-4">
           <h1 className="text-6xl">Profile</h1>
