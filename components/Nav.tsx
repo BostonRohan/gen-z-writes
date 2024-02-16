@@ -34,78 +34,88 @@ const Nav = () => {
     };
   }, [isOpen]);
   return (
-    <nav
-      className={classNames(
-        "z-10 font-semibold transition-all duration-500 w-full ease-in-out top-0 sticky text-slate-200",
-        {
-          "h-screen w-screen bg-background-primary opacity-[0.97] !fixed transition-all":
-            isOpen,
-          "!relative": pathname.split("/")[1] === "author",
-        }
-      )}>
-      <div className="w-full bg-background-primary bg-opacity-70 backdrop-blur-md p-1 mx-auto text-slate-200 h-14 flex items-center">
+    <>
+      <nav
+        className={classNames(
+          "z-20 font-semibold w-full top-0 text-slate-200 h-14",
+          { sticky: pathname.split("/")[1] !== "author" }
+        )}>
         <div
           className={classNames(
-            "max-w-4xl",
-            {
-              "xl:max-w-[1829px] md:max-w-[1100px] md:px-6 max-w-none":
-                pathname === "/database",
-            },
-            "mx-auto flex items-center gap-8 w-full px-4"
+            "w-full bg-background-primary/95 transition-all p-1 h-full mx-auto text-slate-200 flex items-center",
+            { "backdrop-blur-md bg-background-primary/70 ": !isOpen }
           )}>
-          <Link
-            aria-label="Home"
-            className="opacity-40 xs:text-base text-sm"
-            onClick={() => setOpen(false)}
-            href="/">
-            Project Gen Z Writes
-          </Link>
-          <Link
-            onClick={() => setOpen(false)}
-            aria-label="Database"
-            href="/database"
-            className="items-center gap-2 mr-auto hover:bg-neutral-700/30 p-1.5 rounded-md sm:flex hidden">
-            <DatabaseIcon />
-            Database
-          </Link>
-          <div className="sm:inline hidden">
-            {status === "loading" ? (
-              <div className="bg-neutral-700 bg-opacity-40 w-10 p-2 h-10 animate-pulse rounded-full" />
-            ) : (
-              <Link
-                onClick={() => setOpen(false)}
-                href="/profile"
-                aria-label={
-                  data?.user
-                    ? `${data?.user.name ?? data?.user.email} Profile Image`
-                    : "Profile Icon"
-                }>
-                {data?.user ? (
-                  <ProfileImage
-                    name={data.user.name}
-                    email={data.user.email}
-                    image={data.user.image}
-                  />
+          <div
+            className={classNames(
+              "max-w-4xl",
+              {
+                "xl:max-w-[1829px] md:max-w-[1100px] md:px-6 max-w-none":
+                  pathname === "/database",
+              },
+              "mx-auto flex items-center gap-8 w-full px-4 z-20"
+            )}>
+            <Link
+              aria-label="Home"
+              className="opacity-40 xs:text-base text-sm"
+              onClick={() => setOpen(false)}
+              href="/">
+              Project Gen Z Writes
+            </Link>
+            <Link
+              onClick={() => setOpen(false)}
+              aria-label="Database"
+              href="/database"
+              className="items-center gap-2 mr-auto hover:bg-neutral-700/30 p-1.5 rounded-md sm:flex hidden">
+              <DatabaseIcon />
+              Database
+            </Link>
+            {pathname !== "/profile" && (
+              <div className="sm:inline hidden">
+                {status === "loading" ? (
+                  <div className="bg-neutral-700 bg-opacity-40 w-10 p-2 h-10 animate-pulse rounded-full" />
                 ) : (
-                  <div className="flex items-center gap-2 hover:bg-neutral-700/30 p-1.5 rounded-md">
-                    <UserIcon /> Login
-                  </div>
+                  <Link
+                    onClick={() => setOpen(false)}
+                    href="/profile"
+                    aria-label={
+                      data?.user
+                        ? `${data?.user.name ?? data?.user.email} Profile Image`
+                        : "Profile Icon"
+                    }>
+                    {data?.user ? (
+                      <ProfileImage
+                        name={data.user.name}
+                        email={data.user.email}
+                        image={data.user.image}
+                      />
+                    ) : (
+                      <div className="flex items-center gap-2 hover:bg-neutral-700/30 p-1.5 rounded-md">
+                        <UserIcon /> Login
+                      </div>
+                    )}
+                  </Link>
                 )}
-              </Link>
+              </div>
             )}
-          </div>
-          <div className="sm:hidden inline ml-auto opacity-90">
-            <Hamburger
-              size={24}
-              toggled={isOpen}
-              toggle={setOpen}
-              color="#e2e8f0"
-              label="Show Menu"
-            />
+            <div className="sm:hidden inline ml-auto opacity-90">
+              <Hamburger
+                size={24}
+                toggled={isOpen}
+                toggle={setOpen}
+                color="#e2e8f0"
+                label="Show Menu"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      {isOpen && (
+      </nav>
+      <div
+        className={classNames(
+          "transition-all hidden font-semibold bg-background-primary/95 backdrop-blur-sm",
+          {
+            "h-screen w-screen z-20 !inline text-slate-200 fixed": isOpen,
+          }
+        )}>
         <div className="px-4 flex gap-4 flex-col">
           <Link
             onClick={() => setOpen(false)}
@@ -145,8 +155,8 @@ const Nav = () => {
             )}
           </div>
         </div>
-      )}
-    </nav>
+      </div>
+    </>
   );
 };
 
