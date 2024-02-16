@@ -40,7 +40,7 @@ export default function TopHeader({
   return (
     <header
       className={classNames(
-        "fixed top-0 h-20 bg-gradient-to-b from-neutral-500/80 text-white to-background-primary/80 w-full flex items-center transition-all ease-in-out duration-200",
+        "fixed top-0 h-20 bg-gradient-to-b z-10 from-neutral-500/80 text-white to-background-primary/80 w-full flex items-center transition-all ease-in-out duration-200",
         { "opacity-0 !h-0": !showHeader }
       )}>
       <div className="px-4 flex justify-between w-full max-w-[800px] mx-auto">

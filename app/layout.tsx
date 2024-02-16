@@ -4,7 +4,6 @@ import Nav from "@/components/Nav";
 import NextAuthProvider from "@/components/global/NextAuthProvider";
 import { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
-import Footer from "@/components/Footer";
 
 export const sharedOGImage = {
   images: ["/gen-z-writes-og.png"],
@@ -44,7 +43,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-background-primary dark">
+      <body className="bg-background-primary dark overflow-x-hidden">
         <link
           rel="apple-touch-icon"
           sizes="180x180"

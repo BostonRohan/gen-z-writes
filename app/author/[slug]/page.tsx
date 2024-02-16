@@ -19,6 +19,7 @@ import dynamic from "next/dynamic";
 import ShareButton from "@/components/global/ShareButton";
 import shortenDescription from "@/utils/shortenDescription";
 import TopHeader from "@/components/author/TopHeader";
+import Footer from "@/components/Footer";
 
 const BooksSwiper = dynamic(() => import("@/components/swipers/Books"), {
   ssr: false,
@@ -155,6 +156,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <div />
       <TopHeader
         src={author?.image ? builder.image(author.image).url() : undefined}
         name={author.name}
@@ -162,7 +164,7 @@ export default async function Page({ params }: Props) {
         slug={params.slug}
       />
       <div className="text-slate-200 mb-10">
-        <section className="sm:mt-36 mt-20 max-w-[800px] mx-auto">
+        <section className="sm:mt-36 mt-20 max-w-4xl mx-auto">
           <div className="px-4">
             <div className="space-y-4">
               {author.image && (
@@ -254,6 +256,7 @@ export default async function Page({ params }: Props) {
           )}
         </section>
       </div>
+      <Footer />
     </>
   );
 }

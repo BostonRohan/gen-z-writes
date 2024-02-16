@@ -1,100 +1,162 @@
 "use client";
 import Link from "next/link";
-import { HomeIcon, DatabaseIcon, UserIcon } from "lucide-react";
-import { useState, useEffect } from "react";
-import { debounce } from "@/utils/debounce";
+import { DatabaseIcon, UserIcon } from "lucide-react";
 import ProfileImage from "./profile/ProfileImage";
 import { useSession } from "next-auth/react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import Hamburger from "hamburger-react";
+import { useEffect, useState } from "react";
+import classNames from "classnames";
+import { usePathname } from "next/navigation";
 
 const Nav = () => {
-  const [showNav, setShowNav] = useState(true);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const { data, status } = useSession();
-
-  const handleScroll = debounce(() => {
-    const currentScrollPos = window.scrollY;
-
-    setShowNav(
-      (prevScrollPos > currentScrollPos &&
-        prevScrollPos - currentScrollPos > 70) ||
-        currentScrollPos < 10
-    );
-
-    setPrevScrollPos(currentScrollPos);
-  }, 100);
+  const [isOpen, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos, showNav, handleScroll]);
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      if (windowWidth > 640 && isOpen) {
+        setOpen(false);
+      }
+    };
 
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isOpen]);
   return (
-    <nav
-      className={`fixed z-10 font-semibold transition-all duration-500 w-full ease-in-out ${
-        showNav ? "bottom-10" : "-bottom-20"
-      }`}>
-      <div className="w-[250px] bg-neutral-800 bg-opacity-60 p-1 mx-auto text-slate-200 rounded-3xl flex items-center justify-center gap-6">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
+    <>
+      <nav
+        className={classNames(
+          "z-20 font-semibold w-full top-0 text-slate-200 h-14",
+          { sticky: pathname.split("/")[1] !== "author" }
+        )}>
+        <div
+          className={classNames(
+            "w-full bg-background-primary/95 transition-all p-1 h-full mx-auto text-slate-200 flex items-center",
+            { "backdrop-blur-md bg-background-primary/70 ": !isOpen }
+          )}>
+          <div
+            className={classNames(
+              "max-w-4xl",
+              {
+                "xl:max-w-[1829px] md:max-w-[1100px] md:px-6 max-w-none":
+                  pathname === "/database",
+              },
+              "mx-auto flex items-center gap-8 w-full px-4 z-20"
+            )}>
+            <Link
+              aria-label="Home"
+              className="opacity-40 xs:text-base text-sm"
+              onClick={() => setOpen(false)}
+              href="/">
+              Project Gen Z Writes
+            </Link>
+            <Link
+              onClick={() => setOpen(false)}
+              aria-label="Database"
+              href="/database"
+              className="items-center gap-2 mr-auto hover:bg-neutral-700/30 p-1.5 rounded-md sm:flex hidden">
+              <DatabaseIcon />
+              Database
+            </Link>
+            {pathname !== "/profile" && (
+              <div className="sm:inline hidden">
+                {status === "loading" ? (
+                  <div className="bg-neutral-700 bg-opacity-40 w-10 p-2 h-10 animate-pulse rounded-full" />
+                ) : (
+                  <Link
+                    onClick={() => setOpen(false)}
+                    href="/profile"
+                    aria-label={
+                      data?.user
+                        ? `${data?.user.name ?? data?.user.email} Profile Image`
+                        : "Profile Icon"
+                    }>
+                    {data?.user ? (
+                      <ProfileImage
+                        name={data.user.name}
+                        email={data.user.email}
+                        image={data.user.image}
+                      />
+                    ) : (
+                      <div className="flex items-center gap-2 hover:bg-neutral-700/30 p-1.5 rounded-md">
+                        <UserIcon /> Login
+                      </div>
+                    )}
+                  </Link>
+                )}
+              </div>
+            )}
+            <div className="sm:hidden inline ml-auto opacity-90">
+              <Hamburger
+                size={24}
+                toggled={isOpen}
+                toggle={setOpen}
+                color="#e2e8f0"
+                label="Show Menu"
+              />
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div
+        className={classNames(
+          "transition-all hidden font-semibold bg-background-primary/95 backdrop-blur-sm",
+          {
+            "h-screen w-screen z-20 !inline text-slate-200 fixed": isOpen,
+          }
+        )}>
+        <div className="px-4 flex gap-4 flex-col">
+          <Link
+            onClick={() => setOpen(false)}
+            aria-label="Database"
+            href="/database"
+            className="items-center gap-2 mr-auto hover:bg-neutral-700/30 p-1.5 rounded-md sm:hidden flex opacity-90">
+            <DatabaseIcon />
+            Database
+          </Link>
+          <div className="sm:hidden flex gap-4">
+            {status === "loading" ? (
+              <div className="bg-neutral-700 bg-opacity-40 w-10 p-2 h-10 animate-pulse rounded-full" />
+            ) : (
               <Link
-                aria-label="Home"
-                href="/"
-                className="bg-neutral-700 bg-opacity-40 w-10 p-2 rounded-full flex items-center justify-center hover:bg-opacity-100">
-                <HomeIcon />
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent>Home</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger>
-              <Link
-                aria-label="Database"
-                className="bg-neutral-700 bg-opacity-40 w-10 p-2 rounded-full flex items-center justify-center hover:bg-opacity-100"
-                href="/database">
-                <DatabaseIcon />
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent>Database</TooltipContent>
-          </Tooltip>
-          {status === "loading" ? (
-            <div className="bg-neutral-700 bg-opacity-40 w-10 p-2 h-10 animate-pulse rounded-full" />
-          ) : (
-            <Tooltip>
-              <TooltipTrigger>
-                <Link
-                  href="/profile"
-                  aria-label={
-                    data?.user
-                      ? `${data?.user.name ?? data?.user.email} Profile Image`
-                      : "Profile Icon"
-                  }>
-                  {data?.user ? (
+                href="/profile"
+                onClick={() => setOpen(false)}
+                aria-label={
+                  data?.user
+                    ? `${data?.user.name ?? data?.user.email} Profile Image`
+                    : "Profile Icon"
+                }>
+                {data?.user ? (
+                  <div className="flex gap-2 items-center">
                     <ProfileImage
                       name={data.user.name}
                       email={data.user.email}
                       image={data.user.image}
                     />
-                  ) : (
-                    <div className="bg-neutral-700 bg-opacity-40 p-2 rounded-full flex items-center justify-center hover:bg-opacity-100">
-                      <UserIcon />
-                    </div>
-                  )}
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent>Profile</TooltipContent>
-            </Tooltip>
-          )}
-        </TooltipProvider>
+                    <p className="opacity-70">{data?.user?.username}</p>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 hover:bg-neutral-700/30 p-1.5 rounded-md">
+                    <UserIcon /> Login
+                  </div>
+                )}
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
-    </nav>
+    </>
   );
 };
 
