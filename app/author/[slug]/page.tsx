@@ -19,6 +19,7 @@ import dynamic from "next/dynamic";
 import ShareButton from "@/components/global/ShareButton";
 import shortenDescription from "@/utils/shortenDescription";
 import TopHeader from "@/components/author/TopHeader";
+import Footer from "@/components/Footer";
 
 const BooksSwiper = dynamic(() => import("@/components/swipers/Books"), {
   ssr: false,
@@ -254,6 +255,7 @@ export default async function Page({ params }: Props) {
           )}
         </section>
       </div>
+      <Footer />
     </>
   );
 }
