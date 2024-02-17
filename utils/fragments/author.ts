@@ -4,7 +4,7 @@ const authorFragment = {
   _id: q.string(),
   name: q.string(),
   slug: q.slug("slug"),
-  bio: q.contentBlocks().nullable(),
+  bio: q.contentBlocks(),
   image: sanityImage("image").nullable(),
   books: q
     .array(
@@ -19,8 +19,8 @@ const authorFragment = {
     .nullable(),
   socials: q
     .object({
-      website: q.string().nullable(),
-      instagram: q.string().nullable(),
+      website: q.string().nullable().optional(),
+      instagram: q.string().nullable().optional(),
     })
     .nullable(),
   videos: q("videos")
@@ -30,7 +30,8 @@ const authorFragment = {
       slug: q.slug("slug"),
       title: q.string(),
       url: q.string(),
-    }),
+    })
+    .nullable(),
 };
 
 export default authorFragment;
