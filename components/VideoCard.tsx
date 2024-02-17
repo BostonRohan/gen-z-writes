@@ -5,6 +5,9 @@ import Link from "next/link";
 import getYoutubeId from "@/utils/getYoutubeId";
 import YoutubePlayer from "./Youtube";
 import YoutubeThumbnail from "./YoutubeThumbnail";
+import imageUrlBuilder from "@sanity/image-url";
+import client from "@/sanity/client";
+import Image from "next/image";
 
 export type LoadImages = "eager" | "lazy";
 
@@ -30,6 +33,7 @@ const VideoCard = ({
   loadImages,
 }: VideoCardProps) => {
   const youtubeId = getYoutubeId(video.url);
+  const builder = imageUrlBuilder(client);
 
   return (
     <article
@@ -60,15 +64,21 @@ const VideoCard = ({
       )}
       <section className="flex justify-between flex-wra lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
         <address className="author flex gap-2 items-center my-auto">
-          {/* <AuthorImage
-            src={author.data.image ?? ""}
-            alt={author.data.name}
-            loading={"lazy"}
-          /> */}
-          <Link
-            href={`/author/${video.author.slug}`}
-            className={`${poppins.className} truncate opacity-90 hover:underline text-lg`}>
-            {video.author.name}
+          <Link href={`/author/${video.author.slug}`} className="flex gap-2">
+            {video.author?.image && (
+              <div className="w-[30px] h-[30px] relative">
+                <Image
+                  src={builder.image(video.author.image).url()}
+                  className="rounded-full object-cover"
+                  fill
+                  alt={video.author.name}
+                />
+              </div>
+            )}
+            <p
+              className={`${poppins.className} truncate opacity-80 hover:underline text-lg`}>
+              {video.author.name}
+            </p>
           </Link>
         </address>
         <div className="flex gap-2 flex-wrap">

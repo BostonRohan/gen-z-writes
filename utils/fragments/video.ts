@@ -1,4 +1,4 @@
-import { q } from "groqd";
+import { q, sanityImage } from "groqd";
 
 const videoFragment = {
   _id: q.string(),
@@ -8,7 +8,11 @@ const videoFragment = {
   tags: q.array(q.string()),
   author: q("author.ref")
     .deref()
-    .grab({ name: q.string(), slug: q.slug("slug") }),
+    .grab({
+      name: q.string(),
+      slug: q.slug("slug"),
+      image: sanityImage("image").nullable(),
+    }),
 };
 
 export default videoFragment;
