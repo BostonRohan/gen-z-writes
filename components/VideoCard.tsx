@@ -65,9 +65,11 @@ const VideoCard = ({
             alt={author.data.name}
             loading={"lazy"}
           /> */}
-          <p className={`${poppins.className} truncate text-lg`}>
+          <Link
+            href={`/author/${video.author.slug}`}
+            className={`${poppins.className} truncate opacity-90 hover:underline text-lg`}>
             {video.author.name}
-          </p>
+          </Link>
         </address>
         <div className="flex gap-2 flex-wrap">
           {video.tags.map((tag: string) => {
