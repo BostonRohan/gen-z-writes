@@ -1,13 +1,11 @@
 import { Metadata } from "next";
 import VideoCard from "@/components/VideoCard";
-import sanityClient from "@/sanity/client";
+import { sanityFetch } from "@/sanity/fetch";
 import { q } from "groqd";
 import { cache } from "react";
 import { notFound } from "next/navigation";
 import getYoutubeId from "@/utils/getYoutubeId";
 import videoFragment from "@/utils/fragments/video";
-
-const client = sanityClient({ useCdn: false });
 
 const getVideoBySlug = cache(async (slug: string) => {
   try {
@@ -17,7 +15,7 @@ const getVideoBySlug = cache(async (slug: string) => {
       .filter(`!(_id in path("drafts.**"))`)
       .slice(0)
       .grab(videoFragment);
-    return schema.parse(await client.fetch(query));
+    return schema.parse(await sanityFetch({ query, tags: ["video"] }));
   } catch (err) {
     console.error(
       "there was an issue getting the data for the following video",
@@ -33,14 +31,13 @@ export type Video = Awaited<ReturnType<typeof getVideoBySlug>>;
 
 export async function generateStaticParams() {
   try {
-    const client = sanityClient({ useCdn: false });
     const { query, schema } = q("*")
       .filterByType("video")
       .filter(`!(_id in path("drafts.**"))`)
       .grab({
         slug: q.slug("slug"),
       });
-    return schema.parse(await client.fetch(query));
+    return schema.parse(await sanityFetch({ query, tags: ["video"] }));
   } catch (err) {
     console.error(
       "there was an error getting the video slugs statically:",

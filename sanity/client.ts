@@ -1,13 +1,13 @@
-import { createClient } from "next-sanity";
-import { projectId, apiVersion, dataset } from "./env";
+import { ClientConfig, createClient } from "next-sanity";
+import { apiVersion, dataset, projectId } from "./env";
 
-const client = ({ useCdn }: { useCdn?: boolean }) =>
-  createClient({
-    projectId,
-    dataset,
-    token: process.env.SANITY_API_TOKEN,
-    apiVersion, // https://www.sanity.io/docs/api-versioning
-    useCdn: useCdn ?? true, // if you're using ISR or only static generation at build time then you can set this to `false` to guarantee no stale content
-  });
+const config: ClientConfig = {
+  projectId,
+  dataset,
+  apiVersion,
+  // set CDN to live API in development mode
+  useCdn: process.env.NODE_ENV === "development" ? true : false,
+  token: process.env.SANITY_API_TOKEN,
+};
 
-export default client;
+export default createClient(config);

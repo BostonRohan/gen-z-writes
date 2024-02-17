@@ -3,16 +3,13 @@
 import { Author } from "@/app/author/[slug]/page";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import imageUrlBuilder from "@sanity/image-url";
-import sanityClient from "@/sanity/client";
 import "swiper/css";
 import Link from "next/link";
+import client from "@/sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
 
 export default function BooksSwiper({ books }: { books: Author["books"] }) {
-  const client = sanityClient({ useCdn: true });
-
   const builder = imageUrlBuilder(client);
-
   return (
     <Swiper
       slidesPerView="auto"

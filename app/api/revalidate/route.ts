@@ -1,20 +1,31 @@
-import { NextRequest, NextResponse } from "next/server";
 import { revalidateTag } from "next/cache";
+import { type NextRequest, NextResponse } from "next/server";
+import { parseBody } from "next-sanity/webhook";
 
-export async function GET(request: NextRequest) {
-  const requestedTag = request.nextUrl.searchParams.get("tag");
-  const tag = process.env.VIDEOS_CACHE_TAG;
+export async function POST(req: NextRequest) {
+  try {
+    const { body, isValidSignature } = await parseBody<{
+      _type: string;
+      slug?: string | undefined;
+    }>(req, process.env.SANITY_HOOK_SECRET);
 
-  if (tag && requestedTag) {
-    if (tag === requestedTag) {
-      revalidateTag(tag);
-      return NextResponse.json({ revalidated: true, now: Date.now() });
-    } else {
-      console.error("Incorrect Tag Passed to search param");
-      return NextResponse.json({ revalidated: false, now: Date.now() });
+    if (!isValidSignature) {
+      return new Response("Invalid Signature", { status: 401 });
     }
-  } else {
-    console.error("Missing: ENV VAR or revalidation tag");
-    return NextResponse.json({ revalidated: false, now: Date.now() });
+
+    if (!body?._type) {
+      return new Response("Bad Request", { status: 400 });
+    }
+
+    revalidateTag(body._type);
+    return NextResponse.json({
+      status: 200,
+      revalidated: true,
+      now: Date.now(),
+      body,
+    });
+  } catch (error: any) {
+    console.error(error);
+    return new Response(error.message, { status: 500 });
   }
 }
