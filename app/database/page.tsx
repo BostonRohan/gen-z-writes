@@ -1,11 +1,9 @@
-import sanityClient from "@/sanity/client";
 import { q } from "groqd";
 import { notFound } from "next/navigation";
 import videoFragment from "@/utils/fragments/video";
 import VideoGrid from "@/components/VideoGrid";
 import Footer from "@/components/Footer";
-
-const client = sanityClient({ useCdn: true });
+import { sanityFetch } from "@/sanity/fetch";
 
 async function getVideos() {
   try {
@@ -14,7 +12,7 @@ async function getVideos() {
       .filter(`!(_id in path("drafts.**"))`)
       .order("_createdAt desc")
       .grab(videoFragment);
-    return schema.parse(await client.fetch(query));
+    return schema.parse(await sanityFetch({ query, tags: ["video"] }));
   } catch (err) {
     console.error("there was an error getting the videos err:", err);
     return notFound();

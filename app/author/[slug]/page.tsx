@@ -1,4 +1,3 @@
-import sanityClient from "@/sanity/client";
 import { q } from "groqd";
 import { notFound } from "next/navigation";
 import authorFragment from "@/utils/fragments/author";
@@ -20,6 +19,8 @@ import ShareButton from "@/components/global/ShareButton";
 import shortenDescription from "@/utils/shortenDescription";
 import TopHeader from "@/components/author/TopHeader";
 import Footer from "@/components/Footer";
+import { sanityFetch } from "@/sanity/fetch";
+import client from "@/sanity/client";
 
 const BooksSwiper = dynamic(() => import("@/components/swipers/Books"), {
   ssr: false,
@@ -42,8 +43,6 @@ const VideosSwiper = dynamic(() => import("@/components/swipers/Videos"), {
   ),
 });
 
-const client = sanityClient({ useCdn: true });
-
 const builder = imageUrlBuilder(client);
 
 const getAuthorBySlug = cache(async (slug: string) => {
@@ -54,7 +53,7 @@ const getAuthorBySlug = cache(async (slug: string) => {
       .filter(`!(_id in path("drafts.**"))`)
       .slice(0)
       .grab(authorFragment);
-    return schema.parse(await client.fetch(query));
+    return schema.parse(await sanityFetch({ query, tags: ["author"] }));
   } catch (err) {
     console.error(
       "there was an issue getting the data for the following author",
@@ -69,14 +68,13 @@ export type Author = Awaited<ReturnType<typeof getAuthorBySlug>>;
 
 export async function generateStaticParams() {
   try {
-    const client = sanityClient({ useCdn: false });
     const { query, schema } = q("*")
       .filterByType("author")
       .filter(`!(_id in path("drafts.**"))`)
       .grab({
         slug: q.slug("slug"),
       });
-    return schema.parse(await client.fetch(query));
+    return schema.parse(await sanityFetch({ query, tags: ["author"] }));
   } catch (err) {
     console.error(
       "there was an error getting the author slugs statically:",
