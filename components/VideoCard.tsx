@@ -8,6 +8,7 @@ import YoutubeThumbnail from "./YoutubeThumbnail";
 import imageUrlBuilder from "@sanity/image-url";
 import client from "@/sanity/client";
 import Image from "next/image";
+import classNames from "classnames";
 
 export type LoadImages = "eager" | "lazy";
 
@@ -81,12 +82,15 @@ const VideoCard = ({
             </p>
           </Link>
         </address>
-        <div className="flex gap-2 flex-wrap">
-          {video.tags.map((tag: string) => {
+        <div className="flex gap-2 sm:flex-nowrap flex-wrap last:truncate">
+          {video.tags.map((tag: string, i: number) => {
             const id = uuidv4();
             return (
               <span
-                className="p-2 bg-[#0749ac43] shrink-1 rounded-xl h-10 w-fit truncate text-base"
+                className={classNames(
+                  "p-2 bg-[#0749ac43] shrink-1 rounded-xl h-10 w-fit text-base",
+                  { truncate: i === video.tags.length - 1 }
+                )}
                 key={id}>
                 {tag}
               </span>
