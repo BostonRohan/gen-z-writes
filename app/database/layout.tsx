@@ -1,7 +1,7 @@
 import "../../global.css";
 import { inter } from "../fonts";
 import { Metadata } from "next";
-import { sharedOGImage } from "../layout";
+import sharedOGImage from "../../lib/sharedOg";
 
 const title = "Database";
 const description =

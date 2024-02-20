@@ -4,10 +4,7 @@ import Nav from "@/components/Nav";
 import NextAuthProvider from "@/components/global/NextAuthProvider";
 import { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
-
-export const sharedOGImage = {
-  images: ["/gen-z-writes-og.png"],
-};
+import sharedOGImage from "@/lib/sharedOg";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.projectgenzwrites.com/"),
@@ -63,9 +60,7 @@ export default async function RootLayout({
         />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="sitemap" href="/sitemap.xml" />
-        <NextAuthProvider>
-          <Nav />
-        </NextAuthProvider>
+        <NextAuthProvider>{/* <Nav /> */}</NextAuthProvider>
         {children}
         <Toaster />
         <Analytics />
