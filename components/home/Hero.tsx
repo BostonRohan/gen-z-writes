@@ -1,5 +1,4 @@
 import { bebasNeue } from "../../app/fonts";
-import Link from "next/link";
 import GradientButton from "../global/GradientButton";
 
 export default function Hero() {
@@ -17,8 +16,8 @@ export default function Hero() {
           Writes
         </h1>
         <p className="max-w-[600px] mx-auto font-semibold opacity-60 xs:text-3xl text-lg">
-          An inspirational database to create the next generation of literary
-          changemakers
+          An inspirational database to create the next generation of literary{" "}
+          <span className="type-nextGen" />
         </p>
       </header>
       <section className="w-full max-w-[450px] mx-auto flex flex-wrap text-center justify-center items-center font-semibold pt-4 gap-4">
