@@ -60,7 +60,9 @@ export default async function RootLayout({
         />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="sitemap" href="/sitemap.xml" />
-        <NextAuthProvider>{/* <Nav /> */}</NextAuthProvider>
+        <NextAuthProvider>
+          <Nav />
+        </NextAuthProvider>
         {children}
         <Toaster />
         <Analytics />
