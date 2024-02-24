@@ -3,7 +3,7 @@ import authOptions from "@/utils/auth/authOptions";
 import { Metadata, ResolvingMetadata } from "next";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
-import { sharedOGImage } from "../layout";
+import sharedOGImage from "../layout";
 
 const title = "Signup";
 const description =

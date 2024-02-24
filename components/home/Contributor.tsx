@@ -13,13 +13,15 @@ export default function Contributor({
 }) {
   return (
     <article className="flex flex-col items-center justify-center max-w-[175px] shrink-0 mx-4">
-      <Image
-        src={src}
-        width={175}
-        height={175}
-        alt={name}
-        className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover"
-      />
+      <div className="h-[175px] w-[175px] relative">
+        <Image
+          src={src}
+          fill
+          sizes="(min-width: 175px) 175px, 100vw"
+          className="object-cover rounded-full"
+          alt={name}
+        />
+      </div>
       <ConditionalLink href={href} target="_blank">
         <h3
           className={`text-lg text-center ${classNames({

@@ -3,7 +3,7 @@ import Philosophy from "@/components/home/Philosophy";
 import Contributors from "@/components/home/Contributors";
 import AuthorInterest from "@/components/home/AuthorInterest";
 import { Metadata } from "next";
-import { sharedOGImage } from "./layout";
+import sharedOGImage from "../lib/sharedOg";
 import FeaturedAuthor from "@/components/home/FeaturedAuthor";
 import Footer from "@/components/Footer";
 

@@ -1,10 +1,23 @@
 import { bebasNeue } from "@/app/fonts";
 import Contributor from "./Contributor";
-import Marquee from "react-fast-marquee";
+import dynamic from "next/dynamic";
+const Marquee = dynamic(() => import("react-fast-marquee"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center gap-4 overflow-hidden min-h-[219px]">
+      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
+      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
+      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
+      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
+      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
+      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
+    </div>
+  ),
+});
 
 export default function Contributors() {
   return (
-    <section className="pt-80">
+    <section className="pt-40">
       <h2
         className={`${bebasNeue.className} sm:text-[76px] sm:leading-none px-4 text-[16vw] leading-[16vw] text-center text-slate-200 mb-4`}>
         Contributors

@@ -1,11 +1,10 @@
 import { bebasNeue } from "../../app/fonts";
-import Link from "next/link";
 import GradientButton from "../global/GradientButton";
 
 export default function Hero() {
   return (
-    <>
-      <header className="pt-40 text-center text-slate-200 px-4">
+    <section className="mt-40 text-center text-slate-200 px-4">
+      <header>
         <h1
           className={`${bebasNeue.className} sm:text-9xl text-[20vw] xs:leading-none leading-[0.9]`}>
           <div className="whitespace-nowrap xs:leading-[80px] leading-none">
@@ -17,8 +16,8 @@ export default function Hero() {
           Writes
         </h1>
         <p className="max-w-[600px] mx-auto font-semibold opacity-60 xs:text-3xl text-lg">
-          An inspirational database to create the next generation of literary
-          changemakers
+          An inspirational database to create the next generation of literary{" "}
+          <span className="type-nextGen" />
         </p>
       </header>
       <section className="w-full max-w-[450px] mx-auto flex flex-wrap text-center justify-center items-center font-semibold pt-4 gap-4">
@@ -33,6 +32,6 @@ export default function Hero() {
           Join Newsletter
         </GradientButton>
       </section>
-    </>
+    </section>
   );
 }
