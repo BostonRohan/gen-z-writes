@@ -72,7 +72,7 @@ const Nav = () => {
             {pathname !== "/profile" && (
               <div className="sm:inline hidden">
                 {status === "loading" ? (
-                  <div className="bg-neutral-700 bg-opacity-40 w-10 p-2 h-10 animate-pulse rounded-full" />
+                  <div className="bg-neutral-700 bg-opacity-40 w-[85px] p-2 h-[36px] animate-pulse rounded-md" />
                 ) : (
                   <Link
                     onClick={() => setOpen(false)}
@@ -127,7 +127,7 @@ const Nav = () => {
           </Link>
           <div className="sm:hidden flex gap-4">
             {status === "loading" ? (
-              <div className="bg-neutral-700 bg-opacity-40 w-10 p-2 h-10 animate-pulse rounded-full" />
+              <div className="bg-neutral-700 bg-opacity-40 w-[85px] p-2 h-[36px] animate-pulse rounded-md" />
             ) : (
               <Link
                 href="/profile"

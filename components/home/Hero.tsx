@@ -3,8 +3,8 @@ import GradientButton from "../global/GradientButton";
 
 export default function Hero() {
   return (
-    <>
-      <header className="pt-40 text-center text-slate-200 px-4">
+    <section className="mt-40 text-center text-slate-200 px-4">
+      <header>
         <h1
           className={`${bebasNeue.className} sm:text-9xl text-[20vw] xs:leading-none leading-[0.9]`}>
           <div className="whitespace-nowrap xs:leading-[80px] leading-none">
@@ -32,6 +32,6 @@ export default function Hero() {
           Join Newsletter
         </GradientButton>
       </section>
-    </>
+    </section>
   );
 }
