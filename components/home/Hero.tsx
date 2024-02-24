@@ -27,9 +27,10 @@ export default function Hero() {
           View Database
         </GradientButton>
         <GradientButton
-          href="#newsletter"
+          targetBlank
+          href="https://discord.gg/arENz9gzuj"
           gradient="bg-gradient-to-r from-truePrimary to-slate-700">
-          Join Newsletter
+          Join Discord
         </GradientButton>
       </section>
     </section>

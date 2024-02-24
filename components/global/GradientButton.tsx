@@ -8,12 +8,14 @@ export default function GradientButton({
   children,
   scroll = true,
   textClassName,
+  targetBlank,
 }: {
   gradient: string;
   href: string;
   children: ReactNode;
   scroll?: boolean;
   textClassName?: string;
+  targetBlank?: boolean;
 }) {
   return (
     <div className="flex justify-center">
@@ -22,6 +24,7 @@ export default function GradientButton({
           className={`absolute -inset-0.5 blur group-hover:blur-xl opacity-75 transition duration-500 group-hover:duration-200 group-hover:opacity-100 will-change-filter overflow-hidden ${gradient}`}
         />
         <Link
+          target={targetBlank ? "_blank" : "_self"}
           scroll={scroll}
           href={href}
           role="button"
