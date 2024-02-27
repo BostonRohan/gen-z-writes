@@ -67,9 +67,7 @@ export async function generateMetadata({
     tags
   )} as the author shares expertise and insights. Gain valuable knowledge and creative inspiration from this engaging multimedia experience.`;
 
-  const images = [
-    { url: `https://img.youtube.com/vi/${youtubeId}/sddefault.jpg` },
-  ];
+  const images = [{ url: `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg` }];
 
   return {
     title,
