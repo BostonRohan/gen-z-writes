@@ -1,4 +1,4 @@
-name: Deploy DB Migrations to Staging
+name: 🛜 DB Migrations to Staging
 
 on:
   push:
