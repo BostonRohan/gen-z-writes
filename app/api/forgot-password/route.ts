@@ -9,6 +9,10 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   const { email } = await request.json();
+  let base_url =
+    process.env.NODE_ENV === "production"
+      ? "https://www.projectgenzwrites.com"
+      : process.env.VERCEL_URL;
 
   if (email) {
     try {
@@ -41,7 +45,7 @@ export async function POST(request: NextRequest) {
           reply_to: "noreply@projectgenzwrites.com",
           to: email,
           subject: "Gen Z Writes Password Reset",
-          html: `<a href=${`${process.env.VERCEL_URL}/forgot-password?token=${signedForgotPassword}`}>Click here to reset your password.</a>`,
+          html: `<a href=${`${base_url}/forgot-password?token=${signedForgotPassword}`}>Click here to reset your password.</a>`,
         }),
       });
 
@@ -51,7 +55,7 @@ export async function POST(request: NextRequest) {
       if ((err as any).meta.cause === "Record to update not found.") {
         return NextResponse.json(
           { data: "We could not find a user with that email." },
-          { status: 401 }
+          { status: 401 },
         );
       }
       console.error(err);
