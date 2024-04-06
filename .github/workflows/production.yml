@@ -18,6 +18,7 @@ jobs:
         name: 🏠 Setup pnpm
         with:
           run_install: false
+          version: latest
 
       - name: 📁 Get pnpm store directory
         shell: bash
