@@ -10,10 +10,27 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: preview
-
     steps:
       - name: 🏪 Checkout repo
         uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        name: 🏠 Setup pnpm
+        with:
+          run_install: false
+
+      - name: 📁 Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: 👷‍♂️ Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: 🖥️ Install dependencies
         run: pnpm install
