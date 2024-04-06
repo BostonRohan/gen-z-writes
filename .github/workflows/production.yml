@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: Production
     steps:
       - name: 🏪 Checkout repo
         uses: actions/checkout@v4
