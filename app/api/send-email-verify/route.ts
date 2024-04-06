@@ -8,6 +8,10 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   const { email } = await request.json();
+  let base_url =
+    process.env.NODE_ENV === "production"
+      ? "https://www.projectgenzwrites.com"
+      : process.env.VERCEL_URL;
 
   if (email && process.env.EMAIL_SECRET) {
     try {
@@ -26,16 +30,16 @@ export async function POST(request: NextRequest) {
           reply_to: "noreply@projectgenzwrites.com",
           to: user.email,
           subject: "Gen Z Writes Verify Email",
-          html: `<a href=${`${
-            process.env.VERCEL_URL
-          }/api/verify-email?eid=${await new jose.SignJWT({
-            data: email,
-          })
+          html: `<a href=${`${base_url}/api/verify-email?eid=${await new jose.SignJWT(
+            {
+              data: email,
+            },
+          )
             .setProtectedHeader({ alg: "HS256" })
             .setIssuedAt()
             .setExpirationTime("1h")
             .sign(
-              new TextEncoder().encode(process.env.EMAIL_SECRET)
+              new TextEncoder().encode(process.env.EMAIL_SECRET),
             )}`}>Click here to verify your email.</a>`,
         }),
       });

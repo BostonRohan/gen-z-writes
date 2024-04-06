@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { redirect } from "next/navigation";
