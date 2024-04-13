@@ -87,6 +87,8 @@ const video = {
         },
       ],
     },
+    { name: "views", type: "number", readOnly: true },
+    { name: "videoDuration", type: "number", readOnly: true },
   ],
 };
 
