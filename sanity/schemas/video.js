@@ -87,8 +87,8 @@ const video = {
         },
       ],
     },
-    { name: "views", type: "number", readOnly: true },
-    { name: "videoDuration", type: "number", readOnly: true },
+    { name: "views", type: "number", initialValue: 0, readOnly: true },
+    { name: "videoDuration", type: "number", readOnly: true, initialValue: 0 },
   ],
 };
 
