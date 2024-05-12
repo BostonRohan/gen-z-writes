@@ -33,7 +33,7 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@sanity/client':
-        specifier: ^6.7.0
+        specifier: 6.7.0
         version: 6.7.0
       '@sanity/image-url':
         specifier: ^1.0.2
@@ -5497,7 +5497,7 @@ snapshots:
 
   '@sanity/client@6.7.0':
     dependencies:
-      '@sanity/eventsource': 5.0.0
+      '@sanity/eventsource': 5.0.1
       get-it: 8.4.3
       rxjs: 7.8.1
     transitivePeerDependencies:
