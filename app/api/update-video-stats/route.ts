@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { getVideos } from "@/app/database/page";
+import getVideos from "@/utils/getVideos";
 import getYoutubeId from "@/utils/getYoutubeId";
 import client from "@/sanity/client";
 import moment from "moment";
