@@ -1,11 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { getVideos } from "@/app/database/page";
 import getYoutubeId from "@/utils/getYoutubeId";
 import client from "@/sanity/client";
 import moment from "moment";
 import "moment-duration-format";
 
-export async function GET(_request: NextRequest) {
+export async function GET(request: NextRequest) {
+  const authHeader = request.headers.get("authorization");
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new Response("Unauthorized", {
+      status: 401,
+    });
+  }
+
   if (process.env.YOUTUBE_API_KEY === undefined) {
     console.error("YOUTUBE_API_KEY is not set");
     throw new Error("Unauthorized");
@@ -51,5 +58,5 @@ export async function GET(_request: NextRequest) {
       );
     }
   }
-  return NextResponse.json({ success: true });
+  return Response.json({ success: true });
 }
