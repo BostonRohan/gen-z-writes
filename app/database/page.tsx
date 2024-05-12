@@ -5,7 +5,7 @@ import VideoGrid from "@/components/VideoGrid";
 import Footer from "@/components/Footer";
 import { sanityFetch } from "@/sanity/fetch";
 
-async function getVideos() {
+export async function getVideos() {
   try {
     const { query, schema } = q("*")
       .filterByType("video")
