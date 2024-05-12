@@ -89,17 +89,15 @@ const video = {
     },
     {
       name: "views",
-      type: "number",
-      initialValue: 0,
+      type: "string",
+      initialValue: "0",
       readOnly: true,
-      validation: (Rule) => Rule.min(0),
     },
     {
       name: "videoDuration",
-      type: "number",
-      initialValue: 0,
+      type: "string",
+      initialValue: "0:00",
       readOnly: true,
-      validation: (Rule) => Rule.min(0),
     },
   ],
 };
