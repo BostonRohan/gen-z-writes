@@ -38,3 +38,8 @@ next-env.d.ts
 
 # local scripts
 scripts
+
+# build files
+robots.txt
+sitemap.xml
+sitemap-0.xml
