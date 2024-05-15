@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import getVideos from "@/utils/getVideos";
 import getYoutubeId from "@/utils/getYoutubeId";
-import client from "@/sanity/client";
+import { client } from "@/sanity/client";
 import moment from "moment";
 import "moment-duration-format";
 

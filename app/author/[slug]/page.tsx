@@ -19,8 +19,7 @@ import ShareButton from "@/components/global/ShareButton";
 import shortenDescription from "@/utils/shortenDescription";
 import TopHeader from "@/components/author/TopHeader";
 import Footer from "@/components/Footer";
-import { sanityFetch } from "@/sanity/fetch";
-import client from "@/sanity/client";
+import { client, runQuery } from "@/sanity/client";
 
 const BooksSwiper = dynamic(() => import("@/components/swipers/Books"), {
   ssr: false,
@@ -47,18 +46,19 @@ const builder = imageUrlBuilder(client);
 
 const getAuthorBySlug = cache(async (slug: string) => {
   try {
-    const { query, schema } = q("*")
+    const query = q("*")
       .filterByType("author")
       .filter(`slug.current == "${slug}"`)
       .filter(`!(_id in path("drafts.**"))`)
       .slice(0)
       .grab(authorFragment);
-    return schema.parse(await sanityFetch({ query, tags: ["author"] }));
+
+    return await runQuery(query);
   } catch (err) {
     console.error(
       "there was an issue getting the data for the following author",
       `"${slug}"`,
-      { err }
+      { err },
     );
     return notFound();
   }
@@ -68,17 +68,18 @@ export type Author = Awaited<ReturnType<typeof getAuthorBySlug>>;
 
 export async function generateStaticParams() {
   try {
-    const { query, schema } = q("*")
+    const query = q("*")
       .filterByType("author")
       .filter(`!(_id in path("drafts.**"))`)
       .grab({
         slug: q.slug("slug"),
       });
-    return schema.parse(await sanityFetch({ query, tags: ["author"] }));
+
+    return await runQuery(query);
   } catch (err) {
     console.error(
       "there was an error getting the author slugs statically:",
-      err
+      err,
     );
     return [];
   }
@@ -90,7 +91,7 @@ type Props = {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   // read route params
   const slug = params.slug;

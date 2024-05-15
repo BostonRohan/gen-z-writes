@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import "swiper/css";
 import Link from "next/link";
-import client from "@/sanity/client";
+import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
 export default function BooksSwiper({ books }: { books: Author["books"] }) {
@@ -28,13 +28,15 @@ export default function BooksSwiper({ books }: { books: Author["books"] }) {
         450: {
           slidesPerView: "auto",
         },
-      }}>
+      }}
+    >
       {books!.map((book) => (
         <SwiperSlide key={book._key} className="max-w-[180px]">
           <Link
             href={book.url}
             target="_blank"
-            className="hover:scale-105 transition block">
+            className="hover:scale-105 transition block"
+          >
             <Image
               src={builder.image(book.cover).url()}
               alt={`${book.title} Cover`}

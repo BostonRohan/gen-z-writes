@@ -6,7 +6,7 @@ import getYoutubeId from "@/utils/getYoutubeId";
 import YoutubePlayer from "./Youtube";
 import YoutubeThumbnail from "./YoutubeThumbnail";
 import imageUrlBuilder from "@sanity/image-url";
-import client from "@/sanity/client";
+import {client} from "@/sanity/client";
 import Image from "next/image";
 import classNames from "classnames";
 

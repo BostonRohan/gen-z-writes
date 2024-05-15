@@ -1,5 +1,6 @@
 import { ClientConfig, createClient } from "next-sanity";
 import { apiVersion, dataset, projectId } from "./env";
+import { makeSafeQueryRunner } from "groqd";
 
 const config: ClientConfig = {
   projectId,
@@ -10,4 +11,8 @@ const config: ClientConfig = {
   token: process.env.SANITY_API_TOKEN,
 };
 
-export default createClient(config);
+const runQuery = makeSafeQueryRunner((query) => client.fetch(query));
+
+const client = createClient(config);
+
+export { client, runQuery, config };
