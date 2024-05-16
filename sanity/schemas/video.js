@@ -89,8 +89,8 @@ const video = {
     },
     {
       name: "views",
-      type: "string",
-      initialValue: "0",
+      type: "number",
+      initialValue: 0,
       readOnly: true,
     },
     {

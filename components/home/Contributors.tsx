@@ -17,9 +17,10 @@ const Marquee = dynamic(() => import("react-fast-marquee"), {
 
 export default function Contributors() {
   return (
-    <section className="pt-40">
+    <section>
       <h2
-        className={`${bebasNeue.className} sm:text-[76px] sm:leading-none px-4 text-[16vw] leading-[16vw] text-center text-slate-200 mb-4`}>
+        className={`${bebasNeue.className} sm:text-[76px] sm:leading-none px-4 text-[16vw] leading-[16vw] text-center text-slate-200 mb-4`}
+      >
         Contributors
       </h2>
       <div className="lg:hidden">
@@ -29,7 +30,8 @@ export default function Contributors() {
           autoFill
           gradient
           gradientColor="#1b1b1d"
-          className="max-w-4xl mx-auto flex gap-4">
+          className="max-w-4xl mx-auto flex gap-4"
+        >
           <Contributor name="Ruby Seidner" src="/ruby.webp" />
           <Contributor
             href="https://bostonrohan.com/"

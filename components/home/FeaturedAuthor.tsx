@@ -5,9 +5,10 @@ import Link from "next/link";
 
 export default function FeaturedAuthor() {
   return (
-    <section className="pt-40 text-slate-200 text-center px-4">
+    <section className="text-slate-200 text-center px-4">
       <h2
-        className={`xs:text-6xl xs:leading-[1] text-[15vw] leading-[15vw] ${bebasNeue.className}`}>
+        className={`xs:text-6xl xs:leading-[1] text-[15vw] leading-[15vw] ${bebasNeue.className}`}
+      >
         Featured Author
       </h2>
       <h3 className="text-3xl font-bold">Abigail Tarttelin</h3>
@@ -23,7 +24,8 @@ export default function FeaturedAuthor() {
       </div>
       <Link
         className="flex items-center justify-center gap-2 text-white text-lg font-semibold relative hover:text-slate-200"
-        href="author/abigail-tarttelin">
+        href="author/abigail-tarttelin"
+      >
         Learn More <ArrowRight width={18} height={18} />
       </Link>
     </section>

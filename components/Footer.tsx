@@ -3,14 +3,15 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="py-8 px-4 text-slate-200 max-w-7xl mx-auto">
+    <footer className="px-4 text-slate-200 max-w-7xl mx-auto">
       <div className="flex justify-between gap-4 xs:flex-row flex-col">
         <div className="flex flex-col w-full h-full gap-1">
           <h3 className="opacity-50 font-semibold">Project Gen Z Writes</h3>
           <Link
             target="_blank"
             className="p-1 rounded-md bg-black/10 hover:bg-black/30 h-8 w-8"
-            href="https://www.linkedin.com/company/projectgenzwrites/">
+            href="https://www.linkedin.com/company/projectgenzwrites/"
+          >
             <Linkedin />
           </Link>
         </div>
@@ -28,7 +29,8 @@ export default function Footer() {
             </Link>
             <Link
               className="opacity-70 hover:underline xs:whitespace-nowrap"
-              href="/signup">
+              href="/signup"
+            >
               Sign Up
             </Link>
           </div>
