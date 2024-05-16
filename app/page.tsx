@@ -31,13 +31,13 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   return (
-    <>
+    <div className="space-y-40 sm:pt-40 pt-20">
       <Hero />
       <FeaturedAuthor />
       <Philosophy />
       <Contributors />
       <AuthorInterest />
       <Footer />
-    </>
+    </div>
   );
 }

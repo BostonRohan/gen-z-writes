@@ -3,10 +3,11 @@ import GradientButton from "../global/GradientButton";
 
 export default function Hero() {
   return (
-    <section className="mt-40 text-center text-slate-200 px-4">
+    <section className="text-center text-slate-200 px-4">
       <header>
         <h1
-          className={`${bebasNeue.className} sm:text-9xl text-[20vw] xs:leading-none leading-[0.9]`}>
+          className={`${bebasNeue.className} sm:text-9xl text-[20vw] xs:leading-none leading-[0.9]`}
+        >
           <div className="whitespace-nowrap xs:leading-[80px] leading-none">
             Project{" "}
             <span className="gradient-text-animation whitespace-nowrap">
@@ -23,13 +24,15 @@ export default function Hero() {
       <section className="w-full max-w-[450px] mx-auto flex flex-wrap text-center justify-center items-center font-semibold pt-4 gap-4">
         <GradientButton
           href="/database"
-          gradient="bg-gradient-to-r from-truePrimary to-trueSecondary">
+          gradient="bg-gradient-to-r from-truePrimary to-trueSecondary"
+        >
           View Database
         </GradientButton>
         <GradientButton
           targetBlank
           href="https://discord.gg/arENz9gzuj"
-          gradient="bg-gradient-to-r from-truePrimary to-slate-700">
+          gradient="bg-gradient-to-r from-truePrimary to-slate-700"
+        >
           Join Discord
         </GradientButton>
       </section>
