@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
       await client
         .patch(video._id)
         .set({
-          views: statistics.viewCount,
+          views: parseInt(statistics.viewCount),
           videoDuration,
         })
         .commit();
