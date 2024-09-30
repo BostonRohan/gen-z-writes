@@ -1,9 +1,10 @@
 import { bebasNeue } from "@/app/fonts";
 import MacWindow from "./MacWindow";
+import Link from "next/link";
 
 export default function Philosophy() {
   return (
-    <section className="text-slate-200 text-center px-4 flex flex-col gap-24">
+    <section className="pt-40 text-slate-200 px-4 flex flex-col gap-24">
       <div className="flex flex-wrap justify-center gap-16">
         <article>
           <h2
@@ -11,17 +12,20 @@ export default function Philosophy() {
           >
             Our Philosophy
           </h2>
-          <p className="max-w-[650px] mx-auto opacity-80 sm:leading-9 sm:text-lg leading-8">
-            ProjectGenZWrites believes in the importance of storytelling in our
-            culture, and that in order for stories to continue in the modern
-            world, everyone needs to have access to high-quality writing advice
-            for no fee. ProjectGenZWrites is meant for anyone with a passion for
-            writing, no matter your skill level, race, gender, economic class,
-            or sexuality. This is a place for you to grow with the authors in
-            the videos and chart the creative path of your dreams.
+          <p className="max-w-[650px] mx-auto  sm:leading-9 sm:text-lg leading-8">
+            <span className="opacity-80">
+              ProjectGenZWrites is a fast-growing, youth-led, non-profit
+              database that educates the next generation of novelists, poets,
+              journalists, and creative visionaries.{" "}
+            </span>
+            <Link
+              href="/philosophy"
+              className="underline opacity-80 hover:opacity-100"
+            >
+              Read more...
+            </Link>
           </p>
         </article>
-        <MacWindow />
       </div>
     </section>
   );
