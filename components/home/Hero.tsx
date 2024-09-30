@@ -16,9 +16,10 @@ export default function Hero() {
           </div>
           Writes
         </h1>
-        <p className="max-w-[600px] mx-auto font-semibold opacity-60 xs:text-3xl text-lg">
-          An inspirational database to create the next generation of literary{" "}
-          <span className="type-nextGen" />
+        <p className="max-w-[600px] mx-auto font-semibold opacity-60 xs:text-2xl">
+          A creative writing education platform bridging the gap and empowering
+          the next generation of literary <span className="type-nextGen" />
+          through video content.
         </p>
       </header>
       <section className="w-full max-w-[450px] mx-auto flex flex-wrap text-center justify-center items-center font-semibold pt-4 gap-4">

@@ -59,6 +59,7 @@
     "formik": "^2.4.4",
     "framer-motion": "^10.16.4",
     "groqd": "^0.15.11",
+    "typescript": "^5",
     "groqd-playground": "^0.0.19",
     "hamburger-react": "^2.5.0",
     "lucide-react": "^0.378.0",
