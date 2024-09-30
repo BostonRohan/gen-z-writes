@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Philosophy() {
   return (
-    <section className="pt-40 text-slate-200 px-4 flex flex-col gap-24">
+    <section className="text-slate-200 px-4 flex flex-col gap-24">
       <div className="flex flex-wrap justify-center gap-16">
         <article>
           <h2
