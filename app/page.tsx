@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   return (
-    <div className="space-y-40 sm:pt-40 pt-20">
+    <div className="space-y-28 sm:pt-32 pt-20">
       <Hero />
       <FeaturedAuthor />
       <Philosophy />
