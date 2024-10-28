@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (body._type === "video") {
-      revalidateTag("/database");
+      revalidatePath("/database");
     }
 
     revalidateTag(body._type);
