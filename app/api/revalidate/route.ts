@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidateTag, revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { parseBody } from "next-sanity/webhook";
 
@@ -19,6 +19,10 @@ export async function POST(req: NextRequest) {
 
     if (body.slug) {
       revalidateTag(`${body._type}:${body.slug}`);
+    }
+
+    if (body._type === "video") {
+      revalidateTag("/database");
     }
 
     revalidateTag(body._type);
