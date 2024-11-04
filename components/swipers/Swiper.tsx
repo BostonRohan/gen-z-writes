@@ -27,6 +27,7 @@ interface SwiperProps {
   slidesOffsetAfter?: number;
   slidesOffsetBefore?: number;
   showArrows?: boolean;
+  id?: string;
 }
 
 const defaultBreakpoints: Breakpoints = {
@@ -49,6 +50,7 @@ export default function Swiper({
   slidesOffsetAfter = 16,
   slidesOffsetBefore = 16,
   showArrows = true,
+  id = "swiper",
 }: SwiperProps) {
   //generate unique id for key lengths
 
@@ -60,6 +62,7 @@ export default function Swiper({
   return (
     <div className="relative">
       <SwiperReact
+        id={id}
         modules={[Navigation]}
         slidesPerView="auto"
         className={className}
@@ -69,7 +72,10 @@ export default function Swiper({
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         breakpoints={breakpoints}
-        navigation={{ nextEl: ".arrow-right", prevEl: ".arrow-left" }}
+        navigation={{
+          nextEl: `.arrow-right-${id}`,
+          prevEl: `.arrow-left-${id}`,
+        }}
       >
         {slides.map(({ slide, id }) => (
           <SwiperSlide key={id}>{slide}</SwiperSlide>
@@ -77,10 +83,14 @@ export default function Swiper({
       </SwiperReact>
       {showArrows && (
         <>
-          <button className="arrow-left arrow top-[35%] rounded-full -ml-2 bg-muted-foreground/60 hover:bg-popover-foreground/70 p-1 absolute left-0 z-50 transition opacity-1 xs:block hidden">
+          <button
+            className={`arrow-left-${id} top-[35%] rounded-full -ml-2 bg-muted-foreground/60 hover:bg-popover-foreground/70 p-1 absolute left-0 z-50 transition opacity-1 xs:block hidden`}
+          >
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <button className="arrow-right arrow arrow top-[35%] rounded-full -mr-4 bg-muted-foreground/60 hover:bg-popover-foreground/70 p-1 absolute right-0 z-50 transition opacity-1 xs:block hidden">
+          <button
+            className={`arrow-right-${id} top-[35%] rounded-full -mr-4 bg-muted-foreground/60 hover:bg-popover-foreground/70 p-1 absolute right-0 z-50 transition opacity-1 xs:block hidden`}
+          >
             <ArrowRight className="w-5 h-5" />
           </button>
         </>

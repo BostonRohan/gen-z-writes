@@ -233,3 +233,299 @@ export const teenMagazines = [
     title: "Zaum at Sonoma State University",
   },
 ];
+
+export const writingContests = [
+  {
+    image:
+      "https://youngarts.org/wp-content/uploads/2021/06/youngarts-sharing-image.png",
+    description:
+      "For 15-18 year old visual, literary, or performing artists. Apply to the National Arts Competition with YoungArts. Get cash awards, mentorship, and more.",
+    link: "https://youngarts.org/apply/",
+    title: "Apply to the National Arts Competition | YoungArts",
+  },
+  {
+    image: null,
+    description: "Supporting the future of creativity since 1923",
+    link: "https://www.artandwriting.org/",
+    title: "Home | Scholastic Art and Writing Awards",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://www.nfsps.com/manningham.html",
+    title: "Manningham",
+  },
+  {
+    image:
+      "https://static01.nyt.com/images/2024/07/23/learning/23ContestCalendarTopArtLN/23ContestCalendarTopArtLN-facebookJumbo.png",
+    description:
+      "Ten challenges that invite teenagers to engage, experiment, reflect and create — via writing, photography, audio, video and more.",
+    link: "https://www.nytimes.com/2024/07/25/learning/our-2024-25-student-contest-calendar.html",
+    title: "Our 2024-25 Student Contest Calendar - The New York Times",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://www.jfklibrary.org/learn/education/profile-in-courage-essay-contest",
+    title: "Profile in Courage Essay Contest | JFK Library",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://poetrysociety.org.uk/competitions/foyle-young-poets-of-the-year-award/",
+    title: "Foyle Young Poets Award – The Poetry Society",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://www.bennington.edu/events/young-writers-awards",
+    title: "Young Writers Awards | Bennington College",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://www.johnlockeinstitute.com/essay-competition",
+    title: "2024 Essay Competition | John Locke Institute",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://www.nationalyouthfoundation.org/our-programs/",
+    title: "Our Programs - National Youth Foundation",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://afsa.org/rules-and-guidelines",
+    title: "Rules and Guidelines",
+  },
+  {
+    image:
+      "https://arts.princeton.edu/wp-content/themes/lca/static/img/lca_logo_big.png",
+    description:
+      "Princeton University hosts an annual Ten-Minute Play contest for high schoolers in eleventh grade in the U.S. or abroad.",
+    link: "https://arts.princeton.edu/about/opportunities/high-school-contests/ten-minute-play-contest/",
+    title: "Ten-Minute Play Contest - Lewis Center for the Arts",
+  },
+  {
+    image:
+      "https://www.hollins.edu/wp-content/uploads/2020/02/thorp_cropped.jpg",
+    description:
+      "Join a Rich Legacy of Writing Excellence Sponsored by Hollins University, the 61st Annual Nancy Thorp Poetry Contest provides scholarships, prizes, and recognition for the best poems submitted by young […]",
+    link: "https://www.hollins.edu/academics/pre-college-experiences-camps/nancy-thorp-poetry-contest/",
+    title: "Nancy Thorp Poetry Contest - Hollins University",
+  },
+  {
+    image:
+      "https://kenyonreview.org/wp-content/uploads/Grodd-2023-Email-1024x536.png",
+    description:
+      "About the Prize The Patricia Grodd Poetry Prize for Young Writers, created in 2007 to recognize outstanding young poets, is an annual contest for poets who are sophomores and juniors […]",
+    link: "https://kenyonreview.org/submit/patricia-grodd/",
+    title: "Patricia Grodd Poetry Prize for Young Writers",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://jasna.org/programs/essay-contest/",
+    title: "Essay Contest » JASNA",
+  },
+  {
+    image: "https://www.rattle.com/wp-content/uploads/2020/04/2020-RYPA-FB.jpg",
+    description:
+      "1) Poems may be submitted by the poet, or by the poet's parent/legal guardian, or teacher. Teachers may select at most five students per year and submit on their behalf (in a single submission), with",
+    link: "https://www.rattle.com/children/guidelines/",
+    title: "Rattle Young Poets Anthology Guidelines | Rattle: Poetry",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://blacklawrencepress.com/submissions-and-contests/the-black-river-chapbook-competition/",
+    title: "The Black River Chapbook Competition",
+  },
+  {
+    image: "https://www.engineergirl.org/images/logo.png",
+    description:
+      " Every year, EngineerGirl hosts a contest dealing with engineering and its impact on our world. The topic and detailed instructions for the contest are posted ...",
+    link: "https://www.engineergirl.org/128750/EngineerGirl-Writing-Contest",
+    title: "EngineerGirl  - EngineerGirl Writing Contest",
+  },
+  {
+    image: null,
+    description:
+      "Learn more about the NSHSS Creative Writing Scholarship 2020 including scholarship eligibility, award, and application requirements.",
+    link: "https://www.nshss.org/scholarships/s/nshss-creative-writing-scholarship/",
+    title:
+      "NSHSS Creative Writing Scholarship 2020 | National Society of High School Scholars",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://www.thewha.org/wha-awards/world-historian-student-essay-competition/",
+    title: "World History Association",
+  },
+  {
+    image: null,
+    description:
+      "Plays and musicals for schools, youth theatres, universities, community theatres, professional theatres for young audiences and more!",
+    link: "https://www.youthplays.com/submit_play.php",
+    title: "Submit a play | YouthPLAYS",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://www.writopialab.org/programs/specialty-programs/worldwide-plays-festival/the-competition",
+    title: "Writopia Lab - The Competition",
+  },
+  {
+    image:
+      "https://i0.wp.com/theadroitjournal.org/wp-content/uploads/2024/04/unnamed.png",
+    description: null,
+    link: "https://theadroitjournal.org/adroit-prizes/",
+    title: "The Adroit Prizes for Poetry & Prose - The Adroit Journal",
+  },
+  {
+    image:
+      "https://images.squarespace-cdn.com/content/v1/5ff8151f837e745dfac4a288/1669732592776-I4KEP88SP9C2M9CTNMGS/_EC23+-+Website+BG+Options.png?format=2500w",
+    description: null,
+    link: "https://www.essaycomp.org/?SQF_SOURCE=ref_org&SQF_MEDIUM=aff_refer&SQF_CAMPAIGN=NSC_partnerships_2024-07-01_indigo-research",
+    title: "THE HARVARD CRIMSON GLOBAL ESSAY COMPETITION",
+  },
+  {
+    image: null,
+    description: "Apply for a scholarship!",
+    link: "https://learnmore.scholarsapply.org/penguinrandomhouse/",
+    title: "Penguin Random House Creative Writing Awards",
+  },
+];
+
+export const writingCommunities = [
+  {
+    image: null,
+    description: null,
+    link: "https://www.writegirl.org/writegirl-club-house",
+    title: "WriteGirl ClubHouse",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://projectwritenow.org/pwnteen/real-voices-write-now/?gad_source=1&gclid=Cj0KCQjwyL24BhCtARIsALo0fSBkAIv3me9lgyjO2lCGeDfTLoUgfbO2aXN1v6WbqLy02SkENRl_OPEaAmiuEALw_wcB",
+    title: "Real Voices Write Now – pwn teen",
+  },
+  {
+    image:
+      "https://assets.readbrightly.com/wp-content/uploads/2015/05/great-websites-for-teen-writers-feat.jpg",
+    description:
+      "Rather than bombard teens with fancy pens and motivational reading, direct them to a comfort zone: the Internet. These sites are great resources for future storytellers.",
+    link: "https://www.readbrightly.com/6-great-websites-teen-writers/",
+    title: "6 Great Websites for Teen Writers | Brightly",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://www.teenwritersproject.org/#/",
+    title: "Teen Writers Project",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://heyyoungwriter.com/",
+    title: "HOME - Hey Young Writer",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://goteenwriters.com/",
+    title:
+      "Go Teen Writers | Honesty, encouragement, and community for writers",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://girlswritenow.org/",
+    title: "Girls Write Now",
+  },
+];
+
+export const writingPromptWebsites = [
+  {
+    image:
+      "https://wpvip.edutopia.org/wp-content/uploads/2024/08/062624_writingprompts_final_sm.jpg?w=2880&quality=85",
+    description:
+      "Across grade levels, engaging and creative writing prompts encourage kids to explore their opinions, reflect on experiences, and build strong arguments.",
+    link: "https://www.edutopia.org/article/54-excellent-low-stakes-writing-prompts?gad_source=1&gclid=Cj0KCQjwyL24BhCtARIsALo0fSClUhD2gB64V8i2GYNHM9bF3IFRJX8uQRNoBjlnBNSnnmC-ipfpJB4aAmt7EALw_wcB",
+    title: "54 Excellent, Low-Stakes Writing Prompts | Edutopia",
+  },
+  {
+    image: null,
+    description:
+      "The Time Is Now will send you a weekly writing prompt (we’ll send a poetry prompt, a fiction prompt, and a creative nonfiction prompt) every Friday to help you stay committed to your writing practice throughout the year. Whether you're looking for poetry prompts, fiction prompts, or creative nonfiction prompts, you can also browse the more than 1,800 writing prompts we've alredy posted.",
+    link: "https://www.pw.org/writing-prompts-signup?gad_source=1&gclid=Cj0KCQjwyL24BhCtARIsALo0fSAJcmSgWLsqSIWTq3YlXxxFg3X5mh2jmn5yJp5Gk5gV3M9WcgdcTloaAkG6EALw_wcB",
+    title: "The Time Is Now - Sign Up | Poets & Writers",
+  },
+  {
+    image:
+      "https://blog-cdn.reedsy.com/packs/static/og-image-3c7d1b813198444b6b80.jpg",
+    description:
+      "Browse through hundreds of creative writing prompts — and enter our free short story contest to WIN $250 and publication. Kickstart your writing now!",
+    link: "https://blog.reedsy.com/creative-writing-prompts/",
+    title: "1800+ Creative Writing Prompts To Inspire You Right Now",
+  },
+  {
+    image:
+      "https://www.writtenwordmedia.com/wp-content/uploads/2019/05/500-Writing-Prompts-0030-1.jpg",
+    description:
+      "Writing prompts are a great way to beat writer's block. Check out our easy-to-use list of 500 writing prompts, sorted by genre.",
+    link: "https://www.writtenwordmedia.com/500-writing-prompts-to-help-beat-writers-doubt/",
+    title:
+      "500 Writing Prompts to Help Beat Writer's Block - Written Word Media",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://shakeragalley.org/wp-content/uploads/2020/04/300-writing-prompts-for-kids-list.pdf",
+    title: "300 Writing Prompts for Kids PDF",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://www.writersdigest.com/prompts",
+    title: "writersdigest.com",
+  },
+  {
+    image: "https://www.servicescape.com/img/prompt/social.png",
+    description:
+      "Need fiction writing inspiration? The ServiceScape Writing Prompt Generator has hundreds of creative writing ideas. From Fantasy to Science Fiction to Horror to Romance, our free and easy-to-use writing prompt generator can get your gears turning for whatever fiction story you want to write.",
+    link: "https://www.servicescape.com/writing-prompt-generator",
+    title: "ServiceScape Writing Prompt Generator | 1,340 Fiction Story Ideas",
+  },
+  {
+    image:
+      "https://wpvip.edutopia.org/wp-content/uploads/2024/08/062624_writingprompts_final_sm.jpg?w=2880&quality=85",
+    description:
+      "Across grade levels, engaging and creative writing prompts encourage kids to explore their opinions, reflect on experiences, and build strong arguments.",
+    link: "https://www.edutopia.org/article/54-excellent-low-stakes-writing-prompts/",
+    title: "54 Excellent, Low-Stakes Writing Prompts | Edutopia",
+  },
+  {
+    image: null,
+    description: null,
+    link: "https://scriptwritersnetwork.com/creative-writing-challenge-2-3/?gad_source=1&gclid=Cj0KCQjwyL24BhCtARIsALo0fSBGhh4gh9r53q9xzbTNd9KjwCnm-Is3j9bULQmP5XcaxKGtiglZOvUaAnd2EALw_wcB",
+    title: "Creative Writing Challenge | Scriptwriters Network",
+  },
+  {
+    image:
+      "https://64.media.tumblr.com/c837792f6043259ee7d6fd1e46c31f3b/8546e6ffc73a2fd1-f6/s640x960/537ca76712f26f55dca08c4affadb8f612bd55ca.jpg",
+    description:
+      "See a recent post on Tumblr from @writing-prompt-s about writing prompts. Discover more posts about writing ideas, writing inspiration, writing exercise, prompts, romance prompts, writeblr, and writing prompts.",
+    link: "https://www.tumblr.com/tagged/writing%20prompts",
+    title: "writing prompts on Tumblr",
+  },
+  {
+    image:
+      "https://assets-homepages-learning.3plearning.net/wp-content/uploads/2020/11/writing-prompts.jpg",
+    description:
+      "These writing prompts will get your students' creative juices flowing in no time, and help them produce stories that are uniquely their own.",
+    link: "https://www.3plearning.com/blog/writing-prompts-for-kids/",
+    title: "100 Writing Prompts for Kids | Ideas To Keep Student Pens Moving",
+  },
+];
