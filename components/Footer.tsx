@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="px-4 max-w-7xl pb-4 mx-auto">
+    <footer className="px-3 max-w-7xl pb-4 mx-auto">
       <div className="flex justify-between gap-4 xs:flex-row flex-col">
         <div className="flex flex-col w-full h-full gap-1">
           <h3 className="font-semibold">Project Gen Z Writes</h3>
@@ -19,10 +19,17 @@ export default function Footer() {
           <div className="flex flex-col">
             <h3 className="font-semibold">Content</h3>
             <Link
-              className="hover:underline text-muted-foreground"
+              className="hover:underline group text-muted-foreground"
               href="/database"
             >
               Database
+            </Link>
+            <Link
+              className="group text-muted-foreground flex gap-1 items-center"
+              href="/resources"
+            >
+              <span className="group-hover:underline">Resources</span>
+              <span className="text-xs text-brandSecondary">New</span>
             </Link>
           </div>
           {/*   <div className="flex flex-col"> */}
