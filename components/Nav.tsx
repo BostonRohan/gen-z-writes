@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { DatabaseIcon } from "lucide-react";
+import { DatabaseIcon, LibraryBigIcon } from "lucide-react";
 // import ProfileImage from "./profile/ProfileImage";
 // import { useSession } from "next-auth/react";
 import Hamburger from "hamburger-react";
@@ -59,15 +59,28 @@ const Nav = () => {
             >
               Project Gen Z Writes
             </Link>
-            <Link
-              onClick={() => setOpen(false)}
-              aria-label="Database"
-              href="/database"
-              className="items-center gap-2 mr-auto hover:bg-neutral-700/30 p-1.5 rounded-md sm:flex hidden"
-            >
-              <DatabaseIcon />
-              Database
-            </Link>
+            <div className="mr-auto flex gap-1">
+              <Link
+                onClick={() => setOpen(false)}
+                aria-label="Database"
+                href="/database"
+                className="items-center gap-2 hover:bg-neutral-700/30 p-1.5 rounded-md sm:flex hidden"
+              >
+                <DatabaseIcon />
+                Database
+              </Link>
+              <Link
+                onClick={() => setOpen(false)}
+                href="/resources"
+                className="sm:inline-flex hidden group"
+              >
+                <div className="items-center gap-2 mr-auto group-hover:bg-neutral-700/30 p-1.5 rounded-md flex">
+                  <LibraryBigIcon />
+                  Resources
+                </div>
+                <span className="text-xs text-brandSecondary pl-1">New</span>
+              </Link>
+            </div>
             {/* {pathname !== "/profile" && ( */}
             {/*   <div className="sm:inline hidden"> */}
             {/*     {status === "loading" ? ( */}
@@ -114,6 +127,17 @@ const Nav = () => {
           >
             <DatabaseIcon />
             Database
+          </Link>
+          <Link
+            onClick={() => setOpen(false)}
+            href="/resources"
+            className="sm:hidden inline-flex group w-fit"
+          >
+            <div className="items-center gap-2 mr-auto group-hover:bg-neutral-700/30 p-1.5 rounded-md flex">
+              <LibraryBigIcon />
+              Resources
+            </div>
+            <span className="text-xs text-brandSecondary pl-1">New</span>
           </Link>
           {/* <div className="sm:hidden flex gap-4"> */}
           {/*   {status === "loading" ? ( */}
