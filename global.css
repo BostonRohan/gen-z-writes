@@ -134,4 +134,11 @@
       width: 100%;
     }
   }
+
+  /* Swiper */
+  .swiper-button-disabled {
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+  }
 }

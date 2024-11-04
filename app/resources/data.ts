@@ -37,16 +37,17 @@ export const teenMagazines = [
     title: "Seesaw Lit",
   },
   {
-    image: null,
+    image:
+      "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=945,h=922,fit=crop/Yg295E8P0ncalnWg/saam-1983.95.76_1-mxB78yJr41SQ4v6G.jpg",
     description: null,
     link: "https://sturgeonmoonreview.com/",
-    title: "home",
+    title: "Sturgeon Moon Review",
   },
   {
     image: null,
     description: null,
     link: "https://coterieyouthmental.wixsite.com/literarymagazine/issues",
-    title: "Issues | My Site",
+    title: "THE Coterie",
   },
   {
     image:
@@ -65,10 +66,11 @@ export const teenMagazines = [
     title: "Teen Comedy Magazine | The Milking Cat",
   },
   {
-    image: null,
+    image:
+      "https://images.squarespace-cdn.com/content/v1/5f402a9d4e121b7f850b4374/1598041921654-PO0T7240CYG66I5YPNZN/YVG_2545.jpg?format=1000w",
     description: null,
     link: "https://assembly.malala.org/submit",
-    title: "400 Bad Request",
+    title: "Assembly",
   },
   {
     image: null,
@@ -178,14 +180,15 @@ export const teenMagazines = [
   {
     image: null,
     description: null,
-    link: "https://curieuxjournal.wordpress.com/",
-    title: "Page not found – Curieux Academic Journal",
+    link: "https://www.curieuxacademicjournal.com/",
+    title: "Curieux Academic Journal",
   },
   {
-    image: null,
+    image:
+      "https://bluemarblereview.com/wp-content/uploads/2024/08/20240223_This_Golden_Age-1.jpg",
     description: null,
     link: "https://bluemarblereview.com/",
-    title: "403 Forbidden",
+    title: "Blue Marble Review",
   },
   {
     image:

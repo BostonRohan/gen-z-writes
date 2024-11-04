@@ -45,6 +45,8 @@ const nextConfig = {
       { protocol: "https", hostname: "zaum.sonoma.edu" },
       { protocol: "https", hostname: "framerusercontent.com" },
       { protocol: "https", hostname: "149444733.v2.pressablecdn.com" },
+      { protocol: "https", hostname: "assets.zyrosite.com" },
+      { protocol: "https", hostname: "images.squarespace-cdn.com" },
     ],
   },
   async redirects() {
