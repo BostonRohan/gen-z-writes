@@ -162,7 +162,7 @@ export default async function Page({ params }: Props) {
         description={shareText}
         slug={params.slug}
       />
-      <div className="text-slate-200 mb-10">
+      <div className="mb-10">
         <section className="sm:mt-36 mt-20 max-w-4xl mx-auto">
           <div className="px-4">
             <div className="space-y-4">
@@ -187,7 +187,7 @@ export default async function Page({ params }: Props) {
                         <TooltipTrigger>
                           <Link href={author.socials.website} target="_blank">
                             <div className="flex flex-col items-center">
-                              <ExternalLinkIcon className="text-white hover:bg-slate-200 hover:bg-opacity-30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
+                              <ExternalLinkIcon className="hover:bg-neutral-600/30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
                               <span className="text-xs">Website</span>
                             </div>
                           </Link>
@@ -202,7 +202,7 @@ export default async function Page({ params }: Props) {
                         <TooltipTrigger>
                           <Link href={author.socials.instagram} target="_blank">
                             <div className="flex flex-col items-center">
-                              <InstagramIcon className="text-white hover:bg-slate-200 hover:bg-opacity-30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
+                              <InstagramIcon className="hover:bg-neutral-600/30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
                               <span className="text-xs">Instagram</span>
                             </div>
                           </Link>
@@ -230,7 +230,7 @@ export default async function Page({ params }: Props) {
               <h2 className="sm:text-[28px] xs:text-2xl text-xl mb-2 font-medium">
                 About
               </h2>
-              <div className="space-y-4 leading-8">
+              <div className="space-y-4 leading-10 text-muted-foreground">
                 {author.bio && (
                   <PortableText value={author.bio} components={components} />
                 )}

@@ -4,13 +4,13 @@ export default function Philosophy() {
   return (
     <main className="py-10 px-4 mx-auto max-w-3xl">
       <h1
-        className={`${bebasNeue.className} sm:text-[76px] gradient-text-animation sm:leading-none text-[16vw] leading-[16vw]`}
+        className={`${bebasNeue.className} sm:text-[76px] sm:leading-none text-[16vw] leading-[16vw]`}
       >
         Our Philosophy
       </h1>
       <p className="leading-10 text-white">
         ProjectGenZWrites{" "}
-        <span className="opacity-80">
+        <span className="text-muted-foreground">
           is a fast-growing, youth-led, non-profit database that educates the
           next generation of novelists, poets, journalists, and creative
           visionaries. We believe in the power of communal nurturing and

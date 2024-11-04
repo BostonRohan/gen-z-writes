@@ -19,7 +19,7 @@ export default function Contributors() {
   return (
     <section>
       <h2
-        className={`${bebasNeue.className} sm:text-[76px] sm:leading-none px-4 text-[16vw] leading-[16vw] text-center text-slate-200 mb-4`}
+        className={`${bebasNeue.className} sm:text-[76px] sm:leading-none px-4 text-[16vw] leading-[16vw] text-center mb-4`}
       >
         Contributors
       </h2>
@@ -28,8 +28,6 @@ export default function Contributors() {
           pauseOnClick
           pauseOnHover
           autoFill
-          gradient
-          gradientColor="#1b1b1d"
           className="max-w-4xl mx-auto flex gap-4"
         >
           <Contributor name="Ruby Seidner" src="/ruby.webp" />

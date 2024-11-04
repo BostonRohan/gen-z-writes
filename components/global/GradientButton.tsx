@@ -9,6 +9,7 @@ export default function GradientButton({
   scroll = true,
   textClassName,
   targetBlank,
+  hoverGrow = true,
 }: {
   gradient: string;
   href: string;
@@ -16,6 +17,7 @@ export default function GradientButton({
   scroll?: boolean;
   textClassName?: string;
   targetBlank?: boolean;
+  hoverGrow?: boolean;
 }) {
   return (
     <div className="flex justify-center">
@@ -28,12 +30,15 @@ export default function GradientButton({
           scroll={scroll}
           href={href}
           role="button"
-          className="relative block group-hover:scale-105 duration-500 group-hover:duration-200">
+          className={classNames(
+            "relative block duration-500 group-hover:duration-200",
+            { "group-hover:scale-105": hoverGrow },
+          )}
+        >
           <span
-            className={`block p-2 min-w-[134px] inset-0.5 rounded-lg ${gradient}`}>
-            <span className={`text-slate-200 ${classNames(textClassName)}`}>
-              {children}
-            </span>
+            className={`block p-2 min-w-[134px] inset-0.5 rounded-lg ${gradient}`}
+          >
+            <span className={classNames(textClassName)}>{children}</span>
           </span>
         </Link>
       </div>

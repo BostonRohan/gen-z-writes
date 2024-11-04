@@ -41,8 +41,9 @@ export default function TopHeader({
     <header
       className={classNames(
         "fixed top-0 h-20 bg-gradient-to-b z-10 from-neutral-500/80 text-white to-background-primary/80 w-full flex items-center transition-all ease-in-out duration-200",
-        { "opacity-0 !h-0": !showHeader }
-      )}>
+        { "opacity-0 !h-0": !showHeader },
+      )}
+    >
       <div className="px-4 flex justify-between w-full max-w-[800px] mx-auto">
         <div className="flex gap-2 items-center">
           {src && (
@@ -55,7 +56,7 @@ export default function TopHeader({
               />
             </div>
           )}
-          <h2 className="text-slate-200 font-semibold">{name}</h2>
+          <h2 className="font-semibold">{name}</h2>
         </div>
         <ShareButton title={name} text={description} slug={slug} />
       </div>
