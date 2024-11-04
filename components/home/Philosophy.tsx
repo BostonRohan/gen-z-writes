@@ -1,10 +1,9 @@
 import { bebasNeue } from "@/app/fonts";
-import MacWindow from "./MacWindow";
 import Link from "next/link";
 
 export default function Philosophy() {
   return (
-    <section className="text-slate-200 px-4 flex flex-col gap-24">
+    <section className=" px-4 flex flex-col gap-24">
       <div className="flex flex-wrap justify-center gap-16">
         <article>
           <h2

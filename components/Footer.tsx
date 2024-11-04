@@ -3,44 +3,53 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="px-4 text-slate-200 max-w-7xl mx-auto">
+    <footer className="px-4 max-w-7xl pb-4 mx-auto">
       <div className="flex justify-between gap-4 xs:flex-row flex-col">
         <div className="flex flex-col w-full h-full gap-1">
-          <h3 className="opacity-50 font-semibold">Project Gen Z Writes</h3>
+          <h3 className="font-semibold">Project Gen Z Writes</h3>
           <Link
             target="_blank"
-            className="p-1 rounded-md bg-black/10 hover:bg-black/30 h-8 w-8"
+            className="p-1 rounded-md h-8 w-8"
             href="https://www.linkedin.com/company/projectgenzwrites/"
           >
-            <Linkedin />
+            <Linkedin className="hover:text-brandPrimary" />
           </Link>
         </div>
-        <div className="flex xs:gap-12 gap-6 flex-row opacity-80">
+        <div className="flex xs:gap-12 gap-6 flex-row">
           <div className="flex flex-col">
             <h3 className="font-semibold">Content</h3>
-            <Link className="opacity-70 hover:underline" href="/database">
+            <Link
+              className="hover:underline text-muted-foreground"
+              href="/database"
+            >
               Database
             </Link>
           </div>
-          <div className="flex flex-col">
-            <h3 className="font-semibold">Profile</h3>
-            <Link className="opacity-70 hover:underline" href="/login">
-              Login
-            </Link>
-            <Link
-              className="opacity-70 hover:underline xs:whitespace-nowrap"
-              href="/signup"
-            >
-              Sign Up
-            </Link>
-          </div>
+          {/*   <div className="flex flex-col"> */}
+          {/*     <h3 className="font-semibold">Profile</h3> */}
+          {/*     <Link className="hover:underline" href="/login"> */}
+          {/*       Login */}
+          {/*     </Link> */}
+          {/*     <Link */}
+          {/*       className="hover:underline xs:whitespace-nowrap" */}
+          {/*       href="/signup" */}
+          {/*     > */}
+          {/*       Sign Up */}
+          {/*     </Link> */}
+          {/*   </div> */}
         </div>
       </div>
-      <div className="flex mt-4 gap-2 opacity-60 text-sm">
-        <Link className="hover:underline" href="/privacy-policy">
+      <div className="flex mt-4 gap-2 text-sm">
+        <Link
+          className="hover:underline text-muted-foreground"
+          href="/privacy-policy"
+        >
           Privacy Policy
         </Link>
-        <Link className="hover:underline" href="/terms-of-service">
+        <Link
+          className="hover:underline text-muted-foreground"
+          href="/terms-of-service"
+        >
           Terms Of Service
         </Link>
       </div>

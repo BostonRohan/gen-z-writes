@@ -36,17 +36,11 @@ const Nav = () => {
   return (
     <>
       <nav
-        className={classNames(
-          "z-20 font-semibold w-full top-0 text-slate-200 h-14",
-          { sticky: pathname.split("/")[1] !== "author" },
-        )}
+        className={classNames("z-20 font-semibold w-full top-0 h-14", {
+          sticky: pathname.split("/")[1] !== "author",
+        })}
       >
-        <div
-          className={classNames(
-            "w-full bg-background-primary/95 transition-all p-1 h-full mx-auto text-slate-200 flex items-center",
-            { "backdrop-blur-md bg-background-primary/70 ": !isOpen },
-          )}
-        >
+        <div className="w-full bg-background/85 transition-all backdrop-blur-sm p-1 h-full mx-auto flex items-center">
           <div
             className={classNames(
               "max-w-4xl",
@@ -105,13 +99,13 @@ const Nav = () => {
       </nav>
       <div
         className={classNames(
-          "transition-all hidden font-semibold bg-background-primary/95 backdrop-blur-sm",
+          "transition-all hidden font-semibold bg-background/80 backdrop-blur-sm",
           {
-            "h-screen w-screen z-20 !inline text-slate-200 fixed": isOpen,
+            "h-screen w-screen z-20 !inline fixed": isOpen,
           },
         )}
       >
-        <div className="px-4 flex gap-4 flex-col">
+        <div className="px-4 flex gap-4 flex-col pt-4">
           <Link
             onClick={() => setOpen(false)}
             aria-label="Database"

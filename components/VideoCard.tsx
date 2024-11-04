@@ -6,7 +6,7 @@ import getYoutubeId from "@/utils/getYoutubeId";
 import YoutubePlayer from "./Youtube";
 import YoutubeThumbnail from "./YoutubeThumbnail";
 import imageUrlBuilder from "@sanity/image-url";
-import {client} from "@/sanity/client";
+import { client } from "@/sanity/client";
 import Image from "next/image";
 import classNames from "classnames";
 
@@ -39,7 +39,8 @@ const VideoCard = ({
   return (
     <article
       key={video._id}
-      className={`md:my-8 my-12 shrink-0 w-full capitalize h-full max-w-[450px] text-white ${cardClassName}`}>
+      className={`md:my-8 my-12 shrink-0 w-full capitalize h-full max-w-[450px] text-white ${cardClassName}`}
+    >
       <h1 className="font-bold mb-4 truncate text-2xl">{video.title}</h1>
       {showVideo ? (
         <YoutubePlayer
@@ -63,7 +64,7 @@ const VideoCard = ({
           )}
         </Link>
       )}
-      <section className="flex justify-between flex-wra lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
+      <section className="flex justify-between flex-wrap lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
         <address className="author flex gap-2 items-center my-auto">
           <Link href={`/author/${video.author.slug}`} className="flex gap-2">
             {video.author?.image && (
@@ -77,7 +78,8 @@ const VideoCard = ({
               </div>
             )}
             <p
-              className={`${poppins.className} truncate opacity-80 hover:underline text-lg`}>
+              className={`${poppins.className} truncate text-muted-foreground hover:underline text-lg`}
+            >
               {video.author.name}
             </p>
           </Link>
@@ -88,10 +90,11 @@ const VideoCard = ({
             return (
               <span
                 className={classNames(
-                  "p-2 bg-[#0749ac43] shrink-1 rounded-xl h-10 w-fit text-base",
-                  { truncate: i === video.tags.length - 1 }
+                  "p-1.5 bg-brandSecondary shrink-1 rounded-xl w-fit text-sm",
+                  { truncate: i === video.tags.length - 1 },
                 )}
-                key={id}>
+                key={id}
+              >
                 {tag}
               </span>
             );
