@@ -9,7 +9,7 @@ export default async function Page() {
     <div className="scroll-mt-24">
       <div className="w-full px-4">
         <div className="max-w-4xl gap-2 text-sm mt-6 rounded-lg mx-auto p-4 bg-accent/60 flex xs:flex-row flex-col items-center justify-between">
-          Interested in being apart of the database?
+          Are you an author interested in being apart of the database?
           <Link
             role="button"
             href="/submit-video"

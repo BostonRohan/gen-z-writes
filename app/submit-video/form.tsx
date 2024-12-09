@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import FileDropzone from "@/components/FileDropzone";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -90,6 +91,7 @@ export default function SubmitVideoForm() {
             </FormItem>
           )}
         />
+        <FileDropzone />
         <Button type="submit">Submit</Button>
       </form>
     </Form>
