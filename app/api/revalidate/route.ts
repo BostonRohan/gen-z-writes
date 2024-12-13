@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   try {
     const { body, isValidSignature } = await parseBody<{
       _type: string;
-      slug?: string | undefined;
+      path?: string | undefined;
     }>(req, process.env.SANITY_HOOK_SECRET);
 
     if (!isValidSignature) {
@@ -17,11 +17,10 @@ export async function POST(req: NextRequest) {
       return new Response("Bad Request", { status: 400 });
     }
 
-    if (body.slug) {
-      console.log(`revalidating tag: ${body._type}:${body.slug}`);
-      revalidateTag(`${body._type}:${body.slug}`);
+    if (body.path) {
+      console.log(`revalidating tag: ${body._type}:${body.path}`);
+      revalidateTag(`${body._type}:${body.path}`);
     }
-
     console.log(`revalidating tag: ${body._type}`);
 
     revalidateTag(body._type);
