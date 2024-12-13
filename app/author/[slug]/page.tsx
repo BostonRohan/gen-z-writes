@@ -53,7 +53,7 @@ const getAuthorBySlug = cache(async (slug: string) => {
       .slice(0)
       .grab(authorFragment);
 
-    return await runQuery(query);
+    return await runQuery(query, ["author", "video"]);
   } catch (err) {
     console.error(
       "there was an issue getting the data for the following author",
