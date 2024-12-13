@@ -16,7 +16,7 @@ const getVideoBySlug = cache(async (slug: string) => {
       .slice(0)
       .grab(videoFragment);
 
-    return await runQuery(query);
+    return await runQuery(query, [`video:${slug}`]);
   } catch (err) {
     console.error(
       "there was an issue getting the data for the following video",
