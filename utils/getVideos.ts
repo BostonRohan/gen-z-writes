@@ -11,7 +11,7 @@ export default async function getVideos() {
       .order("_createdAt desc")
       .grab(videoFragment);
 
-    return await runQuery(query);
+    return await runQuery(query, ["video"]);
   } catch (err) {
     console.error("there was an error getting the videos err:", err);
     return notFound();

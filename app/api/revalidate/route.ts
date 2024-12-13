@@ -1,4 +1,4 @@
-import { revalidateTag, revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { parseBody } from "next-sanity/webhook";
 
@@ -21,10 +21,6 @@ export async function POST(req: NextRequest) {
       revalidateTag(`${body._type}:${body.slug}`);
     }
 
-    if (body._type === "video") {
-      revalidatePath("/database");
-    }
-
     revalidateTag(body._type);
     return NextResponse.json({
       status: 200,
@@ -32,8 +28,12 @@ export async function POST(req: NextRequest) {
       now: Date.now(),
       body,
     });
-  } catch (error: any) {
-    console.error(error);
-    return new Response(error.message, { status: 500 });
+  } catch (error) {
+    if (error instanceof Error) {
+      return new Response(error.message, { status: 500 });
+    }
+    return new Response("An unknown error occured revalidating", {
+      status: 500,
+    });
   }
 }
