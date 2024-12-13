@@ -18,8 +18,11 @@ export async function POST(req: NextRequest) {
     }
 
     if (body.slug) {
+      console.log(`revalidating tag: ${body._type}:${body.slug}`);
       revalidateTag(`${body._type}:${body.slug}`);
     }
+
+    console.log(`revalidating tag: ${body._type}`);
 
     revalidateTag(body._type);
     return NextResponse.json({
