@@ -16,15 +16,6 @@ export async function POST(req: NextRequest) {
       return new Response("Invalid Signature", { status: 401 });
     }
 
-    const { isValidSignature, body } = await parseBody<WebhookPayload>(
-      req,
-      process.env.SANITY_REVALIDATE_SECRET,
-    );
-
-    if (!isValidSignature) {
-      return new Response("Invalid Signature", { status: 401 });
-    }
-
     if (!body?._type) {
       return new Response("Bad Request", { status: 400 });
     }
