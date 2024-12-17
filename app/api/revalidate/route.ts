@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const { body, isValidSignature } = await parseBody<{
       _type: string;
-      slug: Slug;
+      slug?: Slug;
     }>(req, process.env.SANITY_HOOK_SECRET);
 
     console.log({ body });
@@ -21,7 +21,9 @@ export async function POST(req: NextRequest) {
     }
 
     if (body.slug) {
-      console.log(`revalidating tag: ${body._type}:${body.slug.current}`);
+      console.log(
+        `revalidating dynamic tag: ${body._type}:${body.slug.current}`,
+      );
 
       revalidateTag(`${body._type}:${body.slug.current}`);
     }
