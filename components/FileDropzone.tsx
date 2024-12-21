@@ -1,25 +1,56 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import { useCallback, useState, SetStateAction, Dispatch } from "react";
+import { FileRejection, useDropzone } from "react-dropzone";
+import { Input } from "@/components/ui/input";
 
-function FileDropzone() {
+interface FileDropzoneProps {
+  setFile: Dispatch<SetStateAction<File | null>>;
+}
+
+function FileDropzone({ setFile }: FileDropzoneProps) {
+  const MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024; //2GB;
+
   const [error, setError] = useState<string>();
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles.length > 1) {
-      setError("You may only submit on video at a time");
-    }
+  const onDropAccepted = useCallback(
+    (acceptedFiles: File[]) => {
+      setFile(acceptedFiles[0]);
+    },
+    [setFile],
+  );
 
-    console.log(acceptedFiles);
+  const onDropRejected = useCallback(
+    (rejections: FileRejection[]) => {
+      const errors = rejections
+        .map((rejection) => rejection.errors)
+        .flat()
+        .map((error) => error.message)
+        .join(", ");
 
-    //TODO: validate file type of video
-    //
-    //TODO: limit file size
-    //
-    //TODO: upload to cloud storage
-    //https://www.cloudflare.com/developer-platform/products/r2/
+      setError(errors);
+    },
+    [setError],
+  );
+
+  const onError = useCallback((error: Error) => {
+    //TODO: sentry
+    console.error(error);
+
+    setError("An error occurred while uploading the file. Please try again.");
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDropRejected,
+    onDropAccepted,
+    onError,
+    accept: {
+      "video/quicktime": [".mov"],
+      "video/mp4": [".mp4"],
+      "video/webm": [".webm"],
+    },
+    maxSize: MAX_FILE_SIZE,
+    maxFiles: 1,
+  });
 
   return (
     <div className="space-y-2">
@@ -27,14 +58,19 @@ function FileDropzone() {
         className="flex justify-center items-center w-full h-32 border-dashed hover:border-muted-foreground border-2 rounded-lg hover:bg-accent hover:text-accent-foreground transition-all select-none cursor-pointer"
         {...getRootProps()}
       >
-        <input {...getInputProps()} />
+        <Input {...getInputProps()} />
         {isDragActive ? (
           <p>Drop the video here</p>
         ) : (
-          <p>Drag &apos;n&apos; drop video here, or click to select video</p>
+          <div className="flex flex-col text-center">
+            <p>Drag &apos;n&apos; drop video here, or click to select video</p>
+            <p className="text-sm text-muted-foreground">
+              2GB limit (mov, mp4, webm)
+            </p>
+          </div>
         )}
       </div>
-      {!!error && <p className="text-red-300 text-sm">{error}</p>}
+      {!!error && <p className="text-destructive text-sm">{error}</p>}
     </div>
   );
 }

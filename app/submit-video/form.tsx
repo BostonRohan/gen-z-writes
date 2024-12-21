@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FileDropzone from "@/components/FileDropzone";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -30,6 +31,8 @@ const formSchema = z.object({
 });
 
 export default function SubmitVideoForm() {
+  const [file, setFile] = useState<File | null>(null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,8 +42,8 @@ export default function SubmitVideoForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function onSubmit(formValues: z.infer<typeof formSchema>) {
+    console.log({ formValues, file });
   }
 
   return (
@@ -91,7 +94,7 @@ export default function SubmitVideoForm() {
             </FormItem>
           )}
         />
-        <FileDropzone />
+        <FileDropzone setFile={setFile} />
         <Button type="submit">Submit</Button>
       </form>
     </Form>
