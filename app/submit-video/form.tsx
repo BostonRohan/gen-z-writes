@@ -55,9 +55,9 @@ export default function SubmitVideoForm() {
 
       const newFileName = `${formValues.first_name}-${formValues.last_name}-${Date.now()}`;
 
-      const preSignedURLResponse = await fetch("/api/upload/r2", {
+      const preSignedURLResponse = await fetch("/api/r2/signed-url", {
         method: "POST",
-        body: JSON.stringify({ fileName: newFileName }),
+        body: JSON.stringify({ fileName: newFileName, type: "upload" }),
       });
 
       if (!preSignedURLResponse.ok) {
@@ -77,6 +77,19 @@ export default function SubmitVideoForm() {
       if (!uploadResponse.ok) {
         throw new Error("Failed to upload file");
       }
+
+      const downloadPreSignedURLResponse = await fetch("/api/r2/signed-url", {
+        method: "POST",
+        body: JSON.stringify({ fileName: newFileName, type: "download" }),
+      });
+
+      if (!downloadPreSignedURLResponse.ok) {
+        throw new Error("Failed to retrieve download link");
+      }
+
+      const { url: downloadURL } = await downloadPreSignedURLResponse.json();
+
+      console.log(downloadURL);
 
       //TODO: send uploaded file to sanity
     } catch (error) {
