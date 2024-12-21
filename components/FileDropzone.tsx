@@ -6,12 +6,17 @@ import { Input } from "@/components/ui/input";
 
 interface FileDropzoneProps {
   setFile: Dispatch<SetStateAction<File | null>>;
+  setFileError: Dispatch<SetStateAction<string | undefined>>;
+  fileError?: string;
 }
 
-function FileDropzone({ setFile }: FileDropzoneProps) {
+function FileDropzone({
+  setFile,
+  setFileError: setError,
+  fileError: error,
+}: FileDropzoneProps) {
   const MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024; //2GB;
 
-  const [error, setError] = useState<string>();
   const onDropAccepted = useCallback(
     (acceptedFiles: File[]) => {
       setFile(acceptedFiles[0]);
@@ -32,12 +37,15 @@ function FileDropzone({ setFile }: FileDropzoneProps) {
     [setError],
   );
 
-  const onError = useCallback((error: Error) => {
-    //TODO: sentry
-    console.error(error);
+  const onError = useCallback(
+    (error: Error) => {
+      //TODO: sentry
+      console.error(error);
 
-    setError("An error occurred while uploading the file. Please try again.");
-  }, []);
+      setError("An error occurred while uploading the file. Please try again.");
+    },
+    [setError],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDropRejected,

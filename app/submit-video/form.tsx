@@ -32,6 +32,7 @@ const formSchema = z.object({
 
 export default function SubmitVideoForm() {
   const [file, setFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState<string>();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,8 +43,46 @@ export default function SubmitVideoForm() {
     },
   });
 
-  function onSubmit(formValues: z.infer<typeof formSchema>) {
-    console.log({ formValues, file });
+  async function onSubmit(formValues: z.infer<typeof formSchema>) {
+    try {
+      if (file === null) {
+        setFileError("Please upload a file.");
+      }
+
+      const formData = new FormData();
+
+      formData.append("file", file!);
+
+      const newFileName = `${formValues.first_name}-${formValues.last_name}-${Date.now()}`;
+
+      const preSignedURLResponse = await fetch("/api/upload/r2", {
+        method: "POST",
+        body: JSON.stringify({ fileName: newFileName }),
+      });
+
+      if (!preSignedURLResponse.ok) {
+        throw new Error("Failed to upload file");
+      }
+
+      const { url } = await preSignedURLResponse.json();
+
+      const uploadResponse = await fetch(url, {
+        method: "PUT",
+        body: file!,
+        headers: {
+          "Content-Type": file!.type,
+        },
+      });
+
+      if (!uploadResponse.ok) {
+        throw new Error("Failed to upload file");
+      }
+
+      //TODO: send uploaded file to sanity
+    } catch (error) {
+      //TODO:sentry
+      console.error(error);
+    }
   }
 
   return (
@@ -94,7 +133,11 @@ export default function SubmitVideoForm() {
             </FormItem>
           )}
         />
-        <FileDropzone setFile={setFile} />
+        <FileDropzone
+          fileError={fileError}
+          setFileError={setFileError}
+          setFile={setFile}
+        />
         <Button type="submit">Submit</Button>
       </form>
     </Form>
