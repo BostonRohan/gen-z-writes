@@ -1,10 +1,9 @@
-import Footer from "@/components/Footer";
 import Form from "./form";
 
 export default function Page() {
   return (
     <>
-      <div className="p-4 space-y-4 max-w-2xl mx-auto">
+      <div className="p-4 py-12  space-y-4 max-w-2xl mx-auto">
         <h1 className="text-3xl sm:text-4xl font-semibold">Submit Video</h1>
         <div className="text-muted-foreground space-y-4">
           <p>
@@ -21,7 +20,6 @@ export default function Page() {
         </div>
         <Form />
       </div>
-      <Footer />
     </>
   );
 }

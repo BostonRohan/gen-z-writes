@@ -33,6 +33,7 @@ const formSchema = z.object({
 export default function SubmitVideoForm() {
   const [file, setFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string>();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,6 +49,8 @@ export default function SubmitVideoForm() {
       if (file === null) {
         setFileError("Please upload a file.");
       }
+
+      setLoading(true);
 
       const formData = new FormData();
 
@@ -98,7 +101,7 @@ export default function SubmitVideoForm() {
     }
   }
 
-  return (
+  return !loading ? (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
         <div className="flex sm:flex-row flex-col sm:gap-4 gap-8 w-full">
@@ -151,8 +154,22 @@ export default function SubmitVideoForm() {
           setFileError={setFileError}
           setFile={setFile}
         />
-        <Button type="submit">Submit</Button>
+        <div className="flex items-center">
+          <Button className="w-full  mx-auto" type="submit">
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
+  ) : (
+    <div className="flex flex-col gap-8">
+      <div className="w-full h-10 rounded-md bg-slate-300 animate-pulse" />
+      <div className="w-full h-10 rounded-md bg-slate-300 animate-pulse" />
+      <div className="w-full h-10 rounded-md bg-slate-300 animate-pulse" />
+      <div className="w-full h-24 rounded-md bg-slate-300 animate-pulse" />
+      <div className="w-full h-10 bg-primary rounded-md text-black flex items-center justify-center">
+        Submitting...
+      </div>
+    </div>
   );
 }
