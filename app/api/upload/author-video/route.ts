@@ -2,7 +2,7 @@ import { client } from "@/sanity/client";
 import { v4 as uuidv4 } from "uuid";
 
 export async function POST(request: Request) {
-  const { title, videoDownloadUrl } = await request.json();
+  const { title, videoDownloadUrl, publication } = await request.json();
 
   try {
     const slug = title.toLowerCase().replace(/ /g, "-");
@@ -12,6 +12,7 @@ export async function POST(request: Request) {
       _type: "author",
       name: title,
       slug: { current: slug },
+      publication,
     };
 
     console.log(`Saving author ${JSON.stringify(author)} as draft to Sanity`);

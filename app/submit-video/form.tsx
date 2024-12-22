@@ -99,6 +99,7 @@ export default function SubmitVideoForm() {
         body: JSON.stringify({
           title: `${formValues.first_name} ${formValues.last_name}`,
           videoDownloadUrl: downloadURL,
+          publication: formValues.publication,
         }),
       });
 
