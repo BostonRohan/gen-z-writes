@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FileDropzone from "@/components/FileDropzone";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +18,7 @@ import {
   FormField,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { client } from "@/sanity/client";
 
 const formSchema = z.object({
   first_name: z.string().min(2, {
@@ -92,7 +94,21 @@ export default function SubmitVideoForm() {
 
       const { url: downloadURL } = await downloadPreSignedURLResponse.json();
 
-      console.log(downloadURL);
+      const videoResponse = await fetch("/api/upload/author-video", {
+        method: "POST",
+        body: JSON.stringify({
+          title: `${formValues.first_name} ${formValues.last_name}`,
+          videoDownloadUrl: downloadURL,
+        }),
+      });
+
+      if (videoResponse.ok) {
+        //TODO: send notification
+      }
+
+      //TODO: send notification of error
+
+      setLoading(false);
 
       //TODO: send uploaded file to sanity
     } catch (error) {
