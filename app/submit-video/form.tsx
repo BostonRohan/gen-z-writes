@@ -153,6 +153,7 @@ export default function SubmitVideoForm() {
           fileError={fileError}
           setFileError={setFileError}
           setFile={setFile}
+          file={file}
         />
         <div className="flex items-center">
           <Button className="w-full  mx-auto" type="submit">

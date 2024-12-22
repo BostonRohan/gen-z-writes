@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, SetStateAction, Dispatch } from "react";
+import { useCallback, SetStateAction, Dispatch } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
 import { Input } from "@/components/ui/input";
 
@@ -8,12 +8,14 @@ interface FileDropzoneProps {
   setFile: Dispatch<SetStateAction<File | null>>;
   setFileError: Dispatch<SetStateAction<string | undefined>>;
   fileError?: string;
+  file: File | null;
 }
 
 function FileDropzone({
   setFile,
   setFileError: setError,
   fileError: error,
+  file,
 }: FileDropzoneProps) {
   const MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024; //2GB;
 
@@ -71,13 +73,19 @@ function FileDropzone({
           <p>Drop the video here</p>
         ) : (
           <div className="flex flex-col text-center">
-            <p>Drag &apos;n&apos; drop video here, or click to select video</p>
-            <p className="text-sm text-muted-foreground">
-              2GB limit (mov, mp4, webm)
+            <p>
+              Drag &apos;n&apos; drop video here, or click to{" "}
+              {!file ? "select" : "replace"} video
             </p>
+            {!file && (
+              <p className="text-sm text-muted-foreground">
+                2GB limit (mov, mp4, webm)
+              </p>
+            )}
           </div>
         )}
       </div>
+      {file && <p className="font-bold text-lg">{file.name}</p>}
       {!!error && <p className="text-destructive text-sm">{error}</p>}
     </div>
   );
