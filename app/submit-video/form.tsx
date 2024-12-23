@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FileDropzone from "@/components/FileDropzone";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +18,6 @@ import {
   FormField,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { client } from "@/sanity/client";
 
 const formSchema = z.object({
   first_name: z.string().min(2, {
@@ -53,6 +52,11 @@ export default function SubmitVideoForm() {
       }
 
       setLoading(true);
+
+      const loadingToastId = toast.loading("Submitting video...", {
+        position: "top-center",
+        richColors: true,
+      });
 
       const formData = new FormData();
 
@@ -103,22 +107,31 @@ export default function SubmitVideoForm() {
         }),
       });
 
+      setLoading(false);
+      toast.dismiss(loadingToastId);
+
       if (videoResponse.ok) {
-        //TODO: send notification
+        toast.success("Video submitted!", {
+          position: "top-center",
+          richColors: true,
+        });
+
+        return;
       }
 
-      //TODO: send notification of error
-
-      setLoading(false);
-
-      //TODO: send uploaded file to sanity
+      throw new Error(`Failed to submit video file ${newFileName} to Sanity`);
     } catch (error) {
       //TODO:sentry
+
+      toast.error(
+        "There was a problem submitting your video, please try again.",
+        { position: "top-center", richColors: true },
+      );
       console.error(error);
     }
   }
 
-  return !loading ? (
+  return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
         <div className="flex sm:flex-row flex-col sm:gap-4 gap-8 w-full">
@@ -173,21 +186,11 @@ export default function SubmitVideoForm() {
           file={file}
         />
         <div className="flex items-center">
-          <Button className="w-full  mx-auto" type="submit">
+          <Button disabled={loading} className="w-full mx-auto" type="submit">
             Submit
           </Button>
         </div>
       </form>
     </Form>
-  ) : (
-    <div className="flex flex-col gap-8">
-      <div className="w-full h-10 rounded-md bg-slate-300 animate-pulse" />
-      <div className="w-full h-10 rounded-md bg-slate-300 animate-pulse" />
-      <div className="w-full h-10 rounded-md bg-slate-300 animate-pulse" />
-      <div className="w-full h-24 rounded-md bg-slate-300 animate-pulse" />
-      <div className="w-full h-10 bg-primary rounded-md text-black flex items-center justify-center">
-        Submitting...
-      </div>
-    </div>
   );
 }

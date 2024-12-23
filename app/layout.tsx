@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Nav from "@/components/Nav";
 import NextAuthProvider from "@/components/global/NextAuthProvider";
 import { Metadata } from "next";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 import sharedOGImage from "@/lib/sharedOg";
 
 export const metadata: Metadata = {
