@@ -1,4 +1,29 @@
 import Form from "./form";
+import { Metadata } from "next";
+import sharedOGImage from "../../lib/sharedOg";
+
+const title = "Project Gen Z Writes - Submit Video";
+const description =
+  "Did you like the database? Are you a published author? Well, you are welcome to send us a video on any topic regarding craft, skill building, publishing or literary ancestors.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  category: title,
+  openGraph: {
+    title,
+    url: "https://www.projectgenzwrites.com/submit-video",
+    siteName: "Project Gen Z Writes",
+    description,
+    ...sharedOGImage,
+  },
+  twitter: {
+    card: "summary",
+    title,
+    description,
+    ...sharedOGImage,
+  },
+};
 
 export default function Page() {
   return (
