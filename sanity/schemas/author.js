@@ -22,6 +22,12 @@ const author = {
       },
     },
     {
+      title: "Publication",
+      name: "publication",
+      type: "url",
+    },
+
+    {
       name: "bio",
       type: "array",
       of: [

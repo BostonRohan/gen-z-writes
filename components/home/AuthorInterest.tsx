@@ -9,10 +9,10 @@ export default function AuthorInterest() {
       </h2>
       <GradientButton
         gradient="bg-gradient-to-r from-brandPrimary to-brandSecondary"
-        href="mailto:projectgenzwrites@gmail.com"
+        href="submit-video"
         textClassName="font-semibold"
       >
-        Connect with us
+        Submit a video
       </GradientButton>
     </section>
   );

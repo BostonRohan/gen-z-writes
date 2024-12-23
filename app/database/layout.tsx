@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     url: "https://www.projectgenzwrites.com/database",
     description,
     ...sharedOGImage,
+    siteName: "Project Gen Z Writes",
   },
   twitter: {
     card: "summary",

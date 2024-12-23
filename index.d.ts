@@ -4,6 +4,8 @@ declare namespace NodeJS {
     GOOGLE_CLIENT_SECRET: string;
     FORGOT_PASSWORD_SECRET: string;
     SANITY_API_TOKEN: string;
-    REQUEST_LIMIT: string;
+    R2_ACCOUNT_ID: string;
+    R2_ACCESS_KEY_ID: string;
+    R2_SECRET_ACCESS_KEY: string;
   }
 }

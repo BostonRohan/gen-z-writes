@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     url: "https://www.projectgenzwrites.com/",
+    siteName: "Project Gen Z Writes",
     description,
     ...sharedOGImage,
   },
