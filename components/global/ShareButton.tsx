@@ -2,6 +2,7 @@
 
 import { useToast } from "@/components/ui/use-toast";
 import { ShareIcon } from "lucide-react";
+import { toast } from "sonner";
 
 export default function ShareButton({
   slug,
@@ -12,18 +13,19 @@ export default function ShareButton({
   title: string;
   text: string;
 }) {
-  const { toast } = useToast();
   const url = `https://www.projectgenzwrites.com/author/${slug}`;
 
   const handleClick = async () => {
     try {
       if (!navigator.canShare) {
         await navigator.clipboard.writeText(url);
-        toast({
-          description: "Link Copied!",
+        toast.info("Link Copied!", {
+          position: "top-right",
+          richColors: true,
         });
       } else {
         await navigator.share({
+          //TODO: add media to share?
           title,
           text,
           url,
@@ -32,12 +34,10 @@ export default function ShareButton({
     } catch (err: unknown) {
       if (err instanceof Error) {
         if (err.message.indexOf("user denied permission") !== -1) {
-          toast({
-            variant: "destructive",
-            title: "Uh oh! Something went wrong.",
-            description:
-              "There was a problem sharing this page. Please try again.",
-          });
+          toast.error(
+            "There was a problem sharing this page. Please try again.",
+            { position: "top-right", richColors: true },
+          );
           console.error(err.message);
         }
       }
