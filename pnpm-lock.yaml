@@ -15,7 +15,7 @@ importers:
         specifier: ^3.717.0
         version: 3.717.0
       '@hookform/resolvers':
-        specifier: 3.3.1
+        specifier: ^3.1.0
         version: 3.3.1(react-hook-form@7.53.2(react@18.2.0))
       '@next-auth/prisma-adapter':
         specifier: ^1.0.7
@@ -93,8 +93,8 @@ importers:
         specifier: ^9.0.1
         version: 9.0.1
       zod:
-        specifier: 3.21.4
-        version: 3.21.4
+        specifier: ^3.21.4
+        version: 3.23.8
     devDependencies:
       '@portabletext/react':
         specifier: ^3.0.18
@@ -6075,9 +6075,6 @@ packages:
   zip-stream@6.0.1:
     resolution: {integrity: sha512-zK7YHHz4ZXpW89AHXUPbQVGKI7uvkd3hzusTdotCg1UxyaVtg0zFJSTfW/Dq5f7OBBVnq6cZIaC8Ti4hb6dtCA==}
     engines: {node: '>= 14'}
-
-  zod@3.21.4:
-    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
 
   zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
@@ -13157,8 +13154,6 @@ snapshots:
       archiver-utils: 5.0.2
       compress-commons: 6.0.2
       readable-stream: 4.5.2
-
-  zod@3.21.4: {}
 
   zod@3.22.4: {}
 
