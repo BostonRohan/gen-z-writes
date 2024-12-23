@@ -14,7 +14,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.717.0",
     "@aws-sdk/s3-request-presigner": "^3.717.0",
-    "@hookform/resolvers": "^2.0.0",
+    "@hookform/resolvers": "^3.1.0",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@prisma/client": "5.8.1",
     "@radix-ui/react-label": "^2.1.0",
@@ -36,11 +36,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.3.5",
-    "react-hook-form": "^7.53.2",
+    "react-hook-form": "^7.44.2",
     "sanity": "^3.42.0",
     "sonner": "^1.7.1",
     "uuid": "^9.0.1",
-    "zod": "3.23.8"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@portabletext/react": "^3.0.18",
@@ -82,7 +82,7 @@
     "tailwind-typewriter": "^1.0.1",
     "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5",
+    "typescript": "^5.5.3",
     "yup": "^1.4.0"
   }
 }
