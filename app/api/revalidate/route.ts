@@ -1,13 +1,16 @@
-import { revalidateTag, revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { parseBody } from "next-sanity/webhook";
+import { Slug } from "sanity";
 
 export async function POST(req: NextRequest) {
   try {
     const { body, isValidSignature } = await parseBody<{
       _type: string;
-      slug?: string | undefined;
+      slug?: Slug;
     }>(req, process.env.SANITY_HOOK_SECRET);
+
+    console.log({ body });
 
     if (!isValidSignature) {
       return new Response("Invalid Signature", { status: 401 });
@@ -18,12 +21,14 @@ export async function POST(req: NextRequest) {
     }
 
     if (body.slug) {
-      revalidateTag(`${body._type}:${body.slug}`);
+      console.log(
+        `revalidating dynamic tag: ${body._type}:${body.slug.current}`,
+      );
+
+      revalidateTag(`${body._type}:${body.slug.current}`);
     }
 
-    if (body._type === "video") {
-      revalidatePath("/database");
-    }
+    console.log(`revalidating tag: ${body._type}`);
 
     revalidateTag(body._type);
     return NextResponse.json({
@@ -32,8 +37,12 @@ export async function POST(req: NextRequest) {
       now: Date.now(),
       body,
     });
-  } catch (error: any) {
-    console.error(error);
-    return new Response(error.message, { status: 500 });
+  } catch (error) {
+    if (error instanceof Error) {
+      return new Response(error.message, { status: 500 });
+    }
+    return new Response("An unknown error occured revalidating", {
+      status: 500,
+    });
   }
 }

@@ -11,7 +11,9 @@ const config: ClientConfig = {
   token: process.env.SANITY_API_TOKEN,
 };
 
-const runQuery = makeSafeQueryRunner((query) => client.fetch(query));
+const runQuery = makeSafeQueryRunner((query, tags?: string[]) =>
+  client.fetch(query, {}, { next: { tags } }),
+);
 
 const client = createClient(config);
 
