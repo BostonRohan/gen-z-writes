@@ -33,11 +33,16 @@ const Nav = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isOpen]);
+
+  const rootPath = pathname.split("/").at(1);
+
+  const stickyNav = rootPath !== "author" && rootPath !== "ruby-seidner";
+
   return (
     <>
       <nav
         className={classNames("z-20 font-semibold w-full top-0 h-14", {
-          sticky: pathname.split("/")[1] !== "author",
+          sticky: stickyNav,
         })}
       >
         <div className="w-full bg-background/85 transition-all backdrop-blur-sm p-1 h-full mx-auto flex items-center">

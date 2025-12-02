@@ -1,6 +1,7 @@
 import { bebasNeue } from "@/app/fonts";
 import Contributor from "./Contributor";
 import dynamic from "next/dynamic";
+
 const Marquee = dynamic(() => import("react-fast-marquee"), {
   ssr: false,
   loading: () => (
@@ -30,7 +31,11 @@ export default function Contributors() {
           autoFill
           className="max-w-4xl mx-auto flex gap-4"
         >
-          <Contributor name="Ruby Seidner" src="/ruby.webp" />
+          <Contributor
+            name="Ruby Seidner"
+            src="/ruby.jpeg"
+            href="/ruby-seidner"
+          />
           <Contributor
             href="https://bostonrohan.com/"
             name="Boston Rohan"
@@ -41,7 +46,11 @@ export default function Contributors() {
         </Marquee>
       </div>
       <div className="lg:flex justify-center hidden">
-        <Contributor name="Ruby Seidner" src="/ruby.webp" />
+        <Contributor
+          name="Ruby Seidner"
+          src="/ruby.jpeg"
+          href="/ruby-seidner"
+        />
         <Contributor
           href="https://bostonrohan.com/"
           name="Boston Rohan"
