@@ -12,29 +12,36 @@ import Image from "next/image";
 import Link from "next/link";
 import { type Metadata } from "next";
 
+const name = "Ruby Seidner";
+const fullDescription =
+  "Ruby Seidner is a poet, advocate, and activist. She's been published thirty-four times in various literary journals, won the Running Start Political Simulation in 2023, and participated in a Jubilee Media video that garnered over one million views. She's been a finalist for Sonoma County Youth Poet Laureate in 2024, a special awardee for the Bay Area Creative Youth Awards in 2025, and a finalist for the Sonoma County Office of Education's Five Minute Film Festival in 2023. She has graduated from online creative writing programs at the Kenyon Review and the Iowa Writers Workshop. She is the co-founder of the creative writing education database ProjectGenZWrites.";
+const images = [
+  {
+    url: "https://projectgenzwrites.com/ruby.jpeg",
+    width: 1200,
+    height: 630,
+    alt: name,
+  },
+];
+
 export const metadata: Metadata = {
   title: "Ruby Seidner",
-  description:
-    "Ruby Seidner is a poet, advocate, and activist. She's been published thirty-four times in various literary journals, won the Running Start Political Simulation in 2023, and participated in a Jubilee Media video that garnered over one million views. She's been a finalist for Sonoma County Youth Poet Laureate in 2024, a special awardee for the Bay Area Creative Youth Awards in 2025, and a finalist for the Sonoma County Office of Education's Five Minute Film Festival in 2023. She has graduated from online creative writing programs at the Kenyon Review and the Iowa Writers Workshop. She is the co-founder of the creative writing education database ProjectGenZWrites.",
+  description: fullDescription,
+  twitter: {
+    title: name,
+    description: fullDescription,
+    images,
+  },
   openGraph: {
-    title: "Ruby Seidner",
-    description:
-      "Ruby Seidner is a poet, advocate, and activist. She's been published thirty-four times in various literary journals, won the Running Start Political Simulation in 2023, and participated in a Jubilee Media video that garnered over one million views. She's been a finalist for Sonoma County Youth Poet Laureate in 2024, a special awardee for the Bay Area Creative Youth Awards in 2025, and a finalist for the Sonoma County Office of Education's Five Minute Film Festival in 2023. She has graduated from online creative writing programs at the Kenyon Review and the Iowa Writers Workshop. She is the co-founder of the creative writing education database ProjectGenZWrites.",
+    title: name,
+    description: fullDescription,
     url: "https://projectgenzwrites.com/ruby-seidner",
     siteName: "Project Gen Z Writes",
-    images: [
-      {
-        url: "https://projectgenzwrites.com/ruby.jpeg",
-        width: 1200,
-        height: 630,
-        alt: "Ruby Seidner",
-      },
-    ],
+    images,
   },
 };
 
 export default function Page() {
-  const name = "Ruby Seidner";
   const description = "Ruby Seidner co-founder of ProjectGenZWrites";
   const slug = "/ruby-seidner";
 
@@ -101,20 +108,7 @@ export default function Page() {
                 About
               </h2>
               <div className="space-y-4 leading-10 text-muted-foreground">
-                <p>
-                  Ruby Seidner is a poet, advocate, and activist. She&apos;s
-                  been published thirty-four times in various literary journals,
-                  won the Running Start Political Simulation in 2023, and
-                  participated in a Jubilee Media video that garnered over one
-                  million views. She&apos;s been a finalist for Sonoma County
-                  Youth Poet Laureate in 2024, a special awardee for the Bay
-                  Area Creative Youth Awards in 2025, and a finalist for the
-                  Sonoma County Office of Education&apos;s Five Minute Film
-                  Festival in 2023. She has graduated from online creative
-                  writing programs at the Kenyon Review and the Iowa Writers
-                  Workshop. She is the co-founder of the creative writing
-                  education database ProjectGenZWrites.
-                </p>
+                <p>{fullDescription}</p>
               </div>
             </section>
           </div>
