@@ -22,30 +22,9 @@ export default function Contributors() {
       <h2
         className={`${bebasNeue.className} sm:text-[76px] sm:leading-none px-4 text-[16vw] leading-[16vw] text-center mb-4`}
       >
-        Contributors
+        Founders
       </h2>
-      <div className="lg:hidden">
-        <Marquee
-          pauseOnClick
-          pauseOnHover
-          autoFill
-          className="max-w-4xl mx-auto flex gap-4"
-        >
-          <Contributor
-            name="Ruby Seidner"
-            src="/ruby.jpeg"
-            href="/ruby-seidner"
-          />
-          <Contributor
-            href="https://bostonrohan.com/"
-            name="Boston Rohan"
-            src="/boston.jpg"
-          />
-          <Contributor name="Randi Seidner" src="/randi.webp" />
-          <Contributor name="Shannan Johnson" src="/shannan.jpeg" />
-        </Marquee>
-      </div>
-      <div className="lg:flex justify-center hidden">
+      <div className="flex justify-center flex-wrap gap-4">
         <Contributor
           name="Ruby Seidner"
           src="/ruby.jpeg"
@@ -56,8 +35,6 @@ export default function Contributors() {
           name="Boston Rohan"
           src="/boston.jpg"
         />
-        <Contributor name="Randi Seidner" src="/randi.webp" />
-        <Contributor name="Shannan Johnson" src="/shannan.jpeg" />
       </div>
     </section>
   );
