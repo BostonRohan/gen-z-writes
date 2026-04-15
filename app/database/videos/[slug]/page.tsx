@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import VideoCard from "@/components/VideoCard";
-import { q } from "groqd";
+import { q } from "@/sanity/groqd";
 import { cache } from "react";
 import { notFound } from "next/navigation";
 import getYoutubeId from "@/utils/getYoutubeId";
@@ -9,14 +9,19 @@ import { runQuery } from "@/sanity/client";
 
 const getVideoBySlug = cache(async (slug: string) => {
   try {
-    const query = q("*")
+    const query = q
+      .parameters<{ slug: string }>()
+      .star
       .filterByType("video")
-      .filter(`slug.current == "${slug}"`)
-      .filter(`!(_id in path("drafts.**"))`)
+      .filterBy("slug.current == $slug")
+      .filterRaw(`!(_id in path("drafts.**"))`)
       .slice(0)
-      .grab(videoFragment);
+      .project(videoFragment);
 
-    return await runQuery(query, [`video:${slug}`]);
+    return await runQuery(query, {
+      parameters: { slug },
+      tags: [`video:${slug}`],
+    });
   } catch (err) {
     console.error(
       "there was an issue getting the data for the following video",
@@ -28,17 +33,22 @@ const getVideoBySlug = cache(async (slug: string) => {
   }
 });
 
-export type Video = Awaited<ReturnType<typeof getVideoBySlug>>;
+export type Video = NonNullable<Awaited<ReturnType<typeof getVideoBySlug>>>;
 
 export async function generateStaticParams() {
   try {
-    const query = q("*")
+    const query = q.star
       .filterByType("video")
-      .filter(`!(_id in path("drafts.**"))`)
-      .grab({
-        slug: q.slug("slug"),
+      .filterRaw(`!(_id in path("drafts.**"))`)
+      .project({
+        slug: true,
       });
-    return await runQuery(query);
+    const videos = await runQuery(query);
+    return videos
+      .map((video) => ({
+        slug: (video.slug as { current?: string | null } | null)?.current ?? "",
+      }))
+      .filter((param) => param.slug !== "");
   } catch (err) {
     console.error(
       "there was an error getting the video slugs statically:",
@@ -51,9 +61,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { title, url, author, tags } = await getVideoBySlug(params.slug);
+  const { slug } = await params;
+  const video = await getVideoBySlug(slug);
+  if (!video) {
+    return {};
+  }
+  const title = video?.title ?? "";
+  const url = video?.url ?? "";
+  const author = video?.author;
+  const tags = video?.tags ?? [];
 
   const youtubeId = getYoutubeId(url);
 
@@ -63,10 +81,8 @@ export async function generateMetadata({
   });
 
   const description = `Explore, learn, and be inspired by '${title},' a captivating video by author ${
-    author.name
-  }. Delve into the world of ${intlFormat.format(
-    tags,
-  )} as the author shares expertise and insights. Gain valuable knowledge and creative inspiration from this engaging multimedia experience.`;
+    author?.name ?? "Unknown"
+  }. Delve into the world of ${intlFormat.format(tags ?? [])} as the author shares expertise and insights. Gain valuable knowledge and creative inspiration from this engaging multimedia experience.`;
 
   const images = [{ url: `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg` }];
 
@@ -82,14 +98,18 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: `https://www.projectgenzwrites.com/database/videos/${params.slug}`,
+      url: `https://www.projectgenzwrites.com/database/videos/${slug}`,
       images,
     },
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const video = await getVideoBySlug(params.slug);
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const video = await getVideoBySlug(slug);
+  if (!video) {
+    notFound();
+  }
 
   return (
     <section className="py-16 px-4">
