@@ -21,11 +21,14 @@ const VideoGrid = ({ videos }: { videos: Video[] }) => {
         .replace(/^[ ]+|[ ]+$/g, "")
         .replace(/[^0-9a-z]/gi, "");
 
-      //search by title, author or genre/type
+      const title = video?.title ?? "";
+      const authorName = video?.author?.name ?? "";
+      const tags = video?.tags ?? [];
+
       return (
-        searchCriteria(video.title, searchInput) ||
-        searchCriteria(video.author.name, searchInput) ||
-        searchCriteria(video.tags.join(" "), searchInput)
+        searchCriteria(title, searchInput) ||
+        searchCriteria(authorName, searchInput) ||
+        searchCriteria(tags.join(" "), searchInput)
       );
     });
 
@@ -42,7 +45,7 @@ const VideoGrid = ({ videos }: { videos: Video[] }) => {
         </h1>
       )}
       <section className="text-white max-w-[2000px] mx-auto grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
-        {videosState.map((video, i) => (
+        {videosState.map((video, i) => video && (
           <VideoCard
             loadImages={i < 3 ? "eager" : "lazy"}
             key={video._id}
