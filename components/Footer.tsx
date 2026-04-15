@@ -1,4 +1,4 @@
-import { Linkedin } from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
@@ -12,7 +12,7 @@ export default function Footer() {
             className="p-1 rounded-md h-8 w-8"
             href="https://www.linkedin.com/company/projectgenzwrites/"
           >
-            <Linkedin className="hover:text-brandPrimary" />
+            <ExternalLinkIcon className="hover:text-brandPrimary" />
           </Link>
         </div>
         <div className="flex xs:gap-12 gap-6 flex-row">

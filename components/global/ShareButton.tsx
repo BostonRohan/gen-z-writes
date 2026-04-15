@@ -1,6 +1,5 @@
 "use client";
 
-import { useToast } from "@/components/ui/use-toast";
 import { ShareIcon } from "lucide-react";
 import { toast } from "sonner";
 

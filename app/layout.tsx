@@ -1,7 +1,6 @@
 import "../global.css";
 import { Analytics } from "@vercel/analytics/react";
 import Nav from "@/components/Nav";
-import NextAuthProvider from "@/components/global/NextAuthProvider";
 import { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import sharedOGImage from "@/lib/sharedOg";
@@ -41,9 +40,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NextAuthProvider>
-          <Nav />
-        </NextAuthProvider>
+        <Nav />
         {children}
         <Toaster />
         {process.env.VERCEL_ENV === "production" && <Analytics />}
