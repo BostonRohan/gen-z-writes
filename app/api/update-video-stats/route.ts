@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
   const videos = await getVideos();
 
   for (const video of videos) {
-    const youtubeVideoId = getYoutubeId(video.url);
+    const youtubeVideoId = getYoutubeId(video?.url ?? "");
 
     const youtubeRes = await fetch(
       `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${youtubeVideoId}&key=${process.env.YOUTUBE_API_KEY}`,
