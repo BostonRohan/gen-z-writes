@@ -7,7 +7,7 @@ export default function FeaturedAuthor() {
   return (
     <section className="text-center px-4">
       <h2
-        className={`xs:text-6xl xs:leading-[1] text-[15vw] leading-[15vw] ${bebasNeue.className}`}
+        className={`xs:text-6xl xs:leading-[1] text-5xl ${bebasNeue.className}`}
       >
         Featured Author
       </h2>

@@ -1,20 +1,21 @@
+function TabButton({
+  color,
+  activeBorderColor,
+  activeColor,
+}: {
+  color: string;
+  activeColor: string;
+  activeBorderColor: string;
+}) {
+  return (
+    <div
+      role="presentation"
+      className={`${color} rounded-[50%] w-[11px] h-[11px] active:${activeColor} active:border ${activeBorderColor}`}
+    />
+  );
+}
+
 export default function MacWindow() {
-  const TabButton = ({
-    color,
-    activeBorderColor,
-    activeColor,
-  }: {
-    color: string;
-    activeColor: string;
-    activeBorderColor: string;
-  }) => {
-    return (
-      <div
-        role="presentation"
-        className={`${color} rounded-[50%] w-[11px] h-[11px] active:${activeColor} active:border ${activeBorderColor}`}
-      />
-    );
-  };
   return (
     <div className="bg-white min-h-[292px] h-full max-w-[600px] w-full rounded-md shadow-[0px_0px_20px_#acacac]">
       <div className="titlebar flex items-center px-4 justify-center h-full">
@@ -41,7 +42,7 @@ export default function MacWindow() {
       </div>
       <textarea
         id="textarea"
-        defaultValue="The writer is an explorer. Every step is an advance into a new land.” – Ralph Waldo Emerson"
+        defaultValue="The writer is an explorer. Every step is an advance into a new land. - Ralph Waldo Emerson"
         className="w-full h-full min-h-[292px] text-black rounded-md p-4 focus:outline-none"></textarea>
     </div>
   );

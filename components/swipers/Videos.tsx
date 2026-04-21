@@ -1,13 +1,15 @@
 "use client";
 
-import { Author } from "@/app/author/[slug]/page";
+import { AuthorFragment } from "@/utils/fragments/author";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Link from "next/link";
 import YoutubeThumbnail from "../YoutubeThumbnail";
 import getYoutubeId from "@/utils/getYoutubeId";
 
-export default function VideosSwiper({ videos }: { videos: Author["videos"] }) {
+export default function VideosSwiper({ videos }: { videos: AuthorFragment["videos"] }) {
+  if (!videos) return null;
+  
   return (
     <Swiper
       slidesPerView="auto"
@@ -27,20 +29,22 @@ export default function VideosSwiper({ videos }: { videos: Author["videos"] }) {
           slidesPerView: "auto",
         },
       }}>
-      {videos!.map((video) => {
-        const youtubeId = getYoutubeId(video.url);
+      {videos.map((video) => {
+        const youtubeId = getYoutubeId(video?.url ?? "");
+        const slug = video?.slug?.current ?? "";
+        const title = video?.title ?? "";
         return (
           <SwiperSlide key={youtubeId} className="max-w-[250px]">
             <Link
-              href={`/database/videos/${video.slug}`}
+              href={`/database/videos/${slug}`}
               className="hover:scale-105 transition block">
               <YoutubeThumbnail
                 id={youtubeId}
-                title={video.title}
+                title={title}
                 width={250}
                 height={250}
               />
-              <h3 className="line-clamp-1 mt-1">{video.title}</h3>
+              <h3 className="line-clamp-1 mt-1">{title}</h3>
             </Link>
           </SwiperSlide>
         );

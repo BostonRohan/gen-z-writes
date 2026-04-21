@@ -1,13 +1,12 @@
 import TopHeader from "@/components/author/TopHeader";
 import ShareButton from "@/components/global/ShareButton";
-import author from "@/sanity/schemas/author";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { InstagramIcon } from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { type Metadata } from "next";
@@ -80,7 +79,7 @@ export default function Page() {
                           target="_blank"
                         >
                           <div className="flex flex-col items-center">
-                            <InstagramIcon className="hover:bg-neutral-600/30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
+                            <ExternalLinkIcon className="hover:bg-neutral-600/30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
                             <span className="text-xs">Instagram</span>
                           </div>
                         </Link>

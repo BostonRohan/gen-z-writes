@@ -2,6 +2,7 @@ import "../../global.css";
 import { inter } from "../fonts";
 import { Metadata } from "next";
 import sharedOGImage from "../../lib/sharedOg";
+import React from "react";
 
 const title = "Database";
 const description =

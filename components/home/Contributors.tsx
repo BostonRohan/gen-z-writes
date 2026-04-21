@@ -1,20 +1,5 @@
 import { bebasNeue } from "@/app/fonts";
 import Contributor from "./Contributor";
-import dynamic from "next/dynamic";
-
-const Marquee = dynamic(() => import("react-fast-marquee"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex justify-center gap-4 overflow-hidden min-h-[219px]">
-      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
-      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
-      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
-      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
-      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
-      <div className="mb-4 h-[175px] rounded-[50%] w-[175px] overflow-hidden !object-cover bg-slate-300 animate-pulse shrink-0" />
-    </div>
-  ),
-});
 
 export default function Contributors() {
   return (

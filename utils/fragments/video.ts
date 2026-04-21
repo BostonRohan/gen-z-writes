@@ -1,18 +1,18 @@
-import { q, sanityImage } from "groqd";
+import { InferFragmentType } from "groqd";
+import { q } from "@/sanity/groqd";
 
-const videoFragment = {
-  _id: q.string(),
-  title: q.string(),
-  url: q.string(),
-  slug: q.slug("slug"),
-  tags: q.array(q.string()),
-  author: q("author.ref")
-    .deref()
-    .grab({
-      name: q.string(),
-      slug: q.slug("slug"),
-      image: sanityImage("image").nullable(),
-    }),
-};
+const videoFragment = q.fragmentForType<"video">().project((sub) => ({
+  _id: true,
+  title: true,
+  url: true,
+  slug: true,
+  tags: true,
+  author: sub.field("author.ref").deref().project({
+    name: true,
+    slug: true,
+    image: true,
+  }),
+}));
 
+export type VideoFragment = InferFragmentType<typeof videoFragment>;
 export default videoFragment;

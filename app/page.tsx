@@ -1,7 +1,6 @@
 import Hero from "@/components/home/Hero";
 import Philosophy from "@/components/home/Philosophy";
 import Contributors from "@/components/home/Contributors";
-import AuthorInterest from "@/components/home/AuthorInterest";
 import { Metadata } from "next";
 import sharedOGImage from "../lib/sharedOg";
 import FeaturedAuthor from "@/components/home/FeaturedAuthor";
@@ -37,7 +36,6 @@ export default async function Home() {
       <FeaturedAuthor />
       <Philosophy />
       <Contributors />
-      <AuthorInterest />
       <Footer />
     </div>
   );

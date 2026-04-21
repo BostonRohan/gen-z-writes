@@ -1,10 +1,10 @@
 import "../global.css";
 import { Analytics } from "@vercel/analytics/react";
 import Nav from "@/components/Nav";
-import NextAuthProvider from "@/components/global/NextAuthProvider";
 import { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import sharedOGImage from "@/lib/sharedOg";
+import React from "react";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.projectgenzwrites.com/"),
@@ -39,11 +39,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" data-scroll-behavior="smooth">
       <body>
-        <NextAuthProvider>
-          <Nav />
-        </NextAuthProvider>
+        <Nav />
         {children}
         <Toaster />
         {process.env.VERCEL_ENV === "production" && <Analytics />}

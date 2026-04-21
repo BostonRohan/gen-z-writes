@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="text-center px-4">
       <header>
         <h1
-          className={`${bebasNeue.className} sm:text-9xl text-[20vw] xs:leading-none leading-[0.9]`}
+          className={`${bebasNeue.className} sm:text-9xl text-7xl leading-none`}
         >
           <div className="whitespace-nowrap xs:leading-[80px] leading-none">
             Project{" "}
@@ -20,8 +20,7 @@ export default function Hero() {
         </h1>
         <p className="max-w-[600px] mx-auto font-semibold text-muted-foreground xs:text-2xl">
           A creative writing education platform bridging the gap and empowering
-          the next generation of literary <span className="type-nextGen" />
-          through video content.
+          the next generation of literary changemakers through video content.
         </p>
       </header>
       <section className="w-full max-w-[450px] mx-auto flex flex-wrap text-center justify-center items-center font-semibold pt-4 gap-2">

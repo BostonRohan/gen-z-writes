@@ -1,10 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-brandPrimary: #074aac;
+  --color-brandSecondary: #7a49a5;
+  --animate-gradient-rotate: gradient-rotate 5s linear infinite reverse;
+  --animate-move-bg: move-bg 20s linear infinite;
+}
 
 @layer base {
   :root {
-    /* Custom Colors*/
+    /* Custom Colors - for gradient text */
     --brandPrimary: #074aac;
     --brandSecondary: #7a49a5;
     --gradient-angle: 360deg;
@@ -66,35 +71,36 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   html {
-    @apply !scroll-smooth;
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground dark;
-    /* font-synthesis-weight: none; */
-    /* text-rendering: optimizeLegibility; */
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
 
 @property --gradient-angle {
-  syntax: "<angle>"; /* <- defined as type angle for the transition to work */
+  syntax: "<angle>";
   initial-value: 360deg;
   inherits: false;
 }
 
-.gradient-text-animation {
-  --bg-size: 400%;
-  background: linear-gradient(
-      90deg,
-      var(--brandPrimary),
-      var(--brandSecondary),
-      var(--brandPrimary)
-    )
-    0 0 / var(--bg-size) 100%;
-  color: transparent;
-  background-clip: text;
+@layer utilities {
+  .gradient-text-animation {
+    --bg-size: 400%;
+    background: linear-gradient(
+        90deg,
+        var(--brandPrimary),
+        var(--brandSecondary),
+        var(--brandPrimary)
+      )
+      0 0 / var(--bg-size) 100%;
+    color: transparent;
+    background-clip: text;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

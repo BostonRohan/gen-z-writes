@@ -1,17 +1,17 @@
-import { q } from "groqd";
 import { notFound } from "next/navigation";
+import { q } from "@/sanity/groqd";
 import videoFragment from "@/utils/fragments/video";
 import { runQuery } from "@/sanity/client";
 
 export default async function getVideos() {
   try {
-    const query = q("*")
+    const query = q.star
       .filterByType("video")
-      .filter(`!(_id in path("drafts.**"))`)
+      .filterRaw(`!(_id in path("drafts.**"))`)
       .order("_createdAt desc")
-      .grab(videoFragment);
+      .project(videoFragment);
 
-    return await runQuery(query, ["video"]);
+    return await runQuery(query, { tags: ["video"] });
   } catch (err) {
     console.error("there was an error getting the videos err:", err);
     return notFound();

@@ -20,17 +20,17 @@ export async function POST(req: NextRequest) {
       return new Response("Bad Request", { status: 400 });
     }
 
-    if (body.slug) {
+    if (body.slug?.current) {
       console.log(
         `revalidating dynamic tag: ${body._type}:${body.slug.current}`,
       );
 
-      revalidateTag(`${body._type}:${body.slug.current}`);
+      revalidateTag(`${body._type}:${body.slug.current}`, "layout");
     }
 
     console.log(`revalidating tag: ${body._type}`);
 
-    revalidateTag(body._type);
+    revalidateTag(body._type, "layout");
     return NextResponse.json({
       status: 200,
       revalidated: true,

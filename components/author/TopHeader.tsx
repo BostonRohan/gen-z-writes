@@ -52,6 +52,7 @@ export default function TopHeader({
                 src={src}
                 alt={name}
                 fill
+                sizes="50px"
                 className="object-cover absolute rounded-[50%]"
               />
             </div>

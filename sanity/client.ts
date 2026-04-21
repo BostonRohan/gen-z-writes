@@ -6,15 +6,18 @@ const config: ClientConfig = {
   projectId,
   dataset,
   apiVersion,
-  // set CDN to live API in development mode
   useCdn: process.env.NODE_ENV === "development" ? true : false,
   token: process.env.SANITY_API_TOKEN,
 };
 
-const runQuery = makeSafeQueryRunner((query, tags?: string[]) =>
-  client.fetch(query, {}, { next: { tags } }),
-);
-
 const client = createClient(config);
+
+const runQuery = makeSafeQueryRunner<{ tags?: string[] }>(
+  (query, options) => {
+    const parameters = options?.parameters ?? {};
+    const tags = options?.tags;
+    return client.fetch(query, parameters, tags ? { next: { tags } } : {});
+  },
+);
 
 export { client, runQuery, config };

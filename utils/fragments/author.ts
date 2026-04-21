@@ -1,37 +1,24 @@
-import { q, sanityImage } from "groqd";
+import { InferFragmentType } from "groqd";
+import { q } from "@/sanity/groqd";
 
-const authorFragment = {
-  _id: q.string(),
-  name: q.string(),
-  slug: q.slug("slug"),
-  bio: q.contentBlocks(),
-  image: sanityImage("image").nullable(),
-  books: q
-    .array(
-      q.object({
-        title: q.string(),
-        url: q.string(),
-        _key: q.string(),
-        //sanityImage doesn't work here?
-        cover: q.object({ asset: q.object({ _ref: q.string() }) }),
-      })
-    )
-    .nullable(),
-  socials: q
-    .object({
-      website: q.string().nullable().optional(),
-      instagram: q.string().nullable().optional(),
-    })
-    .nullable(),
-  videos: q("videos")
-    .filter()
-    .deref()
-    .grab({
-      slug: q.slug("slug"),
-      title: q.string(),
-      url: q.string(),
-    })
-    .nullable(),
-};
+const authorFragment = q.fragmentForType<"author">().project((sub) => ({
+  _id: true,
+  name: true,
+  slug: true,
+  bio: true,
+  image: sub.field("image"),
+  books: sub.field("books[]").project({
+    title: true,
+    url: true,
+    cover: true,
+  }),
+  socials: true,
+  videos: sub.field("videos[]").deref().project({
+    slug: true,
+    title: true,
+    url: true,
+  }),
+}));
 
+export type AuthorFragment = InferFragmentType<typeof authorFragment>;
 export default authorFragment;
