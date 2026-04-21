@@ -9,14 +9,14 @@ export default function Footer() {
           <h3 className="font-semibold">Project Gen Z Writes</h3>
           <Link
             target="_blank"
-            className="relative h-8 w-8"
+            className="relative h-6 w-6"
             href="https://www.linkedin.com/company/projectgenzwrites/"
           >
             <Image
               src="/linkedin.png"
               alt="LinkedIn"
               fill
-              className="object-contain invert"
+              className="object-contain"
             />
           </Link>
         </div>
