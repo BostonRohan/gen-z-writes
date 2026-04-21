@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import sharedOGImage from "@/lib/sharedOg";
+import React from "react";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.projectgenzwrites.com/"),

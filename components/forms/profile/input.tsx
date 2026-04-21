@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export default function Input({
   type,
   children,

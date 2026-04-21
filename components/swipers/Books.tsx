@@ -33,7 +33,7 @@ export default function BooksSwiper({ books }: { books: AuthorFragment["books"] 
       }}
     >
       {books.map((book) => (
-        <SwiperSlide key={book?.title ?? Math.random()} className="max-w-[180px]">
+        <SwiperSlide key={book?.url ?? book?.title} className="max-w-[180px]">
           <Link
             href={book?.url ?? "#"}
             target="_blank"

@@ -4,7 +4,8 @@ import { ChangeEvent } from "react";
 const SearchInput = ({
   handleSearch,
 }: {
-  handleSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+  // eslint-disable-next-line no-unused-vars
+  handleSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
     <section className="w-full flex justify-center relative my-12 sm:p-0 px-4">
@@ -24,7 +25,7 @@ const SearchInput = ({
         type="search"
         className={`rounded-xl bg-transparent border-white border-2 p-4 w-full max-w-md text-white placeholder:text-[#d8d8d8] outline-none ${poppins.className} placeholder:font-normal pl-10`}
         placeholder="Search by category, author or title..."
-        onChange={handleSearch}
+        onChange={(e) => handleSearch(e)}
       />
     </section>
   );

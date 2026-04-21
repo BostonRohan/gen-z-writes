@@ -1,6 +1,5 @@
 import TopHeader from "@/components/author/TopHeader";
 import ShareButton from "@/components/global/ShareButton";
-import author from "@/sanity/schemas/author";
 import {
   Tooltip,
   TooltipContent,
