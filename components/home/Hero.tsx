@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="text-center px-4">
       <header>
         <h1
-          className={`${bebasNeue.className} sm:text-9xl text-[20vw] xs:leading-none leading-[0.9]`}
+          className={`${bebasNeue.className} sm:text-9xl text-7xl leading-none`}
         >
           <div className="whitespace-nowrap xs:leading-[80px] leading-none">
             Project{" "}
