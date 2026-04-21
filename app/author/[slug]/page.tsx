@@ -4,7 +4,7 @@ import authorFragment from "@/utils/fragments/author";
 import { ReactNode, cache } from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { ExternalLinkIcon } from "lucide-react";
@@ -21,7 +21,7 @@ import TopHeader from "@/components/author/TopHeader";
 import Footer from "@/components/Footer";
 import { client, runQuery } from "@/sanity/client";
 
-const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder(client);
 
 const getAuthorBySlug = cache(async (slug: string) => {
   try {
@@ -162,6 +162,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                     src={builder.image(author.image).url()}
                     alt={authorName}
                     fill
+                    sizes="(min-width: 475px) 120px, 80px"
                     className="object-cover absolute rounded-[50%]"
                   />
                 </div>

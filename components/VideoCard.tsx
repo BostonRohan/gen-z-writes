@@ -5,7 +5,7 @@ import Link from "next/link";
 import getYoutubeId from "@/utils/getYoutubeId";
 import YoutubePlayer from "./Youtube";
 import YoutubeThumbnail from "./YoutubeThumbnail";
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 import { client } from "@/sanity/client";
 import Image from "next/image";
 import classNames from "classnames";
@@ -42,7 +42,7 @@ const VideoCard = ({
   const author = video.author;
   
   const youtubeId = getYoutubeId(url);
-  const builder = imageUrlBuilder(client);
+  const builder = createImageUrlBuilder(client);
 
   return (
     <article
@@ -54,8 +54,8 @@ const VideoCard = ({
         <YoutubePlayer
           id={youtubeId}
           title={title}
-          width={videoWidth.toString()}
-          height={videoHeight.toString()}
+          width={videoWidth}
+          height={videoHeight}
         />
       ) : (
         <Link href={`/database/videos/${slug}`}>
@@ -82,6 +82,7 @@ const VideoCard = ({
                     src={builder.image(author.image).url()}
                     className="rounded-full object-cover"
                     fill
+                    sizes="30px"
                     alt={author.name ?? ""}
                   />
                 </div>

@@ -6,12 +6,12 @@ import Image from "next/image";
 import "swiper/css";
 import Link from "next/link";
 import { client } from "@/sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 
 export default function BooksSwiper({ books }: { books: AuthorFragment["books"] }) {
   if (!books) return null;
   
-  const builder = imageUrlBuilder(client);
+  const builder = createImageUrlBuilder(client);
   return (
     <Swiper
       slidesPerView="auto"
