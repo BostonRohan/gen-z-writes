@@ -88,28 +88,6 @@
   inherits: false;
 }
 
-/* Typewriter effect for "changemakers", "trailblazers", "pioneers" */
-@keyframes type-nextGen {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: hsl(var(--foreground)); }
-}
-
-.type-nextGen {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid hsl(var(--foreground));
-  animation: 
-    type-nextGen 3s steps(11) forwards,
-    blink-caret 0.75s step-end infinite;
-  max-width: 0;
-}
-
 @layer utilities {
   .gradient-text-animation {
     --bg-size: 400%;
