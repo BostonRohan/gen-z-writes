@@ -80,7 +80,6 @@ const Nav = () => {
                   <LibraryBigIcon />
                   Resources
                 </div>
-                <span className="text-xs text-brandSecondary pl-1">New</span>
               </Link>
             </div>
             <div className="sm:hidden inline ml-auto opacity-90">
@@ -122,7 +121,6 @@ const Nav = () => {
               <LibraryBigIcon />
               Resources
             </div>
-            <span className="text-xs text-brandSecondary pl-1">New</span>
           </Link>
         </div>
       </div>

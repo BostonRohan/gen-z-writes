@@ -29,7 +29,6 @@ export default function Footer() {
               href="/resources"
             >
               <span className="group-hover:underline">Resources</span>
-              <span className="text-xs text-brandSecondary">New</span>
             </Link>
           </div>
           {/*   <div className="flex flex-col"> */}
