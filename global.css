@@ -9,6 +9,11 @@
 
 @layer base {
   :root {
+    /* Custom Colors - for gradient text */
+    --brandPrimary: #074aac;
+    --brandSecondary: #7a49a5;
+    --gradient-angle: 360deg;
+
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -81,6 +86,28 @@
   syntax: "<angle>";
   initial-value: 360deg;
   inherits: false;
+}
+
+/* Typewriter effect for "changemakers", "trailblazers", "pioneers" */
+@keyframes type-nextGen {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: hsl(var(--foreground)); }
+}
+
+.type-nextGen {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid hsl(var(--foreground));
+  animation: 
+    type-nextGen 3s steps(11) forwards,
+    blink-caret 0.75s step-end infinite;
+  max-width: 0;
 }
 
 @layer utilities {
