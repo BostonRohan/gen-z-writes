@@ -9,10 +9,10 @@ export default function AuthorInterest() {
       </h2>
       <GradientButton
         gradient="bg-gradient-to-r from-brandPrimary to-brandSecondary"
-        href="submit-video"
+        href="/database"
         textClassName="font-semibold"
       >
-        Submit a video
+        View database
       </GradientButton>
     </section>
   );
