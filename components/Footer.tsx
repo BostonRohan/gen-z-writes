@@ -1,4 +1,4 @@
-import { PenLine, Linkedin } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -7,7 +7,15 @@ export default function Footer() {
       <div className="flex justify-between gap-8 xs:flex-row flex-col">
         <div className="flex flex-col w-full h-full gap-3">
           <div className="flex items-center gap-2 text-ink">
-            <PenLine className="w-5 h-5 text-brandPrimary" />
+            <div className="w-8 h-8 rounded-full bg-ink flex items-center justify-center">
+              <Image
+                src="/genz-writes-logo-white.png"
+                alt="Gen Z Writes Logo"
+                width={30}
+                height={30}
+                className="object-contain"
+              />
+            </div>
             <h3 className="font-handwriting text-xl">Project Gen Z Writes</h3>
           </div>
           <p className="font-serif text-sm text-ink-muted max-w-[250px]">
@@ -18,7 +26,6 @@ export default function Footer() {
             className="inline-flex items-center gap-2 text-ink-muted hover:text-brandPrimary transition-colors w-fit"
             href="https://www.linkedin.com/company/projectgenzwrites/"
           >
-            <Linkedin className="w-5 h-5" />
             <span className="text-sm">Follow us</span>
           </Link>
         </div>

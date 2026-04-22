@@ -1,6 +1,7 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
-import { DatabaseIcon, LibraryBigIcon, PenLine } from "lucide-react";
+import { DatabaseIcon, LibraryBigIcon } from "lucide-react";
 import Hamburger from "hamburger-react";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
@@ -59,7 +60,15 @@ const Nav = () => {
               onClick={() => setOpen(false)}
               href="/"
             >
-              <PenLine className="w-5 h-5" />
+              <div className="w-8 h-8 rounded-full bg-ink flex items-center justify-center">
+                <Image
+                  src="/genz-writes-logo-white.png"
+                  alt="Gen Z Writes Logo"
+                  width={30}
+                  height={30}
+                  className="object-contain"
+                />
+              </div>
               <span className="font-handwriting text-xl">Gen Z Writes</span>
             </Link>
             <div className="mr-auto flex gap-1">
