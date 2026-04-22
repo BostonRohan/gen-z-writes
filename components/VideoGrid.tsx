@@ -3,8 +3,8 @@
 import { ChangeEvent, useState } from "react";
 import VideoCard from "./VideoCard";
 import SearchInput from "./SearchInput";
-import { inter } from "../app/fonts";
 import { Video } from "@/app/database/videos/[slug]/page";
+import { BookX } from "lucide-react";
 
 const VideoGrid = ({ videos }: { videos: Video[] }) => {
   const [videosState, setVideosState] = useState(videos);
@@ -39,21 +39,29 @@ const VideoGrid = ({ videos }: { videos: Video[] }) => {
     <>
       <SearchInput handleSearch={handleSearch} />
       {!videosState.length && (
-        <h1
-          className={`${inter.className} font-bold text-3xl text-white text-center`}>
-          No Results Found
-        </h1>
+        <div className="text-center py-12">
+          <BookX className="w-16 h-16 mx-auto text-ink-muted mb-4" />
+          <h1 className="font-serif font-bold text-3xl text-ink">
+            No Results Found
+          </h1>
+          <p className="text-ink-muted mt-2">
+            Try searching with different keywords
+          </p>
+        </div>
       )}
-      <section className="text-white max-w-[2000px] mx-auto grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-4 p-4 place-items-center">
-        {videosState.map((video, i) => video && (
-          <VideoCard
-            loadImages={i < 3 ? "eager" : "lazy"}
-            key={video._id}
-            video={video}
-            videoWidth={450}
-            videoHeight={338}
-          />
-        ))}
+      <section className="max-w-[2000px] mx-auto grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-6 p-4 place-items-center">
+        {videosState.map(
+          (video, i) =>
+            video && (
+              <VideoCard
+                loadImages={i < 3 ? "eager" : "lazy"}
+                key={video._id}
+                video={video}
+                videoWidth={450}
+                videoHeight={338}
+              />
+            )
+        )}
       </section>
     </>
   );

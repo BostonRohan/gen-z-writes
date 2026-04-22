@@ -67,7 +67,7 @@ export default function Page() {
                 />
               </div>
               <div className="flex justify-between items-center gap-6 flex-wrap">
-                <h1 className="sm:text-4xl xs:text-3xl text-2xl font-semibold">
+                <h1 className="sm:text-4xl xs:text-3xl text-2xl font-serif font-semibold text-ink">
                   Ruby Seidner
                 </h1>{" "}
                 <div className="flex items-center gap-4">
@@ -78,8 +78,8 @@ export default function Page() {
                           href="https://www.instagram.com/projectgenzwrites/"
                           target="_blank"
                         >
-                          <div className="flex flex-col items-center">
-                            <ExternalLinkIcon className="hover:bg-neutral-600/30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
+                          <div className="flex flex-col items-center text-ink-muted hover:text-brandPrimary transition-colors">
+                            <ExternalLinkIcon className="hover:bg-ink/5 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
                             <span className="text-xs">Instagram</span>
                           </div>
                         </Link>
@@ -103,10 +103,10 @@ export default function Page() {
               </div>
             </div>
             <section className="mt-16">
-              <h2 className="sm:text-[28px] xs:text-2xl text-xl mb-2 font-medium">
+              <h2 className="sm:text-[28px] xs:text-2xl text-xl mb-2 font-semibold text-ink">
                 About
               </h2>
-              <div className="space-y-4 leading-10 text-muted-foreground">
+              <div className="space-y-4 leading-10 text-ink-muted font-serif paper-card p-6 rounded-lg">
                 <p>{fullDescription}</p>
               </div>
             </section>

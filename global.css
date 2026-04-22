@@ -1,71 +1,65 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brandPrimary: #074aac;
-  --color-brandSecondary: #7a49a5;
+  /* Notepad/Paper Color Palette */
+  --color-paper: #FDF6E3;
+  --color-paper-dark: #F5ECD3;
+  --color-paper-cream: #FFFEF9;
+  --color-ink: #2C1810;
+  --color-ink-light: #5C4033;
+  --color-ink-muted: #8B7355;
+  --color-ruled-line: #C5D4E8;
+  --color-margin-line: #E8A0A0;
+  --color-highlight: #FFE066;
+  --color-pencil: #D4A574;
+  
+  /* Brand colors - warm literary tones */
+  --color-brandPrimary: #B85C38;
+  --color-brandSecondary: #5C4033;
+  
+  /* Fonts */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-handwriting: var(--font-caveat), cursive;
+  --font-serif: var(--font-libre), Georgia, serif;
+  
+  /* Animations */
   --animate-gradient-rotate: gradient-rotate 5s linear infinite reverse;
   --animate-move-bg: move-bg 20s linear infinite;
+  --animate-pencil-write: pencil-write 2s ease-in-out infinite;
 }
 
 @layer base {
   :root {
     /* Custom Colors - for gradient text */
-    --brandPrimary: #074aac;
-    --brandSecondary: #7a49a5;
+    --brandPrimary: #B85C38;
+    --brandSecondary: #5C4033;
     --gradient-angle: 360deg;
 
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
-
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 47 78% 94%;
+    --foreground: 20 30% 12%;
+    --card: 47 70% 96%;
+    --card-foreground: 20 30% 12%;
+    --popover: 47 78% 94%;
+    --popover-foreground: 20 30% 12%;
+    --primary: 17 52% 47%;
+    --primary-foreground: 47 78% 98%;
+    --secondary: 30 22% 85%;
+    --secondary-foreground: 20 30% 20%;
+    --muted: 40 30% 88%;
+    --muted-foreground: 25 20% 40%;
+    --accent: 45 100% 70%;
+    --accent-foreground: 20 30% 12%;
     --destructive: 0 62.8% 50.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --border: 30 30% 80%;
+    --input: 30 30% 85%;
+    --ring: 17 52% 47%;
+    --radius: 0.5rem;
+    --chart-1: 17 52% 47%;
+    --chart-2: 30 22% 35%;
+    --chart-3: 45 70% 50%;
+    --chart-4: 20 40% 30%;
+    --chart-5: 35 60% 55%;
   }
 }
 
@@ -79,6 +73,48 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    position: relative;
+  }
+  
+  /* Lined paper background effect */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: 
+      repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        var(--color-ruled-line) 31px,
+        var(--color-ruled-line) 32px
+      );
+    background-position: 0 20px;
+    opacity: 0.5;
+  }
+  
+  /* Red margin line */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 80px;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-margin-line);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+  
+  /* Content should be above the lines */
+  body > * {
+    position: relative;
+    z-index: 1;
   }
 }
 
@@ -100,6 +136,97 @@
       0 0 / var(--bg-size) 100%;
     color: transparent;
     background-clip: text;
+  }
+  
+  /* Handwriting style */
+  .font-handwriting {
+    font-family: var(--font-handwriting);
+  }
+  
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  
+  /* Paper texture overlay */
+  .paper-texture {
+    background-color: var(--color-paper);
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+  
+  /* Notebook hole punches decoration */
+  .notebook-holes {
+    position: relative;
+  }
+  
+  .notebook-holes::before {
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: 
+      radial-gradient(circle, transparent 6px, var(--color-paper-dark) 6px, var(--color-paper-dark) 8px, transparent 8px);
+    background-size: 20px 80px;
+    background-repeat: repeat-y;
+    height: 100%;
+  }
+  
+  /* Highlight effect like marker */
+  .highlight {
+    background: linear-gradient(
+      180deg,
+      transparent 50%,
+      var(--color-highlight) 50%,
+      var(--color-highlight) 85%,
+      transparent 85%
+    );
+    padding: 0 4px;
+  }
+  
+  /* Underline like pencil */
+  .pencil-underline {
+    text-decoration: underline;
+    text-decoration-color: var(--color-pencil);
+    text-decoration-style: wavy;
+    text-underline-offset: 4px;
+  }
+  
+  /* Torn paper edge effect */
+  .torn-edge-bottom {
+    position: relative;
+  }
+  
+  .torn-edge-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 Q5 8 10 5 T20 7 T30 4 T40 8 T50 5 T60 7 T70 4 T80 8 T90 5 T100 7 L100 20 L0 20 Z' fill='%23FDF6E3'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 100px 20px;
+  }
+  
+  /* Sticky note style */
+  .sticky-note {
+    background: linear-gradient(135deg, var(--color-highlight) 0%, #FFD93D 100%);
+    box-shadow: 
+      2px 2px 5px rgba(0,0,0,0.1),
+      inset 0 -40px 40px -40px rgba(0,0,0,0.05);
+    transform: rotate(-1deg);
+  }
+  
+  /* Card with paper feel */
+  .paper-card {
+    background-color: var(--color-paper-cream);
+    border: 1px solid var(--color-paper-dark);
+    box-shadow: 
+      0 1px 3px rgba(0,0,0,0.08),
+      0 4px 6px rgba(0,0,0,0.04);
   }
 }
 
@@ -134,6 +261,16 @@
       background-position: var(--bg-size) 0;
     }
   }
+  
+  @keyframes pencil-write {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(3px);
+    }
+  }
+  
   @keyframes t {
     90%,
     100% {
@@ -146,5 +283,13 @@
     visibility: hidden;
     opacity: 0;
     transition: 0.5s ease-in-out;
+  }
+}
+
+/* Hide paper lines on smaller screens for cleaner look */
+@media (max-width: 640px) {
+  body::after {
+    left: 20px;
+    opacity: 0.25;
   }
 }

@@ -11,9 +11,13 @@ export default function Page() {
   return (
     <>
       <div className="leading-10 p-4 max-w-4xl mx-auto scroll-mt-24">
-        <h1 className="sm:text-5xl font-semibold text-4xl">Privacy Policy</h1>
-        <p className="text-sm py-4">Last updated: March 16, 2024</p>
-        <div className="text-muted-foreground">
+        <h1 className="sm:text-5xl font-semibold text-4xl text-ink font-serif">
+          Privacy Policy
+        </h1>
+        <p className="text-sm py-4 text-ink-muted">
+          Last updated: March 16, 2024
+        </p>
+        <div className="text-ink-light font-serif paper-card p-6 rounded-lg">
           <p>
             This Privacy Policy (&quot;Policy&quot;) describes how
             ProjectGenZWrites (&quot;we,&quot; &quot;us,&quot; or

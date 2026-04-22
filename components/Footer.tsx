@@ -1,64 +1,54 @@
-import Image from "next/image";
+import { PenLine, Linkedin } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="px-3 max-w-7xl pb-4 mx-auto">
-      <div className="flex justify-between gap-4 xs:flex-row flex-col">
-        <div className="flex flex-col w-full h-full gap-1">
-          <h3 className="font-semibold">Project Gen Z Writes</h3>
+    <footer className="px-4 max-w-7xl pb-8 pt-12 mx-auto border-t border-ink/10 mt-12">
+      <div className="flex justify-between gap-8 xs:flex-row flex-col">
+        <div className="flex flex-col w-full h-full gap-3">
+          <div className="flex items-center gap-2 text-ink">
+            <PenLine className="w-5 h-5 text-brandPrimary" />
+            <h3 className="font-handwriting text-xl">Project Gen Z Writes</h3>
+          </div>
+          <p className="font-serif text-sm text-ink-muted max-w-[250px]">
+            Empowering the next generation of literary changemakers.
+          </p>
           <Link
             target="_blank"
-            className="relative h-6 w-6"
+            className="inline-flex items-center gap-2 text-ink-muted hover:text-brandPrimary transition-colors w-fit"
             href="https://www.linkedin.com/company/projectgenzwrites/"
           >
-            <Image
-              src="/linkedin.png"
-              alt="LinkedIn"
-              fill
-              className="object-contain"
-            />
+            <Linkedin className="w-5 h-5" />
+            <span className="text-sm">Follow us</span>
           </Link>
         </div>
         <div className="flex xs:gap-12 gap-6 flex-row">
-          <div className="flex flex-col">
-            <h3 className="font-semibold">Content</h3>
+          <div className="flex flex-col gap-2">
+            <h3 className="font-semibold text-ink">Content</h3>
             <Link
-              className="hover:underline group text-muted-foreground"
+              className="hover:text-brandPrimary text-ink-muted transition-colors"
               href="/database"
             >
               Database
             </Link>
             <Link
-              className="group text-muted-foreground flex gap-1 items-center"
+              className="hover:text-brandPrimary text-ink-muted transition-colors"
               href="/resources"
             >
-              <span className="group-hover:underline">Resources</span>
+              Resources
             </Link>
           </div>
-          {/*   <div className="flex flex-col"> */}
-          {/*     <h3 className="font-semibold">Profile</h3> */}
-          {/*     <Link className="hover:underline" href="/login"> */}
-          {/*       Login */}
-          {/*     </Link> */}
-          {/*     <Link */}
-          {/*       className="hover:underline xs:whitespace-nowrap" */}
-          {/*       href="/signup" */}
-          {/*     > */}
-          {/*       Sign Up */}
-          {/*     </Link> */}
-          {/*   </div> */}
         </div>
       </div>
-      <div className="flex mt-4 gap-2 text-sm">
+      <div className="flex mt-8 gap-4 text-sm border-t border-ink/10 pt-4">
         <Link
-          className="hover:underline text-muted-foreground opacity-80"
+          className="hover:text-brandPrimary text-ink-muted transition-colors"
           href="/privacy-policy"
         >
           Privacy Policy
         </Link>
         <Link
-          className="hover:underline text-muted-foreground opacity-80"
+          className="hover:text-brandPrimary text-ink-muted transition-colors"
           href="/terms-of-service"
         >
           Terms Of Service

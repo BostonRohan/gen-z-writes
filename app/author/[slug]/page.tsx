@@ -168,7 +168,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                 </div>
               )}
               <div className="flex justify-between items-center gap-6 flex-wrap">
-                <h1 className="sm:text-4xl xs:text-3xl text-2xl font-semibold">
+                <h1 className="sm:text-4xl xs:text-3xl text-2xl font-serif font-semibold text-ink">
                   {authorName}
                 </h1>{" "}
                 <div className="flex items-center gap-4">
@@ -177,8 +177,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                       <Tooltip>
                         <TooltipTrigger>
                           <Link href={author.socials.website} target="_blank">
-                            <div className="flex flex-col items-center">
-                              <ExternalLinkIcon className="hover:bg-neutral-600/30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
+                            <div className="flex flex-col items-center text-ink-muted hover:text-brandPrimary transition-colors">
+                              <ExternalLinkIcon className="hover:bg-ink/5 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
                               <span className="text-xs">Website</span>
                             </div>
                           </Link>
@@ -192,8 +192,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                       <Tooltip>
                         <TooltipTrigger>
                           <Link href={author.socials.instagram} target="_blank">
-                            <div className="flex flex-col items-center">
-                              <ExternalLinkIcon className="hover:bg-neutral-600/30 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
+                            <div className="flex flex-col items-center text-ink-muted hover:text-brandPrimary transition-colors">
+                              <ExternalLinkIcon className="hover:bg-ink/5 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
                               <span className="text-xs">Instagram</span>
                             </div>
                           </Link>
@@ -218,10 +218,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               </div>
             </div>
             <section className="mt-16">
-              <h2 className="sm:text-[28px] xs:text-2xl text-xl mb-2 font-medium">
+              <h2 className="sm:text-[28px] xs:text-2xl text-xl mb-2 font-semibold text-ink">
                 About
               </h2>
-              <div className="space-y-4 leading-10 text-muted-foreground">
+              <div className="space-y-4 leading-10 text-ink-muted font-serif paper-card p-6 rounded-lg">
                 {author.bio && (
                   <PortableText value={author.bio} components={components} />
                 )}
@@ -230,7 +230,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </div>
           {author.books && (
             <section className="mt-16">
-              <h2 className="sm:text-[28px] xs:text-2xl text-xl px-4 font-medium">
+              <h2 className="sm:text-[28px] xs:text-2xl text-xl px-4 font-semibold text-ink">
                 Books
               </h2>
               <BooksSwiper books={author.books} />
@@ -238,7 +238,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           )}
           {author.videos && (
             <section className="mt-16">
-              <h2 className="sm:text-[28px] xs:text-2xl text-xl px-4 font-medium">
+              <h2 className="sm:text-[28px] xs:text-2xl text-xl px-4 font-semibold text-ink">
                 Videos
               </h2>
               <VideosSwiper videos={author.videos} />
