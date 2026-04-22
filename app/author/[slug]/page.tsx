@@ -8,6 +8,7 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { ExternalLinkIcon } from "lucide-react";
+import InstagramIcon from "@/components/InstagramIcon";
 import {
   Tooltip,
   TooltipContent,
@@ -177,7 +178,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                       <Tooltip>
                         <TooltipTrigger>
                           <Link href={author.socials.website} target="_blank">
-                            <div className="flex flex-col items-center text-ink-muted hover:text-brandPrimary transition-colors">
+                            <div className="flex flex-col items-center text-ink transition-colors">
                               <ExternalLinkIcon className="hover:bg-ink/5 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
                               <span className="text-xs">Website</span>
                             </div>
@@ -192,8 +193,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                       <Tooltip>
                         <TooltipTrigger>
                           <Link href={author.socials.instagram} target="_blank">
-                            <div className="flex flex-col items-center text-ink-muted hover:text-brandPrimary transition-colors">
-                              <ExternalLinkIcon className="hover:bg-ink/5 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
+                            <div className="flex flex-col items-center text-ink transition-colors">
+                              <InstagramIcon className="xs:h-8 xs:w-8 h-6 w-6" />
                               <span className="text-xs">Instagram</span>
                             </div>
                           </Link>

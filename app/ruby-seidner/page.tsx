@@ -7,6 +7,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ExternalLinkIcon } from "lucide-react";
+import InstagramIcon from "@/components/InstagramIcon";
 import Image from "next/image";
 import Link from "next/link";
 import { type Metadata } from "next";
@@ -78,8 +79,8 @@ export default function Page() {
                           href="https://www.instagram.com/projectgenzwrites/"
                           target="_blank"
                         >
-                          <div className="flex flex-col items-center text-ink-muted hover:text-brandPrimary transition-colors">
-                            <ExternalLinkIcon className="hover:bg-ink/5 p-1 xs:h-8 xs:w-8 h-6 w-6 flex items-center justify-center rounded-md" />
+                          <div className="flex flex-col items-center text-ink transition-colors">
+                            <InstagramIcon className="xs:h-8 xs:w-8 h-6 w-6" />
                             <span className="text-xs">Instagram</span>
                           </div>
                         </Link>
