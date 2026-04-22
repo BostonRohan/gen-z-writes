@@ -34,22 +34,24 @@ const VideoCard = ({
   loadImages,
 }: VideoCardProps) => {
   if (!video) return null;
-  
+
   const url = video.url ?? "";
   const title = video.title ?? "";
   const slug = video.slug?.current ?? "";
   const tags = video.tags ?? [];
   const author = video.author;
-  
+
   const youtubeId = getYoutubeId(url);
   const builder = createImageUrlBuilder(client);
 
   return (
     <article
       key={video._id}
-      className={`md:my-8 my-12 shrink-0 w-full capitalize h-full max-w-[450px] text-white ${cardClassName}`}
+      className={`md:my-8 my-12 shrink-0 w-full capitalize h-full max-w-[450px] paper-card p-4 rounded-lg ${cardClassName}`}
     >
-      <h1 className="font-bold mb-4 truncate text-2xl">{title}</h1>
+      <h1 className="font-serif font-bold mb-4 truncate text-xl text-ink">
+        {title}
+      </h1>
       {showVideo ? (
         <YoutubePlayer
           id={youtubeId}
@@ -75,12 +77,15 @@ const VideoCard = ({
       <section className="flex justify-between flex-wrap lg:flex-row flex-col text-left gap-2 mt-4 mx-auto lg:items-center">
         <address className="author flex gap-2 items-center my-auto">
           {author && (
-            <Link href={`/author/${author.slug?.current ?? ""}`} className="flex gap-2">
+            <Link
+              href={`/author/${author.slug?.current ?? ""}`}
+              className="flex gap-2 items-center group"
+            >
               {author.image && (
-                <div className="w-[30px] h-[30px] relative">
+                <div className="w-[30px] h-[30px] relative rounded-full overflow-hidden border-2 border-paper-dark">
                   <Image
                     src={builder.image(author.image).url()}
-                    className="rounded-full object-cover"
+                    className="object-cover"
                     fill
                     sizes="30px"
                     alt={author.name ?? ""}
@@ -88,7 +93,7 @@ const VideoCard = ({
                 </div>
               )}
               <p
-                className={`${poppins.className} truncate text-muted-foreground hover:underline text-lg`}
+                className={`${poppins.className} truncate text-ink-muted group-hover:text-brandPrimary text-lg transition-colors`}
               >
                 {author.name}
               </p>
@@ -101,8 +106,8 @@ const VideoCard = ({
             return (
               <span
                 className={classNames(
-                  "p-1.5 bg-brandSecondary shrink-1 rounded-xl w-fit text-sm",
-                  { truncate: i === tags.length - 1 },
+                  "p-1.5 px-3 bg-brandPrimary/90 text-paper-cream shrink-1 rounded-full w-fit text-sm font-medium",
+                  { truncate: i === tags.length - 1 }
                 )}
                 key={id}
               >

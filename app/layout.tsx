@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import sharedOGImage from "@/lib/sharedOg";
 import React from "react";
+import { inter, caveat, libreBaskerville } from "./fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.projectgenzwrites.com/"),
@@ -39,8 +40,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" data-scroll-behavior="smooth">
-      <body>
+    <html
+      lang="en"
+      className={`${inter.variable} ${caveat.variable} ${libreBaskerville.variable} bg-paper`}
+      data-scroll-behavior="smooth"
+    >
+      <body className="font-sans">
         <Nav />
         {children}
         <Toaster />

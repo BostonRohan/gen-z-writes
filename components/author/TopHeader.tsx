@@ -40,24 +40,24 @@ export default function TopHeader({
   return (
     <header
       className={classNames(
-        "fixed top-0 h-20 bg-gradient-to-b z-10 from-neutral-500/80 text-white to-background-primary/80 w-full flex items-center transition-all ease-in-out duration-200",
-        { "opacity-0 !h-0": !showHeader },
+        "fixed top-0 h-20 bg-paper/95 backdrop-blur-sm z-10 border-b border-ink/10 text-ink w-full flex items-center transition-all ease-in-out duration-200",
+        { "opacity-0 !h-0": !showHeader }
       )}
     >
       <div className="px-4 flex justify-between w-full max-w-[800px] mx-auto">
         <div className="flex gap-2 items-center">
           {src && (
-            <div className="rounded-[50%] w-[50px] h-[50px] relative">
+            <div className="rounded-full w-[50px] h-[50px] relative border-2 border-paper-dark">
               <Image
                 src={src}
                 alt={name}
                 fill
                 sizes="50px"
-                className="object-cover absolute rounded-[50%]"
+                className="object-cover absolute rounded-full"
               />
             </div>
           )}
-          <h2 className="font-semibold">{name}</h2>
+          <h2 className="font-serif font-semibold">{name}</h2>
         </div>
         <ShareButton title={name} text={description} slug={slug} />
       </div>

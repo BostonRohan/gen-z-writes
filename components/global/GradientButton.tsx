@@ -23,7 +23,7 @@ export default function GradientButton({
     <div className="flex justify-center">
       <div className="relative group">
         <div
-          className={`absolute -inset-0.5 blur group-hover:blur-xl opacity-75 transition duration-500 group-hover:duration-200 group-hover:opacity-100 will-change-filter overflow-hidden ${gradient}`}
+          className={`absolute -inset-0.5 blur group-hover:blur-lg opacity-50 transition duration-500 group-hover:duration-200 group-hover:opacity-70 will-change-filter overflow-hidden ${gradient}`}
         />
         <Link
           target={targetBlank ? "_blank" : "_self"}
@@ -32,11 +32,11 @@ export default function GradientButton({
           role="button"
           className={classNames(
             "relative block duration-500 group-hover:duration-200",
-            { "group-hover:scale-105": hoverGrow },
+            { "group-hover:scale-105": hoverGrow }
           )}
         >
           <span
-            className={`block p-2 min-w-[134px] inset-0.5 rounded-lg ${gradient}`}
+            className={`block p-2 px-4 min-w-[134px] inset-0.5 rounded-lg ${gradient} text-paper-cream font-semibold`}
           >
             <span className={classNames(textClassName)}>{children}</span>
           </span>

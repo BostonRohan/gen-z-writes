@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { DatabaseIcon, LibraryBigIcon } from "lucide-react";
 import Hamburger from "hamburger-react";
@@ -42,7 +43,7 @@ const Nav = () => {
           sticky: stickyNav,
         })}
       >
-        <div className="w-full bg-background/85 transition-all backdrop-blur-sm p-1 h-full mx-auto flex items-center">
+        <div className="w-full bg-paper/90 transition-all backdrop-blur-sm border-b border-ink/10 p-1 h-full mx-auto flex items-center">
           <div
             className={classNames(
               "max-w-4xl",
@@ -55,20 +56,29 @@ const Nav = () => {
           >
             <Link
               aria-label="Home"
-              className="opacity-40 xs:text-base text-sm"
+              className="flex items-center gap-2 text-ink hover:text-brandPrimary transition-colors"
               onClick={() => setOpen(false)}
               href="/"
             >
-              Project Gen Z Writes
+              <div className="w-8 h-8 rounded-full bg-ink flex items-center justify-center">
+                <Image
+                  src="/genz-writes-logo-white.png"
+                  alt="Gen Z Writes Logo"
+                  width={30}
+                  height={30}
+                  className="object-contain"
+                />
+              </div>
+              <span className="font-handwriting text-xl">Gen Z Writes</span>
             </Link>
             <div className="mr-auto flex gap-1">
               <Link
                 onClick={() => setOpen(false)}
                 aria-label="Database"
                 href="/database"
-                className="items-center gap-2 hover:bg-neutral-700/30 p-1.5 rounded-md sm:flex hidden"
+                className="items-center gap-2 text-ink hover:bg-ink/5 p-1.5 rounded-md sm:flex hidden transition-colors"
               >
-                <DatabaseIcon />
+                <DatabaseIcon className="w-5 h-5" />
                 Database
               </Link>
               <Link
@@ -76,18 +86,18 @@ const Nav = () => {
                 href="/resources"
                 className="sm:inline-flex hidden group"
               >
-                <div className="items-center gap-2 mr-auto group-hover:bg-neutral-700/30 p-1.5 rounded-md flex">
-                  <LibraryBigIcon />
+                <div className="items-center gap-2 mr-auto text-ink group-hover:bg-ink/5 p-1.5 rounded-md flex transition-colors">
+                  <LibraryBigIcon className="w-5 h-5" />
                   Resources
                 </div>
               </Link>
             </div>
-            <div className="sm:hidden inline ml-auto opacity-90">
+            <div className="sm:hidden inline ml-auto">
               <Hamburger
                 size={24}
                 toggled={isOpen}
                 toggle={setOpen}
-                color="#e2e8f0"
+                color="#2C1810"
                 label="Show Menu"
               />
             </div>
@@ -96,7 +106,7 @@ const Nav = () => {
       </nav>
       <div
         className={classNames(
-          "transition-all hidden font-semibold bg-background/80 backdrop-blur-sm",
+          "transition-all hidden font-semibold bg-paper/95 backdrop-blur-sm",
           {
             "h-screen w-screen z-20 !inline fixed": isOpen,
           },
@@ -107,9 +117,9 @@ const Nav = () => {
             onClick={() => setOpen(false)}
             aria-label="Database"
             href="/database"
-            className="items-center gap-2 mr-auto hover:bg-neutral-700/30 p-1.5 rounded-md sm:hidden flex opacity-90"
+            className="items-center gap-2 mr-auto text-ink hover:bg-ink/5 p-1.5 rounded-md sm:hidden flex"
           >
-            <DatabaseIcon />
+            <DatabaseIcon className="w-5 h-5" />
             Database
           </Link>
           <Link
@@ -117,8 +127,8 @@ const Nav = () => {
             href="/resources"
             className="sm:hidden inline-flex group w-fit"
           >
-            <div className="items-center gap-2 mr-auto group-hover:bg-neutral-700/30 p-1.5 rounded-md flex">
-              <LibraryBigIcon />
+            <div className="items-center gap-2 mr-auto text-ink group-hover:bg-ink/5 p-1.5 rounded-md flex">
+              <LibraryBigIcon className="w-5 h-5" />
               Resources
             </div>
           </Link>
