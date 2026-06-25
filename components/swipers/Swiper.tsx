@@ -3,9 +3,10 @@
 import { Swiper as SwiperReact, SwiperSlide } from "swiper/react";
 import type { ReactNode } from "react";
 import { Navigation } from "swiper/modules";
+import type { Swiper as SwiperInstance } from "swiper";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -44,7 +45,7 @@ const defaultBreakpoints: Breakpoints = {
 
 export default function Swiper({
   className,
-  spaceBetween,
+  spaceBetween = 24,
   breakpoints = defaultBreakpoints,
   swiperSlides,
   slidesOffsetAfter = 16,
@@ -53,6 +54,9 @@ export default function Swiper({
   id = "swiper",
 }: SwiperProps) {
   //generate unique id for key lengths
+  const [swiperInstance, setSwiperInstance] = useState<SwiperInstance | null>(
+    null,
+  );
 
   const slides = useMemo(
     () => swiperSlides.map((slide) => ({ id: uuidv4(), slide })),
@@ -65,31 +69,47 @@ export default function Swiper({
         id={id}
         modules={[Navigation]}
         slidesPerView="auto"
-        className={className}
+        className={`overflow-visible pr-20 ${className ?? ""}`}
         spaceBetween={spaceBetween}
         slidesOffsetAfter={slidesOffsetAfter}
         slidesOffsetBefore={slidesOffsetBefore}
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         breakpoints={breakpoints}
+        onSwiper={setSwiperInstance}
         navigation={{
           nextEl: `.arrow-right-${id}`,
           prevEl: `.arrow-left-${id}`,
         }}
       >
         {slides.map(({ slide, id }) => (
-          <SwiperSlide key={id}>{slide}</SwiperSlide>
+          <SwiperSlide
+            key={id}
+            className="!h-auto flex items-stretch !w-[260px] sm:!w-[280px]"
+          >
+            <div className="pr-6 h-full w-full">{slide}</div>
+          </SwiperSlide>
         ))}
       </SwiperReact>
       {showArrows && (
         <>
           <button
-            className={`arrow-left-${id} top-[35%] rounded-full -ml-2 bg-muted-foreground/60 hover:bg-popover-foreground/70 p-1 absolute left-0 z-50 transition opacity-1 xs:block hidden`}
+            type="button"
+            aria-label="Previous slide"
+            className={`arrow-left-${id} absolute left-2 top-1/2 z-50 -translate-y-1/2 rounded-full bg-brandPrimary p-3 text-paper-cream shadow-lg ring-2 ring-paper transition hover:scale-105 hover:bg-brandSecondary ${
+              swiperInstance?.isBeginning
+                ? "pointer-events-none opacity-0"
+                : "opacity-100"
+            }`}
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <button
-            className={`arrow-right-${id} top-[35%] rounded-full -mr-4 bg-muted-foreground/60 hover:bg-popover-foreground/70 p-1 absolute right-0 z-50 transition opacity-1 xs:block hidden`}
+            type="button"
+            aria-label="Next slide"
+            className={`arrow-right-${id} absolute right-2 top-1/2 z-50 -translate-y-1/2 rounded-full bg-brandPrimary p-3 text-paper-cream shadow-lg ring-2 ring-paper transition hover:scale-105 hover:bg-brandSecondary ${
+              swiperInstance?.isEnd ? "pointer-events-none opacity-0" : "opacity-100"
+            }`}
           >
             <ArrowRight className="w-5 h-5" />
           </button>

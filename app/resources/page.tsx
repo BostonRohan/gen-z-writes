@@ -11,6 +11,7 @@ import classNames from "classnames";
 import Footer from "@/components/Footer";
 import { bebasNeue } from "@/app/fonts";
 import { BookOpen, Trophy, Users, Lightbulb } from "lucide-react";
+import { ImageOff } from "lucide-react";
 
 interface SwiperSlideProps {
   title: string | null;
@@ -29,30 +30,36 @@ export default function Page() {
     <Link
       href={link}
       target="_blank"
-      className="hover:scale-105 transition block paper-card rounded-lg overflow-hidden"
+      className="hover:scale-[1.02] transition block paper-card rounded-lg overflow-hidden w-full h-full"
     >
-      <Image
-        src={image ?? "https://www.projectgenzwrites.com/gen-z-writes-og.png"}
-        alt={`${title ?? link} OG`}
-        width={180}
-        height={180}
-        className="xs:w-[180px] xs:h-[180px] w-[120px] h-[120px] object-cover"
-      />
-      <div className="space-y-1 pt-2 max-w-[180px] px-2 pb-2">
+      <div className="relative w-full aspect-[4/3] bg-paper-dark overflow-hidden">
+        {image ? (
+          <Image
+            src={image}
+            alt={`${title ?? link} OG`}
+            fill
+            sizes="(max-width: 640px) 220px, 240px"
+            className="object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-ink-muted">
+            <ImageOff className="w-10 h-10 opacity-40" />
+          </div>
+        )}
+      </div>
+      <div className="space-y-1 pt-2 px-3 pb-3 h-[150px] flex flex-col">
         {title && (
           <h3
             className={classNames(
-              "line-clamp-2 sm:text-base text-sm font-semibold text-ink",
-              {
-                "line-clamp-1": description,
-              }
+              "line-clamp-2 sm:text-base text-sm font-semibold text-ink leading-snug min-h-[3.5rem]",
+              { "line-clamp-1": description }
             )}
           >
             {title}
           </h3>
         )}
         {description && (
-          <p className="line-clamp-2 text-ink-muted sm:text-base text-xs">
+          <p className="line-clamp-3 text-ink-muted sm:text-sm text-xs leading-relaxed">
             {description}
           </p>
         )}
@@ -122,7 +129,7 @@ export default function Page() {
             {teenMagazines.length}
           </span>
         </div>
-        <Swiper
+      <Swiper
           id="teen-magazines"
           swiperSlides={magazineSwiperSlides}
           breakpoints={breakpoints}
